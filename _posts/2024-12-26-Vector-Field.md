@@ -34,5 +34,4 @@ $$\left\langle\frac{6xy}{x^2+y^2},\frac{6y^2}{x^2+y^2}-2\right\rangle$$
 
 <canvas id="vector_field_curl"></canvas>
 
-<script src="https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/js/vector_field/VectorField.min.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/vector_field/VectorField.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/vector_field/VectorField.min.js"></script>
