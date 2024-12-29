@@ -9,12 +9,16 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/electric fiel
 <style>
     canvas {
         display: block;
-        width: 640px;
-        height: 360px;
+        width: 75%;
+        margin: 0 auto;
     }
 </style>
 
+
+### 散度
 <canvas id="vector_field_div"></canvas>
+
+### 旋度
 <canvas id="vector_field_curl"></canvas>
 
 <script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/vector_field/VectorField.min.js"></script>
