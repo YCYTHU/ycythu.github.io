@@ -147,6 +147,10 @@ function init(url, fake_url) {
     document.getElementById('loginForm').addEventListener('submit', function (event) {
         event.preventDefault();
         const key = document.getElementById('password').value;
+        if (key.length != 48) {
+            window.location.replace(fake_url);
+            return;
+        }
         const loginMessage = document.getElementById('loginMessage');
         const loginSection = document.getElementById('loginSection');
         const contentSection = document.getElementById('contentSection');
