@@ -106,7 +106,7 @@ $$\left\langle\sin(\pi x+\pi y),\cos(\pi x-\pi y-\frac\pi 2)\right\rangle$$
 
 下图展示了向量场
 
-$$\left\langle\frac{6xy}{x^2+y^2},\frac{6y^2}{x^2+y^2}-2\right\rangle$$
+$$\left\langle\frac{3xy}{x^2+y^2},\frac{3y^2}{x^2+y^2}-1\right\rangle$$
 
 的可视化结果。不同颜色代表了旋度不同的区域，红色代表旋度为正（逆时针旋转），蓝色代表旋度为负（顺时针旋转）。
 
@@ -170,10 +170,10 @@ function createVectorField(type = 'default') {
             interpolate: (x, y) => {
                 x = (x-bounds.width/2) / (bounds.height/3);
                 y = (y-bounds.height/2) / (bounds.height/3);
-                const u = 6*x*y/(x * x + y * y);
-                const v = 6*y*y/(x * x + y * y) - 2;
+                const u = 3*x*y/(x * x + y * y);
+                const v = 3*y*y/(x * x + y * y) - 1;
                 const norm = Math.sqrt(u * u + v * v);
-                const colorParam = -6*x/Math.sqrt(x * x + y * y);
+                const colorParam = -3*x/Math.sqrt(x * x + y * y);
                 return [u, v, norm, colorParam];
             }
         };
