@@ -132,7 +132,7 @@ const bounds = {
 const MAX_PARTICLE_AGE = 100;
 const PARTICLE_MULTIPLIER = 10.0;
 const FRAME_RATE = 25;
-const LINE_WIDTH = Math.min(canvas1.style.width/400, 1.0);
+const LINE_WIDTH = Math.min(canvas1.width/400/dpr, 1.0);
 const EVOLVE_STEP = 0.5;
 const COLORMAP = [
     [58, 76, 192],
