@@ -151,10 +151,10 @@ function init(url, fake_url) {
             window.location.replace(fake_url);
             return;
         }
-        loginMessage.innerHTML = "Please wait a moment...";
         const loginMessage = document.getElementById('loginMessage');
         const loginSection = document.getElementById('loginSection');
         const contentSection = document.getElementById('contentSection');
+        loginMessage.innerHTML = "Please wait a moment...";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
         xhr.responseType = "text";
