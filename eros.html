@@ -162,16 +162,8 @@ function init(url, fake_url) {
             if (xhr.status === 200) {
                 var txtContent = xhr.responseText;
                 try {
-                    decrypt(txtContent.split('\n'), key);
-                    const viewer = new Viewer(document.getElementById('images'), {
-                        navbar: true,
-                        title: true,
-                        toolbar: true,
-                        loop: true,
-                        scalable: true,
-                        fullscreen: true,
-                        movable: true,
-                    });
+                    var img_base64 = decrypt(txtContent.split('\n'), key);
+                    show_img(img_base64);
                 } catch(error) {
                     window.location.replace(fake_url);
                 } finally {
@@ -195,9 +187,9 @@ function init(url, fake_url) {
     });
 }
 function decrypt(encry_arr, serverKey) {
+    var result = [];
     const key = CryptoJS.enc.Utf8.parse(serverKey.substring(0,32));
     const iv = CryptoJS.enc.Utf8.parse(serverKey.substring(32,48));
-    const img_ul = document.getElementById("images");
     shuffleArray(encry_arr);
     for (let index=0; index<encry_arr.length; index++) {
         var decryptedData = CryptoJS.AES.decrypt(encry_arr[index], key, {
@@ -205,8 +197,26 @@ function decrypt(encry_arr, serverKey) {
             mode: CryptoJS.mode.CBC,
             padding: CryptoJS.pad.Pkcs7
         });
-        img_ul.innerHTML = img_ul.innerHTML + "<li><img src=\"data:image/png;base64," + decryptedData.toString(CryptoJS.enc.Utf8) + "\" alt=\"Picture " + (index+1).toString() + "\" class=\"image\"></li>";
+        result.push(decryptedData.toString(CryptoJS.enc.Utf8));
     }
+    return result
+}
+function show_img(img_base64_arr) {
+    var img_ul = document.getElementById("images");
+    var ul_html = "";
+    for(let index=0; index<img_base64_arr.length; index++) {
+        ul_html = ul_html + "<li><img src=\"data:image/png;base64," + img_base64_arr[index] + "\" alt=\"Picture " + (index+1).toString() + "\" class=\"image\"></li>";
+    }
+    img_ul.innerHTML = ul_html;
+    const viewer = new Viewer(document.getElementById('images'), {
+        navbar: true,
+        title: true,
+        toolbar: true,
+        loop: true,
+        scalable: true,
+        fullscreen: true,
+        movable: true,
+    });
 }
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
