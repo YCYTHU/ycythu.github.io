@@ -114,10 +114,6 @@
         .login-button:hover {
             background-color: #0056b3;
         }
-        #message {
-            margin-top: 15px;
-            font-size: 14px;
-        }
         .hidden {
             display: none;
         }
@@ -138,7 +134,7 @@
                 <input type="password" id="password" placeholder="请输入结果" required>
             </div>
             <button type="submit" class="login-button">看看实力</button>
-            <p id="loginMessage" class="hidden"></p>
+            <p id="loginMessage"></p>
         </form>
     </div>
     <div id="contentSection" class="content hidden">
@@ -151,28 +147,43 @@ function init(url, fake_url) {
     document.getElementById('loginForm').addEventListener('submit', function (event) {
         event.preventDefault();
         const key = document.getElementById('password').value;
+        if (key.length != 48) {
+            window.location.replace(fake_url);
+            return;
+        }
         const loginMessage = document.getElementById('loginMessage');
         const loginSection = document.getElementById('loginSection');
         const contentSection = document.getElementById('contentSection');
+        loginMessage.innerHTML = "Please wait a moment...";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
         xhr.responseType = "text";
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
+        xhr.onload = function() {
+            if (xhr.status === 200) {
                 var txtContent = xhr.responseText;
                 try {
                     var img_base64 = decrypt(txtContent.split('\n'), key);
                     show_img(img_base64);
                 } catch(error) {
                     window.location.replace(fake_url);
+                } finally {
+                    loginMessage.className = 'hidden';
+                    loginSection.classList.add('hidden');
+                    contentSection.classList.remove('hidden');
+                    document.body.style.animation = "breathe 5s ease-in-out infinite";
                 }
+            } else {
+                alert(xhr.status);
+            }
+        };
+        xhr.onprogress = function(event) {
+            if (event.lengthComputable) {
+                loginMessage.innerHTML = "Received " + formatSize(event.loaded) + " of " + formatSize(event.total) + " (" + (event.loaded/event.total*100).toFixed(2) + "%)";
+            } else {
+                loginMessage.innerHTML = "Received " + formatSize(event.loaded);
             }
         };
         xhr.send();
-        loginMessage.className = 'hidden';
-        loginSection.classList.add('hidden');
-        contentSection.classList.remove('hidden');
-        document.body.style.animation = "breathe 5s ease-in-out infinite";
     });
 }
 function decrypt(encry_arr, serverKey) {
@@ -214,8 +225,14 @@ function shuffleArray(arr) {
   }
   return arr;
 }
-
-const url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/img_encry_aes.txt";
+function formatSize(bytes) {
+    if (bytes === 0) return '0 B';
+    const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    const size = (bytes / Math.pow(1024, i)).toFixed(2);
+    return `${size} ${units[i]}`;
+}
+const url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/eros.aes";
 const fake_url = "https://www.baidu.com";
 init(url, fake_url);
 </script>

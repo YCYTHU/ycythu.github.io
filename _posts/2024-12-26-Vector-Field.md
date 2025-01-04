@@ -5,7 +5,9 @@ tags:
 - JavaScript
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/electric field.jpg
 ---
+向量场是把空间中的每一点指派到一个向量的映射，通过向量场可以对速度、磁力、流体运动和梯度等进行建模。为了方便快捷地在不同设备上展示向量场，本文在canvas中部分实现了向量场的流粒子动画，并加入了粒子着色功能以展示向量场的其他标量性质。
 <!--more-->
+
 <style>
     canvas {
         display: block;
@@ -63,8 +65,8 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/electric fiel
             interpolate: (x, y) => {
                 x = (x - bounds.width / 2) / (bounds.height /2);    // 等效x坐标
                 y = (y - bounds.height / 2) / (bounds.height /2);   // 等效y坐标
-                const u = 6* (x*y)/(x*x+y*y);                       // 向量场x分量
-                const v = 6* (y*y)/(x*x+y*y)-2;                     // 向量场y分量
+                const u = 3 * (x * y) / (x * x + y * y);            // 向量场x分量
+                const v = 3 * (y * y) / (x * x + y * y) - 1;        // 向量场y分量
                 const norm = Math.sqrt(u * u + v * v);
                 const colorParam = norm;                            // 着色依据
                 return [u, v, norm, colorParam];
@@ -92,7 +94,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/electric fiel
 
 ## 示例
 
-### 散度
+### 向量场散度的可视化
 
 下图展示了向量场
 
@@ -102,15 +104,17 @@ $$\left\langle\sin(\pi x+\pi y),\cos(\pi x-\pi y-\frac\pi 2)\right\rangle$$
 
 <canvas id="vector_field_div"></canvas>
 
-### 旋度
+### 向量场旋度的可视化
 
 下图展示了向量场
 
-$$\left\langle\frac{6xy}{x^2+y^2},\frac{6y^2}{x^2+y^2}-2\right\rangle$$
+$$\left\langle\frac{3xy}{x^2+y^2},\frac{3y^2}{x^2+y^2}-1\right\rangle$$
 
 的可视化结果。不同颜色代表了旋度不同的区域，红色代表旋度为正（逆时针旋转），蓝色代表旋度为负（顺时针旋转）。
 
 <canvas id="vector_field_curl"></canvas>
+
+
 
 <script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/vector_field/VectorFieldAnime.min.js"></script>
 <script>
@@ -128,7 +132,7 @@ const bounds = {
 const MAX_PARTICLE_AGE = 100;
 const PARTICLE_MULTIPLIER = 10.0;
 const FRAME_RATE = 25;
-const LINE_WIDTH = 1.0;
+const LINE_WIDTH = Math.min(canvas1.width/400/dpr, 1.0);
 const EVOLVE_STEP = 0.5;
 const COLORMAP = [
     [58, 76, 192],
@@ -170,10 +174,10 @@ function createVectorField(type = 'default') {
             interpolate: (x, y) => {
                 x = (x-bounds.width/2) / (bounds.height/3);
                 y = (y-bounds.height/2) / (bounds.height/3);
-                const u = 6*x*y/(x * x + y * y);
-                const v = 6*y*y/(x * x + y * y) - 2;
+                const u = 3*x*y/(x * x + y * y);
+                const v = 3*y*y/(x * x + y * y) - 1;
                 const norm = Math.sqrt(u * u + v * v);
-                const colorParam = -6*x/Math.sqrt(x * x + y * y);
+                const colorParam = -3*x/Math.sqrt(x * x + y * y);
                 return [u, v, norm, colorParam];
             }
         };
