@@ -165,7 +165,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/titration.jpg
 				<canvas id="stirBar" width="120" height="120"></canvas>
 			</div>
 			<div onclick="titrate()" id="buret" style="position:absolute; top:10px; left:3px; z-index:2;">
-				<img src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/titration simulator/titration simulator.gif" width="112" height="670" border="0">
+				<img src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/titration simulator/titration simulator.gif" width="112" height="670" border="0" alt="titration simulator">
 			</div>
 		</div>
 		<!-- Titration graph area -->
