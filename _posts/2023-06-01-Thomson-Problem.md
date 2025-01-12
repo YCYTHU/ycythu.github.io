@@ -36,7 +36,7 @@ $$U(N)=\sum_{i<j}\frac{1}{\vert\vec{r}_i-\vec{r}_j\vert}$$
 </style>
 <input type="text" id="index" name="index" onchange="getData()"/>
 <a class="button button--success button--pill" onclick="getData()"><i class="fas fa-search"></i></a>
-<table id="Thomson"></table>
+<table id="Thomson"><tbody><tr><th>$N$</th><th>$U$</th><th>Symmetry</th><th>$\left|\sum\mathbf {r} _{i}\right|$</th><th>$v_{3}$</th><th>$v_{4}$</th><th>$v_{5}$</th><th>$v_{6}$</th><th>$v_{7}$</th><th>$v_{8}$</th><th>$e$</th><th>$f_3$</th><th>$f_4$</th><th>$\theta$</th></tr></tbody></table>
 
 <script>
 function getData(str) {
@@ -48,10 +48,12 @@ function getData(str) {
 		if (rowData.length == 0) {
 			alert("暂未收录该数据");
 		}
-		var newRow = table.insertRow(-1);
-		for (let j = 0; j < rowData.length; j++) {
-			let cell = newRow.insertCell(j);
-			cell.innerHTML = rowData[j];
+		else {
+			var newRow = table.insertRow(-1);
+			for (let j = 0; j < rowData.length; j++) {
+				let cell = newRow.insertCell(j);
+				cell.innerHTML = rowData[j];
+			}
 		}
 	}
 }
@@ -77,11 +79,13 @@ function parseRangeString(input) {
 }
 
 function refresh() {
-	table.innerHTML = "<tbody><tr><th><i>N</i></th><th>$U_\mathrm{Thom}$</th><th>Symmetry</th><th>$\left|\sum\mathbf {r} _{i}\right|$</th><th>$v_{3}$</th><th>$v_{4}$</th><th>$v_{5}$</th><th>$v_{6}$</th><th>$v_{7}$</th><th>$v_{8}$</th><th>$e$</th><th>$f_3$</th><th>$f_4$</th><th>$\theta$</th></tr></tbody>";
+	const rows = table.rows;
+    for (let i = rows.length - 1; i > 0; i--) {
+        table.deleteRow(i);
+    }
 }
 const table = document.getElementById('Thomson');
 const input_box = document.getElementById('index');
-refresh();
 const data = [
 	"","",
 	"2,0.500000000,D_{\infty h},0,–,–,–,–,–,–,2,–,–,180.000°",
