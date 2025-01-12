@@ -41,11 +41,13 @@ $$U(N)=\sum_{i<j}\frac{1}{\vert\vec{r}_i-\vec{r}_j\vert}$$
 <script>
 function getData(str) {
 	refresh();
-	index_arr = parseRangeString(input_box.value.replaceAll('，',','));
+	let flg = 1;
+	index_arr = parseRangeString(input_box.value.replaceAll('，',',').replaceAll(' ',','));
 	for (let i = 0; i < index_arr.length; i++) {
 		index = index_arr[i];
 		rowData = index > 1 && index < 200 ? data[index].split(',') : "";
-		if (rowData.length == 0) {
+		if (rowData.length == 0 && flg == 1) {
+			flg = 0;
 			alert("暂未收录该数据");
 		}
 		else {
