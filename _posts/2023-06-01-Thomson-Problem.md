@@ -28,7 +28,7 @@ $$U(N)=\sum_{i<j}\frac{1}{\vert\vec{r}_i-\vec{r}_j\vert}$$
 		font-family: Times New Roman, serif;
 		font-size: 16px;
 		width: 100%;
-		display: block;
+		display: table;
 	}
 	#Thomson tbody tr td {
 		text-align: center;
@@ -44,7 +44,7 @@ function getData(str) {
 	index_arr = parseRangeString(input_box.value.replaceAll('，',','));
 	for (let i = 0; i < index_arr.length; i++) {
 		index = index_arr[i];
-		rowData = i > 1 && index < 200 ? data[index].split(',') : "";
+		rowData = index > 1 && index < 200 ? data[index].split(',') : "";
 		if (rowData.length == 0) {
 			alert("暂未收录该数据");
 		}
