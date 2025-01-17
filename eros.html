@@ -1,5 +1,6 @@
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.1/dist/viewer.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.min.js"></script>
@@ -22,19 +23,24 @@
                 column-count: 3;
             }
         }
-        @media (min-width: 768px) {
+        @media (min-width: 400px) {
             .gallery {
                 column-count: 4;
             }
         }
-        @media (min-width: 1024px) {
+        @media (min-width: 768px) {
             .gallery {
                 column-count: 5;
             }
         }
-        @media (min-width: 1440px) {
+        @media (min-width: 1024px) {
             .gallery {
                 column-count: 6;
+            }
+        }
+        @media (min-width: 1440px) {
+            .gallery {
+                column-count: 7;
             }
         }
         @media (min-width: 2560px) {
@@ -166,7 +172,9 @@ function init(url, fake_url) {
         const loginButton = document.getElementById('loginButton');
         const loginSection = document.getElementById('loginSection');
         const contentSection = document.getElementById('contentSection');
-        loginButton.style.innerHTML = "加载中";
+        loginButton.classList.remove('norm');
+        loginButton.classList.add('load');
+        loginButton.innerHTML = "加载中";
         //loginMessage.innerHTML = "Please wait a moment";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
@@ -183,15 +191,16 @@ function init(url, fake_url) {
                 loginMessage.className = 'hidden';
                 loginSection.classList.add('hidden');
                 contentSection.classList.remove('hidden');
-                document.body.style.animation = "breathe 5s ease-in-out infinite";
             } else {
                 alert(xhr.status);
             }
         };
-        xhr.onprogress = function() {
-            loginButton.classList.remove('norm');
-            loginButton.classList.add('load');
-            loginButton.innerHTML = "已加载 " + formatSize(event.loaded);
+        xhr.onprogress = function(event) {
+            if (event.lengthComputable) {
+                loginButton.innerHTML = "已加载 " + formatSize(event.loaded) + " / " + formatSize(event.total) + " (" + (event.loaded/event.total*100).toFixed(2) + "%)";
+            } else {
+                loginButton.innerHTML = "已加载 " + formatSize(event.loaded);
+            }
         };
         xhr.onerror = function() {
             loginButton.classList.remove('norm');
