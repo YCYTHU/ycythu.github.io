@@ -153,7 +153,7 @@ function init(url, fake_url) {
         const loginMessage = document.getElementById('loginMessage');
         const loginSection = document.getElementById('loginSection');
         const contentSection = document.getElementById('contentSection');
-        loginMessage.innerHTML = "Please wait a moment...";
+        loginMessage.innerHTML = "Please wait a moment";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
         xhr.responseType = "text";
@@ -162,15 +162,14 @@ function init(url, fake_url) {
                 var txtContent = xhr.responseText;
                 try {
                     var img_base64 = decrypt(txtContent.split('\n'), key);
-                    show_img(img_base64);
                 } catch(error) {
                     window.location.replace(fake_url);
-                } finally {
-                    loginMessage.className = 'hidden';
-                    loginSection.classList.add('hidden');
-                    contentSection.classList.remove('hidden');
-                    document.body.style.animation = "breathe 5s ease-in-out infinite";
                 }
+                show_img(img_base64);
+                loginMessage.className = 'hidden';
+                loginSection.classList.add('hidden');
+                contentSection.classList.remove('hidden');
+                document.body.style.animation = "breathe 5s ease-in-out infinite";
             } else {
                 alert(xhr.status);
             }
@@ -182,6 +181,9 @@ function init(url, fake_url) {
                 loginMessage.innerHTML = "Received " + formatSize(event.loaded);
             }
         };
+        xhr.onerror = function() {
+            loginMessage.innerHTML = "Please refresh this page";
+        }
         xhr.send();
     });
 }
