@@ -29,5 +29,5 @@ convert [benzene.xyz](/MolViewer/assets/benzene.xyz) to atoms (12-by-1) and coor
 showmol(atoms,coordinates);
 ```
 <div>
-<img src="/MolViewer/assets/images/benzene.jpg" width="300" alt="benzene">
+<img src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/MolViewer/benzene.jpg" width="300" alt="benzene">
 </div>

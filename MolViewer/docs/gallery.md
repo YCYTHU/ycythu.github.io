@@ -67,7 +67,7 @@ sidebar:
       if (currentPhoto > numPhotos) {
         currentPhoto = 1;
       }
-      document.getElementById("photo").src = "/MolViewer/assets/images/gallery" + currentPhoto + ".jpg";
+      document.getElementById("photo").src = "https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/MolViewer/gallery" + currentPhoto + ".jpg";
       document.getElementById("description").textContent = descriptions[currentPhoto - 1];
     }
     function prevPhoto() {
@@ -75,7 +75,7 @@ sidebar:
       if (currentPhoto < 1) {
         currentPhoto = numPhotos;
       }
-      document.getElementById("photo").src = "/MolViewer/assets/images/gallery" + currentPhoto + ".jpg";
+      document.getElementById("photo").src = "https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/MolViewer/gallery" + currentPhoto + ".jpg";
       document.getElementById("description").textContent = descriptions[currentPhoto - 1];
     }
   </script>

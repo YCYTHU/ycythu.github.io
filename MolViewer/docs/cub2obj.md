@@ -36,5 +36,5 @@ cub2obj('movalue.cub',[0.07;-0.07]);
 ```
 
 <div>
-<img src="/MolViewer/assets/images/movalue_obj.jpg" width="300">
+<img src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/MolViewer/movalue_obj.jpg" width="300" alt="movalue_obj">
 </div>

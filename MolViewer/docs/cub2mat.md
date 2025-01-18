@@ -54,5 +54,5 @@ axis equal
 axis off
 ```
 <div>
-<img src="/MolViewer/assets/images/movalue.jpg" width="300">
+<img src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/MolViewer/movalue.jpg" width="300" alt="movalue">
 </div>

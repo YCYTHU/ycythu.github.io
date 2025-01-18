@@ -45,5 +45,5 @@ ylim([-1,1])
 zlim([-1,1])
 ```
 <div>
-<img src="/MolViewer/assets/images/gradcub.jpg" width="600">
+<img src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/MolViewer/gradcub.jpg" width="600" alt="gradcub">
 </div>
