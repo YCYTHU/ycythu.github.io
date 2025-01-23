@@ -18,6 +18,21 @@
             column-count: 1;
             column-gap: 15px;
         }
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #efefefcc;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        .audio-controls:hover {
+            background-color: #efefefff;
+        }
         @media (min-width: 320px) {
             .gallery {
                 column-count: 3;
@@ -89,7 +104,6 @@
         }
         svg {
             width: 100%;
-            margin-bottom: 10px;
         }
         input[type="password"] {
             width: 300px;
@@ -147,7 +161,7 @@
         <h2>数一数 算一算</h2>
         <form id="loginForm">
             <div class="form-group">
-                <svg xmlns="http://www.w3.org/2000/svg" width="34.149ex" height="6.354ex" viewBox="0 -1562.5 15094 2808.5" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"><defs><path id="i" d="M96 585q56 81 153 81 48 0 96-26t78-92q37-83 37-228 0-155-43-237-20-42-55-67t-61-31-51-7q-26 0-52 6t-61 32-55 67q-43 82-43 237 0 174 57 265zm225 12q-30 32-71 32-42 0-72-32-25-26-33-72t-8-192q0-158 8-208t36-79q28-30 69-30 40 0 68 30 29 30 36 84t8 203q0 145-8 191t-33 73z"/><path id="a" d="M60 948q3 2 605 2h602l58-135q59-138 63-146h-40l-7 14q-21 41-56 78-50 48-111 77t-141 43-151 17-183 4H251l8-11q463-633 465-639 1-2 0-6-3-3-264-302L196-356q0-1 211-1h141q89 0 128-1 136 0 220 5t167 21 141 49 103 87q21 26 41 72h40q0-1-7-21t-25-65-31-84l-58-155-601-1q-602 0-605 2-6 2-6 9 0 2 2 6l533 610q0 1-33 45T452 366 322 544L56 909l-1 15q0 21 5 24z"/><path id="c" d="M56 347q0 13 14 20h637q15-8 15-20 0-11-14-19l-318-1H72q-16 5-16 20zm0-194q0 15 16 20h636q14-10 14-20 0-13-15-20H70q-14 7-14 20z"/><path id="d" d="m213 578-13-5q-14-5-40-10t-58-7H83v46h19q47 2 87 15t56 24 28 22q2 3 12 3 9 0 17-6V361l1-300q7-7 12-9t24-4 62-2h26V0h-11q-21 3-159 3-136 0-157-3H88v46h64q16 0 25 1t16 3 8 2 6 5 6 4v517z"/><path id="e" d="M55 217q0 88 56 156t143 69q88 0 165-61 38-31 74-78l14-19 7 10q104 148 233 148 86 0 141-68t56-160q0-86-55-155T743-11q-86 0-163 61-38 31-74 78l-14 19-7-10Q381-11 252-11q-86 0-141 68T55 217zm852 0q0 68-38 124t-108 56q-21 0-41-5t-38-14-34-19-29-24-25-25-20-25-15-22-11-17l-5-8 31-40q31-40 48-60t42-44 50-33 51-10q62 0 102 49t40 117zm-815-3q0-69 39-125t108-56q118 0 217 160l-31 40q-61 79-91 104-49 43-101 43-62 0-101-49T92 214z"/><path id="f" d="M127 463q-27 0-42 17t-16 44q0 55 48 98t116 43q35 0 44-1 74-12 113-53t40-89q0-52-34-101t-94-71l-3-2q0-1 9-3t29-9 38-21q82-53 82-140 0-79-62-138T238-22q-80 0-138 43T42 130q0 28 18 45t45 18q28 0 46-18t18-45q0-11-3-20t-7-16-11-12-12-8-10-4-8-3l-4-1q51-45 124-45 55 0 83 53 17 33 17 101v20q0 95-64 127-15 6-61 7l-42 1-3 2q-2 3-2 16 0 18 8 18 28 0 58 5 34 5 62 42t28 112v8q0 57-35 79-22 14-47 14-32 0-59-11t-38-23-11-12h3q3-1 8-2t10-5 12-7 10-11 8-15 3-20q0-22-14-39t-45-18z"/><path id="g" d="M78 661q0 21 18 38t42 17 42-16 19-39q0-7-20-229t-21-226q-2-8-19-8-18 0-20 8-1 3-21 225T78 661zm1-600q0 28 18 44t44 16q23-2 40-17t17-43q0-30-17-45T139 1q-25 0-42 15T79 61z"/><path id="h" d="M114-798q18-26 51-26h2q28 0 56 60t52 164 45 209 42 227q3 21 5 31 72 425 156 788t122 472l10 30q4 12 17 44t27 56 34 49 44 40 51 14q56 0 84-35t32-80q0-25-12-40t-23-19-22-3q-21 0-38 15t-17 41q0 48 53 57l-3 4q-3 3-8 7t-8 6q-15 10-33 10-14 0-26-12t-32-56-39-116-47-203-56-308Q574 293 510-5T410-437t-55-192q-77-233-190-233-40 0-73 31t-37 85q0 35 19 48t38 13q21 0 38-15t17-41q0-48-53-57z"/><path id="b" d="M21 287q1 6 3 16t12 38 20 47 33 37 46 17q36 0 60-18t30-34 6-21q0-2 1-2l11 11q61 64 139 64 54 0 87-27t34-79-38-157-38-127q0-26 17-26 6 0 9 1 29 5 52 38t35 80q2 8 20 8 20 0 20-8 0-1-4-15-8-29-22-57t-46-56-69-27q-47 0-68 27t-21 56q0 19 36 120t37 152q0 59-44 59h-5q-86 0-145-101l-7-12-33-134Q156 26 151 16q-13-27-43-27-13 0-21 6T76 7t-2 10q0 13 38 163t40 163q1 5 1 23 0 39-24 39-38 0-63-100-6-20-6-21-2-6-19-6H27q-6 6-6 9z"/><path id="j" d="M376 495v40q0 24 1 33 0 45-10 56t-51 13h-18v23q0 23 2 23l10 1q10 1 29 2t37 2 37 2 30 3 11 1h3V390q0-306 1-309 3-20 14-26t45-9h18V0q-2 0-76-5t-79-6h-7v55l-8-7q-58-48-130-48-77 0-139 61T34 215q0 100 63 163t147 64q75 0 132-49v102zm-3-153q-45 63-113 63-49 0-87-36-27-28-34-64t-8-94q0-56 7-91t35-61q30-33 78-33 71 0 122 77v239z"/><path id="k" d="M52 289q7 42 54 97t116 56q35 0 64-18t43-45q42 63 101 63 37 0 64-22t28-59q0-29-14-47t-27-22-23-4q-19 0-31 11t-12 29q0 46 50 63-11 13-40 13-13 0-19-2-38-16-56-66-60-221-60-258 0-28 16-40t35-12q37 0 73 33t49 81q3 10 6 11t16 2h4q15 0 15-8 0-1-2-11-16-57-62-101T333-11q-70 0-106 63-41-62-94-62h-6q-49 0-70 26T35 71q0 32 19 52t45 20q43 0 43-42 0-20-12-35t-23-20-13-5l-3-1q0-1 6-4t16-7 19-3q36 0 62 45 9 16 23 68t28 108 16 66q5 27 5 39 0 28-15 40t-34 12q-40 0-75-32t-49-82q-2-9-5-10t-16-2H58q-6 6-6 11z"/><path id="l" d="M21 287q0 14 15 48t48 71 74 36q41 0 66-23t26-64q-2-19-3-21 0-3-16-46t-33-97-16-86q0-43 14-60t42-18q23 0 43 11t31 23 27 33q0 1 5 20t14 59 19 74q38 150 42 157 13 27 43 27 13 0 21-7t11-12 2-9q0-13-49-210T391-23q-28-83-97-132t-138-50q-45 0-79 22t-34 66q0 22 7 37t19 22 20 10 17 3q44 0 44-42 0-20-12-35t-23-20-13-5l-3-1q2-5 19-12t34-7h8q17 0 26 2 33 9 61 38t43 62 23 56 8 30l-6-4q-6-4-19-11T270-6q-20-5-39-5-46 0-81 22t-46 71q-1 7-1 31 0 57 35 149t35 117v14q0 3-4 7t-11 4h-4q-23 0-42-19t-30-41-17-42-8-22q-2-2-16-2H27q-6 6-6 9z"/><path id="m" d="M39 168q0 57 19 104t49 78 67 52 70 31 63 9h3q45 0 78-22t33-65q0-90-111-118-49-13-134-14-37 0-38-2 0-2-6-35t-7-58q0-47 21-74t63-28 93 19 92 66q9 10 12 10 4 0 13-9t10-14-9-16-30-27-46-31-63-25-76-10q-79 0-122 53T39 168zm334 185q-6 52-68 52-33 0-61-14t-45-34-29-41-16-36-5-19q0-1 20-1 113 0 158 24t46 69z"/><path id="n" d="M84 237v13l14 20h581q15-8 15-20t-15-20H98q-14 7-14 20z"/><path id="o" d="M152 251q0 395 236 599h28q6-6 6-9 0-4-19-25t-46-63-55-104-47-167-19-232q0-126 19-231t46-166 55-104 47-64 19-25q0-3-6-9h-28q-29 24-56 53t-61 83-59 116-42 153-18 195z"/><path id="p" d="M305 251q0-396-236-600H56q-13 0-17 2t-4 9q2 5 25 31t48 68 52 103 44 163 17 223-17 223-44 163-52 104-48 67-25 32q0 11 15 11h19q128-107 187-284 49-141 49-315z"/></defs><g data-mml-node="math" stroke="currentColor" fill="currentColor" stroke-width="0"><g data-mml-node="munderover"><use xlink:href="#a" data-mml-node="mo" transform="scale(1 -1)"/><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#b" data-mml-node="mi" transform="matrix(.707 0 0 -.707 58 1087.9)"/><use xlink:href="#c" data-mml-node="mo" transform="matrix(.707 0 0 -.707 482.2 1087.9)"/><use xlink:href="#d" data-mml-node="mn" transform="matrix(.707 0 0 -.707 1032.246 1087.9)"/></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#e" data-mml-node="mi" transform="matrix(.707 0 0 -.707 368.4 -1150)"/></g></g><g data-mml-node="mfrac"><g data-mml-node="msup"><use xlink:href="#b" data-mml-node="mi" transform="matrix(1 0 0 -1 1830.7 -676)"/><use xlink:href="#f" data-mml-node="mn" transform="matrix(.707 0 0 -.707 2430.7 -1039)"/></g><g data-mml-node="mrow"><use xlink:href="#b" data-mml-node="mi" transform="matrix(1 0 0 -1 1893.5 686)"/><use xlink:href="#g" data-mml-node="mo" transform="matrix(1 0 0 -1 2493.5 686)"/></g><path stroke="none" d="M1730.7-220h1203.6v-60H1730.7z"/></g><g data-mml-node="msubsup"><use xlink:href="#h" data-mml-node="mo" transform="matrix(1 0 0 -1 3220.9 0)"/><use xlink:href="#d" data-mml-node="mn" transform="matrix(.707 0 0 -.707 4234.3 -1088.1)"/><use xlink:href="#i" data-mml-node="mn" transform="matrix(.707 0 0 -.707 3776.9 896.4)"/></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#j" data-mml-node="mi" transform="matrix(1 0 0 -1 4804.5 0)"/></g><use xlink:href="#k" data-mml-node="mi" transform="matrix(1 0 0 -1 5360.5 0)"/><g data-mml-node="msubsup"><use xlink:href="#h" data-mml-node="mo" transform="matrix(1 0 0 -1 6099.2 0)"/><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#e" data-mml-node="mi" transform="matrix(.707 0 0 -.707 7112.6 -1088.1)"/></g><use xlink:href="#i" data-mml-node="mn" transform="matrix(.707 0 0 -.707 6655.2 896.4)"/></g><use xlink:href="#l" data-mml-node="mi" transform="matrix(1 0 0 -1 8036.3 0)"/><g data-mml-node="msup"><use xlink:href="#m" data-mml-node="mi" transform="matrix(1 0 0 -1 8526.3 0)"/><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#n" data-mml-node="mo" transform="matrix(.707 0 0 -.707 8992.3 -413)"/><use xlink:href="#l" data-mml-node="mi" transform="matrix(.707 0 0 -.707 9542.346 -413)"/></g></g><g data-mml-node="mrow"><use xlink:href="#o" data-mml-node="mo" transform="matrix(1 0 0 -1 9939 0)"/><use xlink:href="#d" data-mml-node="mn" transform="matrix(1 0 0 -1 10397 0)"/><use xlink:href="#n" data-mml-node="mo" transform="matrix(1 0 0 -1 11119.2 0)"/><g data-mml-node="msup"><use xlink:href="#m" data-mml-node="mi" transform="matrix(1 0 0 -1 12119.4 0)"/><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#n" data-mml-node="mo" transform="matrix(.707 0 0 -.707 12585.4 -413)"/><use xlink:href="#k" data-mml-node="mi" transform="matrix(.707 0 0 -.707 13135.446 -413)"/></g></g><use xlink:href="#p" data-mml-node="mo" transform="matrix(1 0 0 -1 13590 0)"/></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#j" data-mml-node="mi" transform="matrix(1 0 0 -1 14048 0)"/></g><use xlink:href="#l" data-mml-node="mi" transform="matrix(1 0 0 -1 14604 0)"/></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="34.149ex" height="6.354ex" style="margin-bottom: 10px;" viewBox="0 -1562.5 15094 2808.5" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"><defs><path id="i" d="M96 585q56 81 153 81 48 0 96-26t78-92q37-83 37-228 0-155-43-237-20-42-55-67t-61-31-51-7q-26 0-52 6t-61 32-55 67q-43 82-43 237 0 174 57 265zm225 12q-30 32-71 32-42 0-72-32-25-26-33-72t-8-192q0-158 8-208t36-79q28-30 69-30 40 0 68 30 29 30 36 84t8 203q0 145-8 191t-33 73z"/><path id="a" d="M60 948q3 2 605 2h602l58-135q59-138 63-146h-40l-7 14q-21 41-56 78-50 48-111 77t-141 43-151 17-183 4H251l8-11q463-633 465-639 1-2 0-6-3-3-264-302L196-356q0-1 211-1h141q89 0 128-1 136 0 220 5t167 21 141 49 103 87q21 26 41 72h40q0-1-7-21t-25-65-31-84l-58-155-601-1q-602 0-605 2-6 2-6 9 0 2 2 6l533 610q0 1-33 45T452 366 322 544L56 909l-1 15q0 21 5 24z"/><path id="c" d="M56 347q0 13 14 20h637q15-8 15-20 0-11-14-19l-318-1H72q-16 5-16 20zm0-194q0 15 16 20h636q14-10 14-20 0-13-15-20H70q-14 7-14 20z"/><path id="d" d="m213 578-13-5q-14-5-40-10t-58-7H83v46h19q47 2 87 15t56 24 28 22q2 3 12 3 9 0 17-6V361l1-300q7-7 12-9t24-4 62-2h26V0h-11q-21 3-159 3-136 0-157-3H88v46h64q16 0 25 1t16 3 8 2 6 5 6 4v517z"/><path id="e" d="M55 217q0 88 56 156t143 69q88 0 165-61 38-31 74-78l14-19 7 10q104 148 233 148 86 0 141-68t56-160q0-86-55-155T743-11q-86 0-163 61-38 31-74 78l-14 19-7-10Q381-11 252-11q-86 0-141 68T55 217zm852 0q0 68-38 124t-108 56q-21 0-41-5t-38-14-34-19-29-24-25-25-20-25-15-22-11-17l-5-8 31-40q31-40 48-60t42-44 50-33 51-10q62 0 102 49t40 117zm-815-3q0-69 39-125t108-56q118 0 217 160l-31 40q-61 79-91 104-49 43-101 43-62 0-101-49T92 214z"/><path id="f" d="M127 463q-27 0-42 17t-16 44q0 55 48 98t116 43q35 0 44-1 74-12 113-53t40-89q0-52-34-101t-94-71l-3-2q0-1 9-3t29-9 38-21q82-53 82-140 0-79-62-138T238-22q-80 0-138 43T42 130q0 28 18 45t45 18q28 0 46-18t18-45q0-11-3-20t-7-16-11-12-12-8-10-4-8-3l-4-1q51-45 124-45 55 0 83 53 17 33 17 101v20q0 95-64 127-15 6-61 7l-42 1-3 2q-2 3-2 16 0 18 8 18 28 0 58 5 34 5 62 42t28 112v8q0 57-35 79-22 14-47 14-32 0-59-11t-38-23-11-12h3q3-1 8-2t10-5 12-7 10-11 8-15 3-20q0-22-14-39t-45-18z"/><path id="g" d="M78 661q0 21 18 38t42 17 42-16 19-39q0-7-20-229t-21-226q-2-8-19-8-18 0-20 8-1 3-21 225T78 661zm1-600q0 28 18 44t44 16q23-2 40-17t17-43q0-30-17-45T139 1q-25 0-42 15T79 61z"/><path id="h" d="M114-798q18-26 51-26h2q28 0 56 60t52 164 45 209 42 227q3 21 5 31 72 425 156 788t122 472l10 30q4 12 17 44t27 56 34 49 44 40 51 14q56 0 84-35t32-80q0-25-12-40t-23-19-22-3q-21 0-38 15t-17 41q0 48 53 57l-3 4q-3 3-8 7t-8 6q-15 10-33 10-14 0-26-12t-32-56-39-116-47-203-56-308Q574 293 510-5T410-437t-55-192q-77-233-190-233-40 0-73 31t-37 85q0 35 19 48t38 13q21 0 38-15t17-41q0-48-53-57z"/><path id="b" d="M21 287q1 6 3 16t12 38 20 47 33 37 46 17q36 0 60-18t30-34 6-21q0-2 1-2l11 11q61 64 139 64 54 0 87-27t34-79-38-157-38-127q0-26 17-26 6 0 9 1 29 5 52 38t35 80q2 8 20 8 20 0 20-8 0-1-4-15-8-29-22-57t-46-56-69-27q-47 0-68 27t-21 56q0 19 36 120t37 152q0 59-44 59h-5q-86 0-145-101l-7-12-33-134Q156 26 151 16q-13-27-43-27-13 0-21 6T76 7t-2 10q0 13 38 163t40 163q1 5 1 23 0 39-24 39-38 0-63-100-6-20-6-21-2-6-19-6H27q-6 6-6 9z"/><path id="j" d="M376 495v40q0 24 1 33 0 45-10 56t-51 13h-18v23q0 23 2 23l10 1q10 1 29 2t37 2 37 2 30 3 11 1h3V390q0-306 1-309 3-20 14-26t45-9h18V0q-2 0-76-5t-79-6h-7v55l-8-7q-58-48-130-48-77 0-139 61T34 215q0 100 63 163t147 64q75 0 132-49v102zm-3-153q-45 63-113 63-49 0-87-36-27-28-34-64t-8-94q0-56 7-91t35-61q30-33 78-33 71 0 122 77v239z"/><path id="k" d="M52 289q7 42 54 97t116 56q35 0 64-18t43-45q42 63 101 63 37 0 64-22t28-59q0-29-14-47t-27-22-23-4q-19 0-31 11t-12 29q0 46 50 63-11 13-40 13-13 0-19-2-38-16-56-66-60-221-60-258 0-28 16-40t35-12q37 0 73 33t49 81q3 10 6 11t16 2h4q15 0 15-8 0-1-2-11-16-57-62-101T333-11q-70 0-106 63-41-62-94-62h-6q-49 0-70 26T35 71q0 32 19 52t45 20q43 0 43-42 0-20-12-35t-23-20-13-5l-3-1q0-1 6-4t16-7 19-3q36 0 62 45 9 16 23 68t28 108 16 66q5 27 5 39 0 28-15 40t-34 12q-40 0-75-32t-49-82q-2-9-5-10t-16-2H58q-6 6-6 11z"/><path id="l" d="M21 287q0 14 15 48t48 71 74 36q41 0 66-23t26-64q-2-19-3-21 0-3-16-46t-33-97-16-86q0-43 14-60t42-18q23 0 43 11t31 23 27 33q0 1 5 20t14 59 19 74q38 150 42 157 13 27 43 27 13 0 21-7t11-12 2-9q0-13-49-210T391-23q-28-83-97-132t-138-50q-45 0-79 22t-34 66q0 22 7 37t19 22 20 10 17 3q44 0 44-42 0-20-12-35t-23-20-13-5l-3-1q2-5 19-12t34-7h8q17 0 26 2 33 9 61 38t43 62 23 56 8 30l-6-4q-6-4-19-11T270-6q-20-5-39-5-46 0-81 22t-46 71q-1 7-1 31 0 57 35 149t35 117v14q0 3-4 7t-11 4h-4q-23 0-42-19t-30-41-17-42-8-22q-2-2-16-2H27q-6 6-6 9z"/><path id="m" d="M39 168q0 57 19 104t49 78 67 52 70 31 63 9h3q45 0 78-22t33-65q0-90-111-118-49-13-134-14-37 0-38-2 0-2-6-35t-7-58q0-47 21-74t63-28 93 19 92 66q9 10 12 10 4 0 13-9t10-14-9-16-30-27-46-31-63-25-76-10q-79 0-122 53T39 168zm334 185q-6 52-68 52-33 0-61-14t-45-34-29-41-16-36-5-19q0-1 20-1 113 0 158 24t46 69z"/><path id="n" d="M84 237v13l14 20h581q15-8 15-20t-15-20H98q-14 7-14 20z"/><path id="o" d="M152 251q0 395 236 599h28q6-6 6-9 0-4-19-25t-46-63-55-104-47-167-19-232q0-126 19-231t46-166 55-104 47-64 19-25q0-3-6-9h-28q-29 24-56 53t-61 83-59 116-42 153-18 195z"/><path id="p" d="M305 251q0-396-236-600H56q-13 0-17 2t-4 9q2 5 25 31t48 68 52 103 44 163 17 223-17 223-44 163-52 104-48 67-25 32q0 11 15 11h19q128-107 187-284 49-141 49-315z"/></defs><g data-mml-node="math" stroke="currentColor" fill="currentColor" stroke-width="0"><g data-mml-node="munderover"><use xlink:href="#a" data-mml-node="mo" transform="scale(1 -1)"/><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#b" data-mml-node="mi" transform="matrix(.707 0 0 -.707 58 1087.9)"/><use xlink:href="#c" data-mml-node="mo" transform="matrix(.707 0 0 -.707 482.2 1087.9)"/><use xlink:href="#d" data-mml-node="mn" transform="matrix(.707 0 0 -.707 1032.246 1087.9)"/></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#e" data-mml-node="mi" transform="matrix(.707 0 0 -.707 368.4 -1150)"/></g></g><g data-mml-node="mfrac"><g data-mml-node="msup"><use xlink:href="#b" data-mml-node="mi" transform="matrix(1 0 0 -1 1830.7 -676)"/><use xlink:href="#f" data-mml-node="mn" transform="matrix(.707 0 0 -.707 2430.7 -1039)"/></g><g data-mml-node="mrow"><use xlink:href="#b" data-mml-node="mi" transform="matrix(1 0 0 -1 1893.5 686)"/><use xlink:href="#g" data-mml-node="mo" transform="matrix(1 0 0 -1 2493.5 686)"/></g><path stroke="none" d="M1730.7-220h1203.6v-60H1730.7z"/></g><g data-mml-node="msubsup"><use xlink:href="#h" data-mml-node="mo" transform="matrix(1 0 0 -1 3220.9 0)"/><use xlink:href="#d" data-mml-node="mn" transform="matrix(.707 0 0 -.707 4234.3 -1088.1)"/><use xlink:href="#i" data-mml-node="mn" transform="matrix(.707 0 0 -.707 3776.9 896.4)"/></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#j" data-mml-node="mi" transform="matrix(1 0 0 -1 4804.5 0)"/></g><use xlink:href="#k" data-mml-node="mi" transform="matrix(1 0 0 -1 5360.5 0)"/><g data-mml-node="msubsup"><use xlink:href="#h" data-mml-node="mo" transform="matrix(1 0 0 -1 6099.2 0)"/><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#e" data-mml-node="mi" transform="matrix(.707 0 0 -.707 7112.6 -1088.1)"/></g><use xlink:href="#i" data-mml-node="mn" transform="matrix(.707 0 0 -.707 6655.2 896.4)"/></g><use xlink:href="#l" data-mml-node="mi" transform="matrix(1 0 0 -1 8036.3 0)"/><g data-mml-node="msup"><use xlink:href="#m" data-mml-node="mi" transform="matrix(1 0 0 -1 8526.3 0)"/><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#n" data-mml-node="mo" transform="matrix(.707 0 0 -.707 8992.3 -413)"/><use xlink:href="#l" data-mml-node="mi" transform="matrix(.707 0 0 -.707 9542.346 -413)"/></g></g><g data-mml-node="mrow"><use xlink:href="#o" data-mml-node="mo" transform="matrix(1 0 0 -1 9939 0)"/><use xlink:href="#d" data-mml-node="mn" transform="matrix(1 0 0 -1 10397 0)"/><use xlink:href="#n" data-mml-node="mo" transform="matrix(1 0 0 -1 11119.2 0)"/><g data-mml-node="msup"><use xlink:href="#m" data-mml-node="mi" transform="matrix(1 0 0 -1 12119.4 0)"/><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#n" data-mml-node="mo" transform="matrix(.707 0 0 -.707 12585.4 -413)"/><use xlink:href="#k" data-mml-node="mi" transform="matrix(.707 0 0 -.707 13135.446 -413)"/></g></g><use xlink:href="#p" data-mml-node="mo" transform="matrix(1 0 0 -1 13590 0)"/></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><use xlink:href="#j" data-mml-node="mi" transform="matrix(1 0 0 -1 14048 0)"/></g><use xlink:href="#l" data-mml-node="mi" transform="matrix(1 0 0 -1 14604 0)"/></g></svg>
                 <input type="password" id="password" placeholder="请输入结果" required>
             </div>
             <button id="loginButton" type="submit" class="login-button norm">看看实力</button>
@@ -158,9 +172,11 @@
         <ul id="images" class="gallery">
         </ul>
     </div>
+    <div id="audioControl" class="audio-controls hidden"></div>
+    <audio id="bgMusic" class="hidden"></audio>
 </body>
 <script type="text/javascript">
-function init(url, fake_url) {
+function init(url, audio_url, fake_url) {
     document.getElementById('loginForm').addEventListener('submit', function (event) {
         event.preventDefault();
         const key = document.getElementById('password').value;
@@ -168,12 +184,19 @@ function init(url, fake_url) {
         const loginButton = document.getElementById('loginButton');
         const loginSection = document.getElementById('loginSection');
         const contentSection = document.getElementById('contentSection');
+        const audio = document.getElementById('myAudio');
+        const audioControl = document.getElementById('audioControl');
         loginButton.classList.remove('norm');
         loginButton.classList.add('load');
         loginButton.innerHTML = "加载中";
+
         var xhr = new XMLHttpRequest();
+        var xhr_audio = new XMLHttpRequest();
         xhr.open("GET", url, true);
+        xhr_audio.open("GET", audio_url, true);
         xhr.responseType = "text";
+        xhr_audio.responseType = "text";
+
         xhr.onload = function() {
             if (xhr.status === 200) {
                 var txtContent = xhr.responseText;
@@ -198,14 +221,59 @@ function init(url, fake_url) {
             }
         };
         xhr.onerror = function() {
-            loginButton.classList.remove('norm');
-            loginButton.classList.add('error');
-            loginButton.innerHTML = "网络错误 点击刷新";
-            loginButton.addEventListener('click', function() {
-                location.reload();
-            });
+            networkError(loginButton);
         }
+        xhr_audio.onload = function() {
+            if (xhr_audio.status === 200) {
+                var audio_txtContent = xhr_audio.responseText;
+                try {
+                    var audio_base64 = decrypt(audio_txtContent.split('\n'), key);
+                } catch(error) {
+                    window.location.replace(fake_url);
+                }
+                loadAudio(audio_base64[0], audioControl);
+            } else {
+                alert(xhr_audio.status);
+            }
+        };
+        xhr_audio.onerror = function() {
+            networkError(loginButton);
+        }
+
         xhr.send();
+        xhr_audio.send();
+    });
+}
+function loadAudio(audio_base64, audioControl) {
+    const audio = document.getElementById('bgMusic');
+    audio.innerHTML = '<source src="data:audio/mp3;base64,' + audio_base64 + '" />'
+    audioControl.classList.remove('hidden');
+    const play_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16px"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/></svg>';
+    const pause_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16px"><path d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"/></svg>';
+    audioControl.innerHTML = play_icon;
+    audioControl.addEventListener('click', () => {
+        if (audio.paused) {
+            setTimeout(() => {
+                audio.play();
+            }, 100)
+            audioControl.innerHTML = pause_icon;
+        } else {
+            setTimeout(() => {
+                audio.pause();
+            }, 100)
+            audioControl.innerHTML = play_icon;
+        }
+    });
+    audio.addEventListener('ended', () => {
+        audio.play();
+    });
+}
+function networkError(btn) {
+    btn.classList.remove('norm');
+    btn.classList.add('error');
+    btn.innerHTML = "网络错误 点击刷新";
+    btn.addEventListener('click', function() {
+        location.reload();
     });
 }
 function decrypt(encry_arr, serverKey) {
@@ -225,7 +293,7 @@ function decrypt(encry_arr, serverKey) {
 function show_img(img_base64_arr) {
     var img_ul = document.getElementById("images");
     var ul_html = "";
-    for(let index=0; index<img_base64_arr.length; index++) {
+    for(let index = 0; index < img_base64_arr.length; index++) {
         ul_html = ul_html + "<li><img src=\"data:image/png;base64," + img_base64_arr[index] + "\" alt=\"Picture " + (index+1).toString() + "\" class=\"image\"></li>";
     }
     img_ul.innerHTML = ul_html;
@@ -254,7 +322,8 @@ function formatSize(bytes) {
     return `${size} ${units[i]}`;
 }
 const url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/eros.aes";
+const audio_url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/eros_audio.aes";
 const fake_url = "https://www.baidu.com";
-init(url, fake_url);
+init(url, audio_url, fake_url);
 </script>
 </html>
