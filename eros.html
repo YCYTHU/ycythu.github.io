@@ -164,10 +164,6 @@ function init(url, fake_url) {
     document.getElementById('loginForm').addEventListener('submit', function (event) {
         event.preventDefault();
         const key = document.getElementById('password').value;
-        if (key.length != 48) {
-            window.location.replace(fake_url);
-            return;
-        }
         const loginMessage = document.getElementById('loginMessage');
         const loginButton = document.getElementById('loginButton');
         const loginSection = document.getElementById('loginSection');
@@ -175,7 +171,6 @@ function init(url, fake_url) {
         loginButton.classList.remove('norm');
         loginButton.classList.add('load');
         loginButton.innerHTML = "加载中";
-        //loginMessage.innerHTML = "Please wait a moment";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
         xhr.responseType = "text";
@@ -215,12 +210,11 @@ function init(url, fake_url) {
 }
 function decrypt(encry_arr, serverKey) {
     var result = [];
-    const key = CryptoJS.enc.Utf8.parse(serverKey.substring(0,32));
-    const iv = CryptoJS.enc.Utf8.parse(serverKey.substring(32,48));
+    const key = CryptoJS.enc.Utf8.parse(serverKey);
     shuffleArray(encry_arr);
-    for (let index=0; index<encry_arr.length; index++) {
-        var decryptedData = CryptoJS.AES.decrypt(encry_arr[index], key, {
-            iv: iv,
+    for (let index = 0; index < encry_arr.length; index++) {
+        var decryptedData = CryptoJS.AES.decrypt(encry_arr[index].substring(16), key, {
+            iv: CryptoJS.enc.Utf8.parse(encry_arr[index].substring(0,16)),
             mode: CryptoJS.mode.CBC,
             padding: CryptoJS.pad.Pkcs7
         });
