@@ -2,22 +2,8 @@
 layout: page
 titles: Favorite
 ---
-{% assign articles = site.posts | where: "tags", "Code" %}
-{% if articles == null or articles == empty %}
-  <p>No articles found with the tag 'Code'.</p>
-{% else %}
-  {% for article in articles %}
-    <p>{{ article.title }}</p>
-  {% endfor %}
-{% endif %}
-
-<h2>Tags:</h2>
-{% for tag in site.tags %}
-  <p>{{ tag }}</p>
-{% endfor %}
-
 <div class="layout--archive js-all">
   <div class="js-result layout--archive__result d-none">
-    
+    {%- include article-list.html articles = site.posts | where: "tags", "Code" type='grid' size='sm' show_info=true reverse=true group_by='year' -%}
   </div>
 </div>
