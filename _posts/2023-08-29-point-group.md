@@ -2,6 +2,7 @@
 layout: article
 title: 点群与特征标表
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/symmetry.jpg
+favorite: true
 ---
 <!--more-->
 

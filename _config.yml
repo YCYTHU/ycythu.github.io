@@ -207,13 +207,6 @@ defaults:
     values:
       layout: article
       cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/default.jpg
-  ## Chemistry Collections
-  - scope:
-      path: ""
-      type: chemistry-collections
-    values:
-      layout: article
-
 
 ## => Plugins
 ##############################

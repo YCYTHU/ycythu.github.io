@@ -2,6 +2,7 @@
 layout: none
 title: 氢原子波函数
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/nebula.jpg
+favorite: true
 ---
 <!--more-->
 
