@@ -7,6 +7,7 @@ tags:
 - JavaScript
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/Colour Palette.jpg
 modify_date: 2024-02-22
+favorite: true
 ---
 通过编辑、新增和删除操作修改配色方案，并通过[Plotly.js](https://plotly.com/javascript/)实时预览。
 <!--more-->
