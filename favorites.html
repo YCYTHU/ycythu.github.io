@@ -7,9 +7,14 @@ titles: Favorite
   <p>No articles found with the tag 'Code'.</p>
 {% else %}
   {% for article in articles %}
-    <!-- 你的文章列表代码 -->
+    <p>{{ article }}</p>
   {% endfor %}
 {% endif %}
+
+<h2>Tags:</h2>
+{% for tag in site.tags %}
+  <p>{{ tag }}</p>
+{% endfor %}
 
 <div class="layout--archive js-all">
   <div class="js-result layout--archive__result d-none">
