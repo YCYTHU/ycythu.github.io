@@ -7,7 +7,7 @@ titles: Favorite
   <p>No articles found with the tag 'Code'.</p>
 {% else %}
   {% for article in articles %}
-    <p>{{ article }}</p>
+    <p>{{ article.title }}</p>
   {% endfor %}
 {% endif %}
 
