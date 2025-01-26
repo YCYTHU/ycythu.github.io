@@ -4,6 +4,7 @@ tags:
 - Code
 - JavaScript
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/electric field.jpg
+favorite: true
 ---
 向量场是把空间中的每一点指派到一个向量的映射，通过向量场可以对速度、磁力、流体运动和梯度等进行建模。为了方便快捷地在不同设备上展示向量场，本文在canvas中部分实现了向量场的流粒子动画，并加入了粒子着色功能以展示向量场的其他标量性质。
 <!--more-->
