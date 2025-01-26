@@ -5,6 +5,7 @@ tags:
 - Bash
 - Quantum Chemistry
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/excited state.jpg
+favorite: true
 ---
 使用Gaussian对分子基态进行结构优化之后，此脚本可依据用户指令自动生成激发态输入文件并通过作业调度系统调用Gaussian继续计算激发态性质。
 <!--more-->

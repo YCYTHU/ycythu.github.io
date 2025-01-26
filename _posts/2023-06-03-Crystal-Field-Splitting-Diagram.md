@@ -6,6 +6,7 @@ tags:
 - MATLAB
 cover: https://upload.wikimedia.org/wikipedia/commons/6/66/Square_planar.png
 modify_date: 2023-07-28
+favorite: true
 ---
 笔者在[往期文章](/2022/02/12/Crystal-Field-Splitting-Energy.html)中介绍了八面体与四面体场d轨道分裂能的计算方法。借助于MATLAB，笔者开发了一款简易的MATLAB App，实现常见与不常见对称性的晶体场的分裂能的计算。[源代码及依赖文件在此处下载。](https://cdn.jsdelivr.net/gh/ycythu/assets@main/CFSD.zip)
 <!--more-->

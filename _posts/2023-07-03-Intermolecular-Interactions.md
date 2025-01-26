@@ -8,6 +8,7 @@ mathjax_autoNumber: true
 aside:
   toc: true
 modify_date: 2023-07-10
+favorite: true
 ---
 
 为什么范德华作用随距离 $r^{-6}$ 衰减，为什么压紧的铅块会粘在一起，胶体为什么能够稳定存在？本文对分子之间的相互作用进行简要介绍。

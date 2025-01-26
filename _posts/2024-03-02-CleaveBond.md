@@ -5,6 +5,7 @@ tags:
 - Bash
 - Quantum Chemistry
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/covalent bonds.jpg
+favorite: true
 ---
 此脚本便捷地将分子沿指定的化学键分割成两个片段，并分别生成这两个片段的Gaussian输入文件，随后通过作业调度系统调用Gaussian完成量子化学计算。
 <!--more-->
