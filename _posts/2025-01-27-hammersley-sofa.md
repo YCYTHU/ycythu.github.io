@@ -14,16 +14,23 @@ favorite: true
 	svg {
       background-color: #ffffc0;
     }
+    input[type=range] {
+      width: 80%;
+    }
 </style>
 
-<svg id="svgCanvas" width="500" height="500" viewBox="16 -16 500 500">
-    <path d="M 0 0 L 0 100 L 400 100 L 400 500 L 500 500 L 500 0 L 0 0" fill="none" stroke="#000" stroke-width="8"/>
-    <path d="M 0 0 L 0 100 L 400 100 L 400 500 L 500 500 L 500 0 L 0 0" fill="#fff" stroke="none" />
-    <path d="M 0 100 L 100 100 A 63.662 63.662 0 0 1 227.324 100 L 327.324 100 A 100 100 0 0 0 227.324 0 L 100 0 A 100 100 0 0 0 0 100" id="sofa" fill="#c0c0fe" stroke="none" />
-    <circle id="center" cx="163.662" cy="100" r="4" fill="#000"/>
-</svg>
+<div style="text-align: center;">
+	<input type="range" id="progressBar" min="0.02" max="0.98" step="0.001" value="0.02">
+</div>
+<div style="text-align: center;">
+	<svg id="svgCanvas" width="500" height="500" viewBox="16 -16 500 500">
+	    <path d="M 0 0 L 0 100 L 400 100 L 400 500 L 500 500 L 500 0 L 0 0" fill="none" stroke="#000" stroke-width="8"/>
+	    <path d="M 0 0 L 0 100 L 400 100 L 400 500 L 500 500 L 500 0 L 0 0" fill="#fff" stroke="none" />
+	    <path d="M 0 100 L 100 100 A 63.662 63.662 0 0 1 227.324 100 L 327.324 100 A 100 100 0 0 0 227.324 0 L 100 0 A 100 100 0 0 0 0 100" id="sofa" fill="#c0c0fe" stroke="none" />
+	    <circle id="center" cx="163.662" cy="100" r="4" fill="#000"/>
+	</svg>
+</div>
 
-<input type="range" id="progressBar" min="0.02" max="0.98" step="0.001" value="0.02">
 
 <script>
     const sofa = document.getElementById("sofa");
