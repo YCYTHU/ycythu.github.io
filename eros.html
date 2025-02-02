@@ -16,7 +16,7 @@
         }
         .gallery {
             column-count: 1;
-            column-gap: 15px;
+            column-gap: 10px;
         }
         .audio-controls {
             position: fixed;
@@ -46,6 +46,10 @@
         @media (min-width: 900px) {
             .gallery {
                 column-count: 5;
+                column-gap: 15px;
+            }
+            .gallery .image {
+                margin-bottom: 15px;
             }
         }
         @media (min-width: 1200px) {
@@ -66,7 +70,7 @@
         .gallery .image {
             width: 100%;
             break-inside: avoid;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             border: 1px solid #ddd;
             border-radius: 10px;
             transition: transform 0.3s ease;
