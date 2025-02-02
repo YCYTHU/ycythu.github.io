@@ -18,6 +18,14 @@
             column-count: 1;
             column-gap: 10px;
         }
+        .gallery .image {
+            width: 100%;
+            break-inside: avoid;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
         .audio-controls {
             position: fixed;
             bottom: 20px;
@@ -66,14 +74,6 @@
             .gallery {
                 column-count: 8;
             }
-        }
-        .gallery .image {
-            width: 100%;
-            break-inside: avoid;
-            margin-bottom: 5px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
         }
         .gallery .image:hover {
             transform: scale(1.05);

@@ -21,7 +21,7 @@ favorite: true
 
 点击下面的播放按钮或拖动进度条以观看Hammersley沙发通过走廊的动画。紫色的部分为Hammersley沙发，其形状如电话听筒，由一个长为 $4/\pi$，宽为 $1$ 的矩形的长边上挖去一个半径为 $2/\pi$ 的半圆，再在其两条短边上各接一个单位半径的四分之一圆盘得到。黑色的点为半圆的圆心，在通过走廊拐角时，其轨迹为四分之一圆弧。
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-bottom: 20px;">
     <button id="playPauseBtn" class="button button--secondary button--circle"><i class="fa-solid fa-play" style="margin-left: 2px;"></i></button>
 	<input type="range" id="progressBar" min="0.02" max="0.98" step="0.001" value="0.02">
 </div>
@@ -29,8 +29,8 @@ favorite: true
 	<svg id="svgCanvas" width="80%" height="80%" viewBox="16 -16 500 500">
 	    <path d="M 0 0 L 0 100 L 400 100 L 400 500 L 500 500 L 500 0 L 0 0" fill="none" stroke="#000" stroke-width="8"/>
 	    <path d="M 0 0 L 0 100 L 400 100 L 400 500 L 500 500 L 500 0 L 0 0" fill="#fff" stroke="none" />
-	    <path d="M 0 100 L 100 100 A 63.662 63.662 0 0 1 227.324 100 L 327.324 100 A 100 100 0 0 0 227.324 0 L 100 0 A 100 100 0 0 0 0 100" id="sofa" fill="#c0c0fe" stroke="#000" stroke-width="3" />
-	    <circle id="center" cx="163.662" cy="100" r="4" fill="#000"/>
+	    <path d="M 0 100 L 100 100 A 63.662 63.662 0 0 1 227.324 100 L 327.324 100 A 100 100 0 0 0 227.324 0 L 100 0 A 100 100 0 0 0 0 100" id="sofa" fill="#c0c0fe" stroke="#000" stroke-width="4" />
+	    <circle id="center" cx="163.662" cy="100" r="3" fill="#000"/>
 	</svg>
 </div>
 
@@ -78,6 +78,7 @@ favorite: true
             direction *= -1;
         }
         progressBar.value = newValue.toFixed(3);
+        updateSofa(progressBar.value);
     }
     updateSofa(0.02);
     progressBar.addEventListener('input', function() {
