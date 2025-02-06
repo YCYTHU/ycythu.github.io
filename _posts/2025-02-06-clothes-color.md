@@ -1,13 +1,14 @@
 ---
 title: 在线预览衣物颜色
 tags: 
+- Color
 - Code
 - CSS
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley sofa.jpg
 ---
 
 <!--more-->
-
+<script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 <style type="text/css">
 	.source {
 		width: 100%;
@@ -42,6 +43,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 	<div class="colorBlock"></div>
 	<div class="colorBlock"></div>
 	<div class="colorBlock"></div>
+	<div class="colorBlock"><input id="colorSelector" oninput="changeColor(this.value)" readonly/></div>
 </div>
 <div class="card" style="max-width: 75%; margin: 0 auto;">
 	<div class="card__image">
@@ -54,11 +56,20 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 	const mask = document.getElementById("mask");
 	const colorGroup = document.getElementsByClassName("colorBlock");
 	const preColor = ["#ff5c4b73","#fe9d3675","#fcf03d69","#528b0166","#62a4f8c4","#850bff40"];
-	for (let i = 0; i < colorGroup.length; i++) {
+	for (let i = 0; i < colorGroup.length-1; i++) {
 		colorGroup[i].style.backgroundColor = preColor[i];
 		colorGroup[i].addEventListener('click', function () {
     		mask.style.background = preColor[i];
 		});
+	}
+	Coloris({
+        el: '#colorSelector',
+        themeMode: 'light',
+        alpha: true,
+        swatches: preColor
+    });
+	function changeColor(clr) {
+		mask.style.background = clr;
 	}
 </script>
 
