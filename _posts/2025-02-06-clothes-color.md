@@ -34,6 +34,11 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 		height: 30px;
     	border-radius: 8px;
 	}
+	#colorSelector {
+        width: 100%;
+        opacity: 0;
+        border: none;
+    }
 </style>
 
 <div class="colorTab">
@@ -43,7 +48,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 	<div class="colorBlock"></div>
 	<div class="colorBlock"></div>
 	<div class="colorBlock"></div>
-	<div class="colorBlock"><input id="colorSelector" oninput="changeColor(this.value)" readonly/></div>
+	<div class="colorBlock"><input id="colorSelector" oninput="changeColor(this.value)"/><i class="fa-solid fa-pen-to-square"></i></div>
 </div>
 <div class="card" style="max-width: 75%; margin: 0 auto;">
 	<div class="card__image">
