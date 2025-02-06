@@ -53,7 +53,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 <script>
 	const mask = document.getElementById("mask");
 	const colorGroup = document.getElementsByClassName("colorBlock");
-	const preColor = ["#ff5c4b73;","#fe9d3675;","#fcf03d69;","#528b0166;","#62a4f8c4;","#850bff40;"];
+	const preColor = ["#ff5c4b73","#fe9d3675","#fcf03d69","#528b0166","#62a4f8c4","#850bff40"];
 	for (let i = 0; i < colorGroup.length; i++) {
 		colorGroup[i].style.backgroundColor = preColor[i];
 		colorGroup[i].addEventListener('click', function () {
