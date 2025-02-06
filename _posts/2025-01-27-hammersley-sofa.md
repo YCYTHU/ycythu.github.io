@@ -4,7 +4,7 @@ tags:
 - Geometry
 - Code
 - JavaScript
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/electric field.jpg
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley sofa.jpg
 favorite: true
 ---
 移动沙发问题来源于现实生活中推沙发过走廊情景的二维理想化，旨在求出能通过单位宽度的L形平面通道的刚性二维形状的最大面积 $A$。Hammersley给出了一个电话听筒形状的解，面积约为 $2.2074$，但并非最大解。
