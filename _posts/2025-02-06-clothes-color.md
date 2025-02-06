@@ -24,7 +24,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 		display: flex;
     	justify-content: space-evenly;
     	width: 75%;
-    	margin: 0 auto;
+    	margin: 10px auto;
     	margin-bottom: 10px;
     	column-gap: 5px;
 	}
@@ -36,12 +36,12 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 </style>
 
 <div class="colorTab">
-	<div class="colorBlock" style="background-color: #ff5c4b73;" onclick="changeColor(this.style.backgroundColor)"></div>
-	<div class="colorBlock" style="background-color: #fe9d3675;"></div>
-	<div class="colorBlock" style="background-color: #fcf03d69;"></div>
-	<div class="colorBlock" style="background-color: #528b0166;"></div>
-	<div class="colorBlock" style="background-color: #62a4f8c4;"></div>
-	<div class="colorBlock" style="background-color: #850bff40;"></div>
+	<div class="colorBlock"></div>
+	<div class="colorBlock"></div>
+	<div class="colorBlock"></div>
+	<div class="colorBlock"></div>
+	<div class="colorBlock"></div>
+	<div class="colorBlock"></div>
 </div>
 <div class="card" style="max-width: 75%; margin: 0 auto;">
 	<div class="card__image">
@@ -52,7 +52,13 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 
 <script>
 	const mask = document.getElementById("mask");
-	function changeColor(clr) {
-		mask.style.background = clr;
+	const colorGroup = document.getElementByClassName("colorBlock");
+	const preColor = ["#ff5c4b73;","#fe9d3675;","#fcf03d69;","#528b0166;","#62a4f8c4;","#850bff40;"];
+	for (let i = 0; i < colorGroup.length; i++) {
+		colorGroup[i].style.backgroundColor = preColor[i];
+		colorGroup[i].addEventListener('click', function () {
+    		mask.style.background = preColor[i];
+		});
 	}
 </script>
+
