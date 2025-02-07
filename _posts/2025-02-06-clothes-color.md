@@ -8,6 +8,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 ---
 
 <!--more-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
 <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 <style type="text/css">
 	.source {
@@ -48,7 +49,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 	<div class="colorBlock"></div>
 	<div class="colorBlock"></div>
 	<div class="colorBlock"></div>
-	<div class="colorBlock"><input id="colorSelector" oninput="changeColor(this.value)"/><i class="fa-solid fa-pen-to-square"></i></div>
+	<div class="colorBlock"><input id="colorSelector" oninput="changeColor(this.value)"/></div>
 </div>
 <div class="card" style="max-width: 75%; margin: 0 auto;">
 	<div class="card__image">
@@ -69,6 +70,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley so
 	}
 	Coloris({
         el: '#colorSelector',
+        theme: 'polaroid',
         themeMode: 'light',
         alpha: true,
         swatches: preColor
