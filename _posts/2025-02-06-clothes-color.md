@@ -76,7 +76,7 @@ CSS的`mask`属性可以在特定位置（部分）隐藏元素，而`mix-blend-
 	<div class="colorBlock"></div>
 	<div class="colorBlock"></div>
 	<div class="colorBlock"></div>
-	<div class="colorBlock"><input id="colorSelector" oninput="changeColor(this.value)" value="#0000005f"/></div>
+	<div class="colorBlock"><input id="colorSelector" oninput="changeColor(this.value)" value="#00000060"/></div>
 </div>
 <div class="card" style="max-width: 75%; margin: 0 auto;">
 	<div class="card__image">
@@ -102,6 +102,7 @@ CSS的`mask`属性可以在特定位置（部分）隐藏元素，而`mix-blend-
 		alpha: true,
 		swatches: preColor
 	});
+	changeColor(document.getElementById("colorSelector").value);
 	function changeColor(clr) {
 		mask.style.background = clr;
 	}
