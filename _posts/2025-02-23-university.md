@@ -14,7 +14,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 </head>
 <style>
 	html {
-		--main-color: #7c2e9a
+		--main-color: #7c2e9a;
 		font-size: 12px;
 	}
 	/*body {
@@ -28,9 +28,18 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		overflow: hidden;
 		display: flex;
 		align-items: end;
+		border-radius: 1.5rem;
+		margin-top: 3rem;
+		line-height: 1.0;
+	}
+	.background p {
+		margin: 0;
+		font-family: FZYT;
+		color: var(--main-color);
+		text-align: center;
 	}
 	.container {
-		margin: 0 auto 5rem;
+		margin: 0 auto;
 		width: fit-content;
 	}
 	/*@media (min-width: 320px) {
@@ -158,13 +167,6 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		width: 4.5rem;
 		filter: drop-shadow(var(--main-color) 0px 200px);
 		transform: translateY(-200px);
-	}
-	p {
-		font-family: FZYT;
-		margin: 0;
-		color: var(--main-color);
-		text-align: center;
-
 	}
 	p.white {
 		color: #fff;
