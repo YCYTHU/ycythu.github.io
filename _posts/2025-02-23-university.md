@@ -7,6 +7,8 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 ---
 
 <!--more-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+<script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 <style>
 	html {
 	--main-color: #7c2e9a;
@@ -135,7 +137,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	align-items: center;
 	overflow: hidden;
 	mask: url(https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/university/beijing.svg) no-repeat;
-    background: red;
+    background-color: var(--main-color);
     width: calc(3.5* var(--my-font-size));
     height: calc(3.5* var(--my-font-size));
     mask-size: 100% 100%;
@@ -150,7 +152,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	align-items: center;
 	overflow: hidden;
 	mask: url(https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/university/Tsinghua.svg) no-repeat;
-    background: red;
+    background-color: var(--main-color);
     width: calc(4.5* var(--my-font-size));
     height: calc(4.5* var(--my-font-size));
     mask-size: 100% 100%;
@@ -259,10 +261,19 @@ p.white {
 .size4 {
 	font-size: calc(0.8*var(--my-font-size));
 }
+#colorSelector {
+	width: 4rem;
+    transform: translateX(-5rem);
+    opacity: 0;
+}
 </style>
 <body>
 	<p>
 		<a class="button button--outline-info button--rounded" onclick="fullScreen()">预览</a>
+		<div style="position: relative;">
+			<a class="button button--outline-success button--rounded">背景颜色</a>
+			<input id="colorSelector" oninput="changeColor(this.value)" readonly/>
+		</div>
 		<select>
     		<option value="1">1</option>
     		<option value="2">2</option>
@@ -288,17 +299,13 @@ p.white {
 				<div class="card-body">
 					<div class="logo">
 						<div class="subwayLogo">
-							<div class="subwayLogoImgBox">
-								<!--<img class="subwayLogoImg" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/university/beijing.svg">-->
-							</div>
+							<div class="subwayLogoImgBox"></div>
 							<div class="subwayName">
 								<p class="justified size2">北京地铁</p>
 								<p class="size4">BEIJING SUBWAY</p>
 							</div>
 						</div>
-						<div class="univLogoImgBox">
-							<!--<img class="univLogoImg" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/university/Tsinghua.svg">-->
-						</div>
+						<div class="univLogoImgBox"></div>
 					</div>
 					<div class="name">
 						<p class="justified size3">北京地铁13号线</p>
@@ -357,6 +364,10 @@ p.white {
 	window.onresize = function () {
 		bg.style.height = `${document.documentElement.clientHeight}px`;
 	}
+	Coloris({
+            el: '#colorSelector',
+            alpha: false
+        });
 	function fullScreen() {
 		if (bg.requestFullscreen) {
             bg.requestFullscreen();
