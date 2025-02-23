@@ -7,11 +7,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 ---
 
 <!--more-->
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>University</title>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></script>
 <style>
 	html {
 		--main-color: #7c2e9a;
@@ -25,7 +21,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		display: flex;
 		align-items: end;
 		border-radius: calc(1.5*var(--my-font-size));
-		margin-top: calc(3*var(--my-font-size));
+		margin-top: calc(1*var(--my-font-size));
 		line-height: 1.0;
 	}
 	.background p {
@@ -252,10 +248,10 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	}
 </style>
 <body>
-	<div>
+	<p>
 		<a class="button button--success button--rounded" onclick="fullScreen()">预览</a>
 		<a class="button button--success button--rounded" onclick="captureScreenshot()">下载</a>
-	</div>
+	</p>
 	<div class="background">
 		<div class="container">
 			<div class="card_head">
