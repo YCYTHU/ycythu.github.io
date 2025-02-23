@@ -10,7 +10,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
 <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 <style>
-	html {
+html {
 	--main-color: #7c2e9a;
 	--my-font-size: 12px;
 }
@@ -266,21 +266,28 @@ p.white {
     transform: translateX(-5rem);
     opacity: 0;
 }
+.clr-field button {
+	border-radius: .4rem;
+    width: 100%;
+}
+select {
+	height: 2rem;
+    border-radius: .4rem;
+}
 </style>
 <body>
-	<p>
-		<a class="button button--outline-info button--rounded" onclick="fullScreen()">预览</a>
-		<div style="position: relative;">
-			<a class="button button--outline-success button--rounded">背景颜色</a>
-			<input id="colorSelector" oninput="changeColor(this.value)" readonly/>
-		</div>
+	<div style="position: relative; margin-top: 1rem;">
+		<a class="button button--outline-info button--rounded" onclick="fullScreen()" style="margin-right: 1rem;">预览</a>
+		<a class="button button--outline-primary button--rounded">背景颜色</a>
+		<input id="colorSelector" oninput="changeColor(this.value)" readonly/>
+		<a class="button button--outline-success button--rounded" style="margin-left: 1rem;">院校</a>
 		<select>
     		<option value="1">1</option>
     		<option value="2">2</option>
     		<option value="3">3</option>
     		<option value="4">4</option>
 		</select>
-	</p>
+	</div>
 	<div class="background">
 		<div class="container">
 			<div class="card_head">
@@ -359,6 +366,7 @@ p.white {
 	</div>
 </body>
 <script>
+	const root = document.documentElement;
 	const bg = document.getElementsByClassName("background")[0];
 	bg.style.height = `${document.documentElement.clientHeight}px`;
 	window.onresize = function () {
@@ -378,5 +386,9 @@ p.white {
         } else if (bg.msRequestFullscreen) {
             bg.msRequestFullscreen();
         }
+	}
+	function changeColor(color) {
+		root.style.setProperty('--main-color', color);
+		//getComputedStyle(root).getPropertyValue('--main-color');
 	}
 </script>
