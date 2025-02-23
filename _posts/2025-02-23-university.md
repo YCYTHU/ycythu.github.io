@@ -11,7 +11,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 <style>
 html {
-	--main-color: #7c2e9a;
+	--main-color: #660874;
 	--my-font-size: 12px;
 }
 .background {
@@ -222,7 +222,7 @@ p.white {
 	align-items: center;
 	margin: calc(0.5*var(--my-font-size)) 0;
 	height: 10px;
-	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10"><circle cx="5" cy="5" r="2.5" fill="%237c2e9a" /></svg>');
+	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10"><circle cx="5" cy="5" r="2.5" fill="%23660874" /></svg>');
 	background-repeat: repeat;
 }
 .smSots {
@@ -279,13 +279,15 @@ select {
 	<div style="position: relative; margin-top: 1rem;">
 		<a class="button button--outline-info button--rounded" onclick="fullScreen()" style="margin-right: 1rem;">预览</a>
 		<a class="button button--outline-primary button--rounded">背景颜色</a>
-		<input id="colorSelector" oninput="changeColor(this.value)" readonly/>
+		<input id="colorSelector" value="#660874" oninput="changeColor(this.value)" readonly/>
 		<a class="button button--outline-success button--rounded" style="margin-left: 1rem;">院校</a>
-		<select>
-    		<option value="1">1</option>
-    		<option value="2">2</option>
-    		<option value="3">3</option>
-    		<option value="4">4</option>
+		<select id="univSelector">
+    		<option value="pku">北京大学</option>
+    		<option value="ruc">中国人民大学</option>
+    		<option value="thu" selected>清华大学</option>
+    		<option value="buaa">北京航空航天大学</option>
+    		<option value="bit">北京理工大学</option>
+    		<option value="cau">中国农业大学</option>
 		</select>
 	</div>
 	<div class="background">
@@ -389,6 +391,14 @@ select {
 	}
 	function changeColor(color) {
 		root.style.setProperty('--main-color', color);
+		updateCircleColor(color); 
 		//getComputedStyle(root).getPropertyValue('--main-color');
 	}
+	function updateCircleColor(color) {
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10">
+                            <circle cx="5" cy="5" r="2.5" fill="${color}" />
+                          </svg>`;
+            const encodedSVG = encodeURIComponent(svg);
+            document.getElementsByClassName('dots')[0].style.background = `url('data:image/svg+xml,${encodedSVG}')`;
+    }
 </script>
