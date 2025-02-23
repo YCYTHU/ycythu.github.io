@@ -359,31 +359,32 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	function captureScreenshot() {
 		try {
 			if (bg.requestFullscreen) {
-                await bg.requestFullscreen();
-            } else if (bg.mozRequestFullScreen) { // Firefox
-                await bg.mozRequestFullScreen();
-            } else if (bg.webkitRequestFullscreen) { // Chrome, Safari 和 Opera
-                await bg.webkitRequestFullscreen();
-            } else if (bg.msRequestFullscreen) { // IE/Edge
-                await bg.msRequestFullscreen();
+                bg.requestFullscreen();
+            } else if (bg.mozRequestFullScreen) {
+                bg.mozRequestFullScreen();
+            } else if (bg.webkitRequestFullscreen) {
+                bg.webkitRequestFullscreen();
+            } else if (bg.msRequestFullscreen) {
+                bg.msRequestFullscreen();
             }
-			await new Promise(resolve => setTimeout(resolve, 500));
-			const canvas = await html2canvas(bg);
-            const link = document.createElement("a");
-            link.href = canvas.toDataURL("image/png");
-            link.download = "screenshot.png";
-            link.click();
+            setTimeout(function(){
+            	const canvas = await html2canvas(bg);
+            	const link = document.createElement("a");
+            	link.href = canvas.toDataURL("image/png");
+            	link.download = "screenshot.png";
+            	link.click();
+            }, 1000)
         } catch (error) {
             console.error("下载失败:", error);
         } finally {
             if (document.exitFullscreen) {
-                await document.exitFullscreen();
+                document.exitFullscreen();
             } else if (document.mozCancelFullScreen) {
-                await document.mozCancelFullScreen();
+                document.mozCancelFullScreen();
             } else if (document.webkitExitFullscreen) {
-                await document.webkitExitFullscreen();
+                document.webkitExitFullscreen();
             } else if (document.msExitFullscreen) {
-                await document.msExitFullscreen();
+                document.msExitFullscreen();
             }
         }
     }
