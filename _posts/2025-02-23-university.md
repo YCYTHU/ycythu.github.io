@@ -368,7 +368,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
                 bg.msRequestFullscreen();
             }
             setTimeout(function(){
-            	const canvas = await html2canvas(bg);
+            	const canvas = html2canvas(bg);
             	const link = document.createElement("a");
             	link.href = canvas.toDataURL("image/png");
             	link.download = "screenshot.png";
