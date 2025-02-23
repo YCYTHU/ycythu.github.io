@@ -79,7 +79,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
             font-size: 32px;
         }
     }*/
-	.cardBox {
+	.card-box {
 		background-color: #fff;
 		padding: 1.2rem;
 		border-radius: 2rem;
@@ -88,7 +88,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		font-family: FZYT;
 		src: url("https://cdn.jsdelivr.net/gh/ycythu/assets@main/fonts/fangzheng/fangzhengyaoti.ttf")
 	}
-	.card {
+	.card-body {
 		display: flex;
 		flex-direction: column;
 	}
@@ -278,8 +278,8 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 				</div>
 				<div class="smSots"></div>
 			</div>
-			<div class="cardBox">
-				<div class="card">
+			<div class="card-box">
+				<div class="card-body">
 					<div class="logo">
 						<div class="subwayLogo">
 							<div class="subwayLogoImgBox">
