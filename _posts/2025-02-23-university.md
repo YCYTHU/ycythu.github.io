@@ -262,9 +262,12 @@ p.white {
 	font-size: calc(0.8*var(--my-font-size));
 }
 #colorSelector {
-	width: 4rem;
-    transform: translateX(-5rem);
+	width: 4.5rem;
+    transform: translateX(-6.5rem);
     opacity: 0;
+}
+.clr-field {
+	width: 0;
 }
 .clr-field button {
 	border-radius: .4rem;
@@ -274,21 +277,29 @@ select {
 	height: 2rem;
     border-radius: .4rem;
 }
+.opt-div {
+	display: flex;
+	justify-content: space-evenly;
+	position: relative;
+	margin-top: 1rem;
+}
 </style>
 <body>
-	<div style="position: relative; margin-top: 1rem;">
-		<a class="button button--outline-info button--rounded" onclick="fullScreen()" style="margin-right: 1rem;">预览</a>
+	<div class="opt-div" style="">
+		<a class="button button--outline-info button--rounded" onclick="fullScreen()">预览</a>
 		<a class="button button--outline-primary button--rounded">背景颜色</a>
 		<input id="colorSelector" value="#660874" oninput="changeColor(this.value)" readonly/>
-		<a class="button button--outline-success button--rounded" style="margin-left: 1rem;">院校</a>
-		<select id="univSelector">
-    		<option value="pku">北京大学</option>
-    		<option value="ruc">中国人民大学</option>
-    		<option value="thu" selected>清华大学</option>
-    		<option value="buaa">北京航空航天大学</option>
-    		<option value="bit">北京理工大学</option>
-    		<option value="cau">中国农业大学</option>
-		</select>
+		<div>
+			<a class="button button--outline-success button--rounded" style="margin-right: 2px;">院校</a>
+			<select id="univSelector">
+    			<option value="pku">北京大学</option>
+    			<option value="ruc">中国人民大学</option>
+    			<option value="thu" selected>清华大学</option>
+    			<option value="buaa">北京航空航天大学</option>
+    			<option value="bit">北京理工大学</option>
+    			<option value="cau">中国农业大学</option>
+			</select>
+		</div>
 	</div>
 	<div class="background">
 		<div class="container">
