@@ -4,7 +4,7 @@ tags:
 - Color
 - Code
 - CSS
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/hammersley sofa.jpg
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 ---
 CSS的`mask`属性可以在特定位置（部分）隐藏元素，而`mix-blend-mode`设置了元素内容如何与其父元素内容以及元素背景相混合，二者相结合可以在线实现模特的换装效果。
 <!--more-->

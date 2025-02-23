@@ -1,5 +1,12 @@
-<!DOCTYPE html>
-<html>
+---
+title: University
+tags: 
+- Code
+- CSS
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
+---
+
+<!--more-->
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +15,12 @@
 <style>
 	html {
 		--main-color: #7c2e9a
+		font-size: 12px;
 	}
-	body {
+	/*body {
 		margin: 0;
 		overflow: hidden;
-	}
+	}*/
 	.background {
 		background-color: var(--main-color);
 		padding-left: 1.5rem;
@@ -25,7 +33,7 @@
 		margin: 0 auto 5rem;
 		width: fit-content;
 	}
-	@media (min-width: 320px) {
+	/*@media (min-width: 320px) {
         html {
             font-size: 12px;
         }
@@ -70,7 +78,7 @@
         html {
             font-size: 32px;
         }
-    }
+    }*/
 	.cardBox {
 		background-color: #fff;
 		padding: 1.2rem;
@@ -337,7 +345,6 @@
 		</div>
 	</div>
 </body>
-</html>
 <script>
 	const bg = document.getElementsByClassName("background")[0];
 	bg.style.height = `${document.documentElement.clientHeight}px`;
