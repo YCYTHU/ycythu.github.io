@@ -250,7 +250,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 <body>
 	<p>
 		<a class="button button--outline-info button--rounded" onclick="fullScreen()">预览</a>
-		<a class="button button--outline-success button--rounded" onclick="captureScreenshot()">下载</a>
+		<a class="button button--outline-success button--rounded" onclick="download()">下载</a>
 		<select>
     		<option value="1">1</option>
     		<option value="2">2</option>
@@ -357,35 +357,30 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
         }
 	}
 	function captureScreenshot() {
+		html2canvas(bg).then(function(canvas) {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = 'screenshot.png';
+            link.click();
+        });
+	}
+	function download() {
 		try {
-			if (bg.requestFullscreen) {
-                bg.requestFullscreen();
-            } else if (bg.mozRequestFullScreen) {
-                bg.mozRequestFullScreen();
-            } else if (bg.webkitRequestFullscreen) {
-                bg.webkitRequestFullscreen();
-            } else if (bg.msRequestFullscreen) {
-                bg.msRequestFullscreen();
-            }
-            setTimeout(function(){
-            	const canvas = html2canvas(bg);
-            	const link = document.createElement("a");
-            	link.href = canvas.toDataURL("image/png");
-            	link.download = "screenshot.png";
-            	link.click();
-            }, 1000)
+			fullScreen();
+            setTimeout(captureScreenshot, 1000);
         } catch (error) {
             console.error("下载失败:", error);
-        } finally {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
         }
+        //finally {
+        //    if (document.exitFullscreen) {
+        //        document.exitFullscreen();
+        //    } else if (document.mozCancelFullScreen) {
+        //        document.mozCancelFullScreen();
+        //    } else if (document.webkitExitFullscreen) {
+        //        document.webkitExitFullscreen();
+        //    } else if (document.msExitFullscreen) {
+        //        document.msExitFullscreen();
+        //    }
+        //}
     }
 </script>
