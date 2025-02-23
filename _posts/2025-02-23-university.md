@@ -249,8 +249,14 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 </style>
 <body>
 	<p>
-		<a class="button button--success button--rounded" onclick="fullScreen()">预览</a>
-		<a class="button button--success button--rounded" onclick="captureScreenshot()">下载</a>
+		<a class="button button--outline-info button--rounded" onclick="fullScreen()">预览</a>
+		<a class="button button--outline-success button--rounded" onclick="captureScreenshot()">下载</a>
+		<select>
+    		<option value="1">1</option>
+    		<option value="2">2</option>
+    		<option value="3">3</option>
+    		<option value="4">4</option>
+		</select>
 	</p>
 	<div class="background">
 		<div class="container">
@@ -351,11 +357,34 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
         }
 	}
 	function captureScreenshot() {
-        html2canvas(bg).then(function(canvas) {
-            const link = document.createElement('a');
-            link.href = canvas.toDataURL();
-            link.download = 'screenshot.png';
+		try {
+			if (bg.requestFullscreen) {
+                await bg.requestFullscreen();
+            } else if (bg.mozRequestFullScreen) { // Firefox
+                await bg.mozRequestFullScreen();
+            } else if (bg.webkitRequestFullscreen) { // Chrome, Safari 和 Opera
+                await bg.webkitRequestFullscreen();
+            } else if (bg.msRequestFullscreen) { // IE/Edge
+                await bg.msRequestFullscreen();
+            }
+			await new Promise(resolve => setTimeout(resolve, 500));
+			const canvas = await html2canvas(bg);
+            const link = document.createElement("a");
+            link.href = canvas.toDataURL("image/png");
+            link.download = "screenshot.png";
             link.click();
-        });
+        } catch (error) {
+            console.error("下载失败:", error);
+        } finally {
+            if (document.exitFullscreen) {
+                await document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                await document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                await document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                await document.msExitFullscreen();
+            }
+        }
     }
 </script>
