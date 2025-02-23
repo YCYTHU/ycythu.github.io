@@ -17,10 +17,6 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		--main-color: #7c2e9a;
 		--my-font-size: 12px;
 	}
-	/*body {
-		margin: 0;
-		overflow: hidden;
-	}*/
 	.background {
 		background-color: var(--main-color);
 		padding-left: calc(1.5*var(--my-font-size));
@@ -52,19 +48,14 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
             --my-font-size: 14px;
         }
     }
-    @media (min-width: 420px) {
+    @media (min-width: 480px) {
         html {
             --my-font-size: 16px;
         }
     }
-    @media (min-width: 480px) {
-        html {
-            --my-font-size: 18px;
-        }
-    }
     @media (min-width: 600px) {
         html {
-            --my-font-size: 20px;
+            --my-font-size: 18px;
         }
         .background {
         	align-items: center;
@@ -75,17 +66,12 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
     }
     @media (min-width: 720px) {
         html {
-            --my-font-size: 24px;
-        }
-    }
-    @media (min-width: 900px) {
-        html {
-            --my-font-size: 28px;
+            --my-font-size: 20px;
         }
     }
     @media (min-width: 1440px) {
         html {
-            --my-font-size: 32px;
+            --my-font-size: 24px;
         }
     }
 	.card-box {
@@ -244,7 +230,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		background-color: var(--main-color);
 	}
 	.dots div:first-child {
-		transform: translateX(-calc(3.2*var(--my-font-size)));
+		transform: translateX(calc(-3.2*var(--my-font-size)));
 	}
 	.dots div:last-child {
 		transform: translateX(calc(3.2*var(--my-font-size)));
@@ -266,6 +252,10 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	}
 </style>
 <body>
+	<div>
+		<a class="button button--success button--rounded" onclick="fullScreen()">预览</a>
+		<a class="button button--success button--rounded" onclick="captureScreenshot()">下载</a>
+	</div>
 	<div class="background">
 		<div class="container">
 			<div class="card_head">
@@ -353,4 +343,23 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	window.onresize = function () {
 		bg.style.height = `${document.documentElement.clientHeight}px`;
 	}
+	function fullScreen() {
+		if (bg.requestFullscreen) {
+            bg.requestFullscreen();
+        } else if (bg.mozRequestFullScreen) { // Firefox
+            bg.mozRequestFullScreen();
+        } else if (bg.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            bg.webkitRequestFullscreen();
+        } else if (bg.msRequestFullscreen) { // IE/Edge
+            bg.msRequestFullscreen();
+        }
+	}
+	function captureScreenshot() {
+        html2canvas(bg).then(function(canvas) {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = 'screenshot.png';
+            link.click();
+        });
+    }
 </script>
