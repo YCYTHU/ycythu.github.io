@@ -15,7 +15,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 <style>
 	html {
 		--main-color: #7c2e9a;
-		font-size: 12px;
+		--my-font-size: 12px;
 	}
 	/*body {
 		margin: 0;
@@ -23,13 +23,13 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	}*/
 	.background {
 		background-color: var(--main-color);
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
+		padding-left: calc(1.5*var(--my-font-size));
+		padding-right: calc(1.5*var(--my-font-size));
 		overflow: hidden;
 		display: flex;
 		align-items: end;
-		border-radius: 1.5rem;
-		margin-top: 3rem;
+		border-radius: calc(1.5*var(--my-font-size));
+		margin-top: calc(3*var(--my-font-size));
 		line-height: 1.0;
 	}
 	.background p {
@@ -39,32 +39,32 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		text-align: center;
 	}
 	.container {
-		margin: 0 auto;
+		margin: 0 auto calc(5*var(--my-font-size));
 		width: fit-content;
 	}
-	/*@media (min-width: 320px) {
+	@media (min-width: 320px) {
         html {
-            font-size: 12px;
+            --my-font-size: 12px;
         }
     }
     @media (min-width: 360px) {
         html {
-            font-size: 14px;
+            --my-font-size: 14px;
         }
     }
     @media (min-width: 420px) {
         html {
-            font-size: 16px;
+            --my-font-size: 16px;
         }
     }
     @media (min-width: 480px) {
         html {
-            font-size: 18px;
+            --my-font-size: 18px;
         }
     }
     @media (min-width: 600px) {
         html {
-            font-size: 20px;
+            --my-font-size: 20px;
         }
         .background {
         	align-items: center;
@@ -75,23 +75,23 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
     }
     @media (min-width: 720px) {
         html {
-            font-size: 24px;
+            --my-font-size: 24px;
         }
     }
     @media (min-width: 900px) {
         html {
-            font-size: 28px;
+            --my-font-size: 28px;
         }
     }
     @media (min-width: 1440px) {
         html {
-            font-size: 32px;
+            --my-font-size: 32px;
         }
-    }*/
+    }
 	.card-box {
 		background-color: #fff;
-		padding: 1.2rem;
-		border-radius: 2rem;
+		padding: calc(1.2*var(--my-font-size));
+		border-radius: calc(2*var(--my-font-size));
 	}
 	@font-face {
 		font-family: FZYT;
@@ -102,7 +102,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		flex-direction: column;
 	}
 	.card_head {
-		padding: 0 1.2rem;
+		padding: 0 calc(1.2*var(--my-font-size));
 	}
 	.bless {
 		display: flex;
@@ -111,7 +111,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	.blessRight {
 		display: flex;
 		align-items: flex-end;
-		column-gap: .2rem;
+		column-gap: calc(0.2*var(--my-font-size));
 	}
 	.logo {
 		display: flex;
@@ -120,24 +120,24 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 	}
 	.name {
 		display: flex;
-		margin-top: .8rem;
+		margin-top: calc(0.8*var(--my-font-size));
 		border-top: 2px solid var(--main-color);
 		justify-content: space-between;
 	}
 	.name p {
-		margin-top: .4rem;
+		margin-top: calc(0.4*var(--my-font-size));
 	}
 	.station {
 		display: flex;
 		justify-content: space-between;
-		margin: 2rem 0;
+		margin: calc(2*var(--my-font-size)) 0;
 	}
 	.station .size4 {
 		text-align-last: center;
 	}
 	.subwayLogo {
 		display: flex;
-		column-gap: .5rem;
+		column-gap: calc(0.5*var(--my-font-size));
 	}
 	.subwayName {
 		text-align: center;
@@ -146,7 +146,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		justify-content: space-around;
 	}
 	.train {
-		width: 2.5rem;
+		width: calc(2.5*var(--my-font-size));
 	}
 	.subwayLogoImgBox {
 		display: flex;
@@ -154,7 +154,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		overflow: hidden;
 	}
 	.subwayLogoImg {
-		width: 3.5rem;
+		width: calc(3.5*var(--my-font-size));
 		filter: drop-shadow(var(--main-color) 0px 200px);
 		transform: translateY(-200px);
 	}
@@ -164,7 +164,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		overflow: hidden;
 	}
 	.univLogoImg {
-		width: 4.5rem;
+		width: calc(4.5*var(--my-font-size));
 		filter: drop-shadow(var(--main-color) 0px 200px);
 		transform: translateY(-200px);
 	}
@@ -179,12 +179,12 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		justify-content: space-evenly;
 	}
 	.subwayLine p {
-		width: 4rem;
+		width: calc(4*var(--my-font-size));
 	}
 	.stations {
 		position: relative;
 		height: 12px;
-		margin-top: .5rem;
+		margin-top: calc(0.5*var(--my-font-size));
 	}
 	.line {
 		position: absolute;
@@ -200,15 +200,15 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		top: 50%;
 		left: 0;
 		width: 100%;
-		height: .75rem;
+		height: calc(0.75*var(--my-font-size));
 		transform: translateY(-50%);
 		display: flex;
 		justify-content: space-evenly;
 	}
 	.circle {
-		margin: 0 1.5rem;
-		width: .75rem;
-		height: .75rem;
+		margin: 0 calc(1.5*var(--my-font-size));
+		width: calc(0.75*var(--my-font-size));
+		height: calc(0.75*var(--my-font-size));
 		border-radius: 50%;
 		border: 2px solid var(--main-color);
 		background-color: #fff;
@@ -220,49 +220,49 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/clothes.jpg
 		justify-content: space-between;
 	}
 	.arrow .size4 {
-		margin: .5rem;
+		margin: calc(0.5*var(--my-font-size));
 	}
 	.dots {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin: .5rem 0;
+		margin: calc(0.5*var(--my-font-size)) 0;
 		height: 10px;
 		background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10"><circle cx="5" cy="5" r="2.5" fill="%237c2e9a" /></svg>');
 		background-repeat: repeat;
 	}
 	.smSots {
-		margin: .2rem 0;
+		margin: calc(0.2*var(--my-font-size)) 0;
 		height: 6px;
 		background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" width="6"><circle cx="3" cy="3" r="1.5" fill="%23fff" /></svg>');
 		background-repeat: repeat;
 	}
 	.dotCircle {
-		width: 3rem;
-		height: 3rem;
+		width: calc(3*var(--my-font-size));
+		height: calc(3*var(--my-font-size));
 		border-radius: 50%;
 		background-color: var(--main-color);
 	}
 	.dots div:first-child {
-		transform: translateX(-3.2rem);
+		transform: translateX(-calc(3.2*var(--my-font-size)));
 	}
 	.dots div:last-child {
-		transform: translateX(3.2rem);
+		transform: translateX(calc(3.2*var(--my-font-size)));
 	}
 	.slogan {
-		margin: .5rem;
+		margin: calc(0.5*var(--my-font-size));
 	}
 	.size1 {
-		font-size: 2.25rem;
+		font-size: calc(2.25*var(--my-font-size));
 	}
 	.size2 {
-		font-size: 1.8rem;
+		font-size: calc(1.8*var(--my-font-size));
 	}
 	.size3 {
-		font-size: 1.1rem;
+		font-size: calc(1.1*var(--my-font-size));
 	}
 	.size4 {
-		font-size: .8rem;
+		font-size: calc(0.8*var(--my-font-size));
 	}
 </style>
 <body>
