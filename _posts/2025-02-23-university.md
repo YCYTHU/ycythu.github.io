@@ -279,18 +279,17 @@ select {
 }
 .opt-div {
 	display: flex;
-	justify-content: space-evenly;
-	position: relative;
+	justify-content: center;
 	margin-top: 1rem;
 }
 </style>
 <body>
 	<div class="opt-div" style="">
-		<a class="button button--outline-info button--rounded" onclick="fullScreen()">预览</a>
-		<a class="button button--outline-primary button--rounded">背景颜色</a>
+		<a class="button button--outline-info button--rounded" onclick="fullScreen()" style="margin-right: 1rem;">预览</a>
+		<a class="button button--outline-primary button--rounded" style="margin-right: 1rem;">背景颜色</a>
 		<input id="colorSelector" value="#660874" oninput="changeColor(this.value)" readonly/>
 		<div>
-			<a class="button button--outline-success button--rounded" style="margin-right: 2px;">院校</a>
+			<a class="button button--outline-success button--rounded">院校</a>
 			<select id="univSelector">
     			<option value="pku">北京大学</option>
     			<option value="ruc">中国人民大学</option>
