@@ -378,6 +378,18 @@ select {
 	</div>
 </body>
 <script>
+	const univData = [
+		{
+			name_zh: "北京大学",
+			name_en: "Peking University",
+			subwayName_zh: "北京地铁",
+			subwayName_en: "BEIJING SUBWAY",
+			line: "4",
+			station_zh: ["北京大学东门"],
+			station_en: ""
+			motto: ""
+		}
+	]
 	const root = document.documentElement;
 	const bg = document.getElementsByClassName("background")[0];
 	bg.style.height = `${document.documentElement.clientHeight}px`;

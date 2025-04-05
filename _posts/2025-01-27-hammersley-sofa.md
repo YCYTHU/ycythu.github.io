@@ -11,7 +11,7 @@ favorite: true
 <!--more-->
 
 <style>
-	svg {
+	#svgCanvas {
       background-color: #ffffc0;
     }
     input[type=range] {
