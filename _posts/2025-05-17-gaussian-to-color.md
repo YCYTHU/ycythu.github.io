@@ -11,7 +11,6 @@ favorite: true
 <!--more-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.min.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/wavelength_to_color/tristimulus.js" type="text/javascript"></script>
-<script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/wavelength_to_color/gaussian2color.js" type="text/javascript"></script>
 <head>
   <style>
     #canvas-container {
@@ -35,3 +34,5 @@ favorite: true
 <div id="canvas-container">
   <canvas id="canvas"></canvas>
 </div>
+<script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/wavelength_to_color/gaussian2color.js" type="text/javascript"></script>
+</body>
