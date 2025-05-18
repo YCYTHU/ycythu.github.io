@@ -20,8 +20,9 @@
     }
   
     canvas {
-      width: 100%;
+      width: 90%;
       height: auto;
+      margin: 0 auto;
       display: block;
       background: white;
       border: 1px solid #ccc;
@@ -43,6 +44,9 @@ let WIDTH = canvas.clientWidth;
 let HEIGHT = 500;
 
 const xAxis = [300, 800];
+
+let longPressTimer = null;
+const LONG_PRESS_DURATION = 800; // ms
 
 function setCanvasSize() {
   WIDTH = canvas.clientWidth;
@@ -72,7 +76,7 @@ function axisToCanvasX(x) {
 }
 
 function drawAxis() {
-  const axisY = HEIGHT - 20;
+  const axisY = HEIGHT;
   const tickStep = 50;
 
   ctx.beginPath();
@@ -90,9 +94,9 @@ function drawAxis() {
     let xPos = axisToCanvasX(x);
     ctx.beginPath();
     ctx.moveTo(xPos, axisY);
-    ctx.lineTo(xPos, axisY + 5);
+    ctx.lineTo(xPos, axisY - 5);
     ctx.stroke();
-    ctx.fillText(x, xPos, axisY + 18);
+    ctx.fillText(x, xPos, axisY - 18);
   }
 }
 
@@ -107,7 +111,7 @@ function draw() {
     const y = HEIGHT - totalGaussianY(axisX);
     ctx.lineTo(x, y);
   }
-  ctx.strokeStyle = 'steelblue';
+  ctx.strokeStyle = 'steelblue'; // line color
   ctx.lineWidth = 2;
   ctx.stroke();
 
@@ -115,18 +119,18 @@ function draw() {
     const isSelected = selected === g;
     const cx = axisToCanvasX(g.mu);
     const cy = HEIGHT - g.A;
-
-    ctx.beginPath();
-    ctx.arc(cx, cy, peakRadius, 0, 2 * Math.PI);
-    ctx.fillStyle = isSelected ? 'darkred' : 'crimson';
-    ctx.fill();
-
     const wx = axisToCanvasX(g.mu + g.sigma * widthHandleLength);
+
     ctx.beginPath();
     ctx.moveTo(cx, cy);
     ctx.lineTo(wx, cy);
     ctx.strokeStyle = 'gray';
     ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, peakRadius, 0, 2 * Math.PI);
+    ctx.fillStyle = isSelected ? 'darkred' : 'crimson';
+    ctx.fill();
 
     ctx.beginPath();
     ctx.arc(wx, cy, peakRadius, 0, 2 * Math.PI);
@@ -159,16 +163,32 @@ function handleStart(e) {
   for (let g of gaussians) {
     const gx = axisToCanvasX(g.mu);
     const gy = HEIGHT - g.A;
-    if (distance(cx, cy, gx, gy) < peakRadius + 2) {
+    if (distance(cx, cy, gx, gy) < peakRadius + 2) { // tolerance
       dragging = { type: 'peak', g };
       selected = g;
       draw();
+
+      // 长按删除逻辑（仅限触摸）
+      if (e.touches) {
+        longPressTimer = setTimeout(() => {
+          if (confirm('是否删除该曲线？')) {
+            const idx = gaussians.indexOf(g);
+            if (idx !== -1) {
+              gaussians.splice(idx, 1);
+              selected = null;
+              draw();
+            }
+          }
+        }, LONG_PRESS_DURATION);
+      }
+
       return;
     }
     const wx = axisToCanvasX(g.mu + g.sigma * widthHandleLength);
     if (distance(cx, cy, wx, gy) < peakRadius + 2) {
       dragging = { type: 'sigma', g };
       selected = g;
+      clearTimeout(longPressTimer);
       draw();
       return;
     }
@@ -183,6 +203,7 @@ function handleStart(e) {
 }
 
 function handleMove(e) {
+  clearTimeout(longPressTimer);
   if (!dragging) return;
   e.preventDefault();
   const [x, y] = getEventPos(e);
@@ -202,6 +223,7 @@ function handleMove(e) {
 }
 
 function handleEnd() {
+  clearTimeout(longPressTimer);
   dragging = null;
 }
 
