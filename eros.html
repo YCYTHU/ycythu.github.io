@@ -233,7 +233,8 @@ function init(url, audio_url, fake_url) {
                 try {
                     var audio_base64 = decrypt(audio_txtContent.split('\n'), key);
                 } catch(error) {
-                    window.location.replace(fake_url);
+                    alert('audio error');
+                    //window.location.replace(fake_url);
                 }
                 loadAudio(audio_base64[0], audioControl);
             } else {
