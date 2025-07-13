@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
-            /*align-items: center;*/
+            align-items: center;
             min-height: 100vh;
             margin: 0;
             background-color: #f4f4f4;
@@ -213,6 +213,7 @@ function init(url, audio_url, fake_url) {
                 loginMessage.className = 'hidden';
                 loginSection.classList.add('hidden');
                 contentSection.classList.remove('hidden');
+                document.body.style.alignItems='';
             } else {
                 alert(xhr.status);
             }
