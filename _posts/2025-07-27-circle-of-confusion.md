@@ -375,8 +375,9 @@ favorite: true
 			c_list.push(c);
 			cpx_list.push(toPx(c));
 		}
-		plotDualAxis(N_list, cpx_list, c_list, "plot1", "光圈 (f/N)", "CoC vs 光圈", {
+		plotDualAxis(N_list, cpx_list, c_list, "plot1", "光圈", "CoC vs 光圈", {
 			logX: true,
+			logY: true,
 			xTickVals: [0.95, 1.4, 2, 2.8, 4, 5.6, 8, 11, 16],
 			xTickText: ["f/0.95", "f/1.4", "f/2", "f/2.8", "f/4", "f/5.6", "f/8", "f/11", "f/16"],
 			xTickprefix: 'f/',
@@ -393,14 +394,28 @@ favorite: true
 			return;
 		}
 		const D_list = [], c_list = [], cpx_list = [];
-		for (let D = s / 2; D <= 2 * s; D += 0.015 * s) {
+		for (let D = 0.5 * s; D < 0.75 * s; D += 0.01 * s) {
 			if (D <= f) continue;
 			const c = computeCoC(f, N, s, D);
 			D_list.push(D / 1000);
 			c_list.push(c);
 			cpx_list.push(toPx(c));
 		}
-		plotDualAxis(D_list, cpx_list, c_list, "plot2", "背景物距 (m)", "CoC vs D");
+		for (let D = 0.75 * s; D < 1.3 * s; D += 0.005 * s) {
+			if (D <= f) continue;
+			const c = computeCoC(f, N, s, D);
+			D_list.push(D / 1000);
+			c_list.push(c);
+			cpx_list.push(toPx(c));
+		}
+		for (let D = 1.3 * s; D <= 2 * s; D += 0.02 * s) {
+			if (D <= f) continue;
+			const c = computeCoC(f, N, s, D);
+			D_list.push(D / 1000);
+			c_list.push(c);
+			cpx_list.push(toPx(c));
+		}
+		plotDualAxis(D_list, cpx_list, c_list, "plot2", "背景物距 (m)", "CoC vs D", {logY: true});
 	}
 
 	function plotCard3() {
@@ -424,6 +439,7 @@ favorite: true
 		}
 		plotDualAxis(f_list, cpx_list, c_list, "plot3", "焦距 f (mm)", "CoC vs 焦距", {
 			logX: true,
+			logY: true,
 			xTickVals: [16, 24, 35, 50, 70, 85, 105, 150, 200, 300, 400, 600, 800],
 			xTickText: ["16", "24", "35", "50", "70", "85", "105", "150", "200", "300", "400", "600", "800"]
 		});
@@ -446,8 +462,9 @@ favorite: true
 			c_list.push(c);
 			cpx_list.push(toPx(c));
 		}
-		plotDualAxis(s_list, cpx_list, c_list, "plot4", "对焦距离 s (m)", "CoC vs s", {
-			logX: true
+		plotDualAxis(s_list, cpx_list, c_list, "plot4", "主体物距 s (m)", "CoC vs s", {
+			logX: true,
+			logY: true
 		});
 	}
 </script>
