@@ -4,10 +4,10 @@ tags:
 - Physics
 - Code
 - JavaScript
-cover: https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/CIE1931xy_blank.svg/723px-CIE1931xy_blank.svg.png
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/aperture.jpg
 favorite: true
 ---
-计算不同参数下的弥散圆直径并绘制2-D图像
+计算弥散圆直径与不同参数之间的关系，方便估算摄影所需参数。
 <!--more-->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <style>
@@ -99,10 +99,10 @@ favorite: true
 	
 	/* ====== 以下为移动端适配部分 ====== */
 	@media (max-width: 768px) {
-		body {
+		/*body {
 			padding: 10px;
 		}
-		/*.container {
+		.container {
 			padding-left: 0;
 			padding-right: 0;
 		}*/
@@ -330,7 +330,7 @@ favorite: true
 				showline: true,
 				mirror: true,
 				showspikes: true,
-				spikemode: 'across'
+				spikemode: 'toaxis'
 			},
 			yaxis2: {
 				title: "CoC (mm)",
@@ -338,7 +338,9 @@ favorite: true
 				tickfont: { color: "blue" },
 				overlaying: "y",
 				side: "right",
-				showline: true
+				showline: true,
+				showspikes: true,
+				spikemode: 'toaxis'
 			},
 			margin: { l: 50, r: 50, t: 30, b: 40 },
 			showlegend: false,
