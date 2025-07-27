@@ -364,7 +364,7 @@ favorite: true
 		const f = parseFloat(document.getElementById("f1").value);
 		const s = parseFloat(document.getElementById("s1").value) * 1000;
 		const D = parseFloat(document.getElementById("D1").value) * 1000;
-		if (f <= 0 || s <= 0 || D <= 0 || s === f || D === f) {
+		if (f <= 0 || s <= 0 || D <= 0 || s <= f || D <= f) {
 			alert('Illegal!');
 			return;
 		}
@@ -388,12 +388,13 @@ favorite: true
 		const f = parseFloat(document.getElementById("f2").value);
 		const N = parseFloat(document.getElementById("N2").value);
 		const s = parseFloat(document.getElementById("s2").value) * 1000;
-		if (f <= 0 || N <= 0 || s <= 0 || s === f || D === f) {
+		if (f <= 0 || N <= 0 || s <= 0 || s <= f) {
 			alert('Illegal!');
 			return;
 		}
 		const D_list = [], c_list = [], cpx_list = [];
 		for (let D = s / 2; D <= 2 * s; D += 0.015 * s) {
+			if (D === f) continue;
 			const c = computeCoC(f, N, s, D);
 			D_list.push(D / 1000);
 			c_list.push(c);
