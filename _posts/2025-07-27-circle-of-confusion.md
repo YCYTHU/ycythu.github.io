@@ -91,6 +91,11 @@ favorite: true
 		grid-template-columns: 1fr 1fr;
 		column-gap: 20px;
 	}
+
+	var {
+		font-family: Times New Roman;
+		font-style: italic;
+	}
 	
 	/* ====== 以下为移动端适配部分 ====== */
 	@media (max-width: 768px) {
@@ -162,68 +167,68 @@ favorite: true
 	</div>
 	<div class="myCard-grid">
 		<div class="myCard">
-			<h2>1. CoC vs 光圈 (固定焦距、对焦距离、被摄体距离)</h2>
+			<h2>1. CoC vs 光圈 (固定 <var>f</var>、<var>s</var>、<var>D</var>)</h2>
 			<div class="form-group">
-				<label>焦距 f (mm)：</label>
+				<label>焦距 <var>f</var> (mm)：</label>
 				<input type="number" id="f1" value="50" min="0" onchange="plotCard1()">
 			</div>
 			<div class="form-group">
-				<label>对焦距离 s (m)：</label>
+				<label>主体物距 <var>s</var> (m)：</label>
 				<input type="number" id="s1" value="2" min="0" onchange="plotCard1()">
 			</div>
 			<div class="form-group">
-				<label>被摄体距离 D (m)：</label>
+				<label>背景物距 <var>D</var> (m)：</label>
 				<input type="number" id="D1" value="2.5" min="0" onchange="plotCard1()">
 			</div>
 			<!--<button onclick="plotCard1()">绘图</button>-->
 			<div id="plot1" class="plot-container"></div>
 		</div>
 		<div class="myCard">
-			<h2>2. CoC vs 被摄体距离 (固定焦距、光圈、对焦距离)</h2>
+			<h2>2. CoC vs 背景物距 (固定 <var>f</var>、<var>N</var>、<var>s</var>)</h2>
 			<div class="form-group">
-				<label>焦距 f (mm)：</label>
+				<label>焦距 <var>f</var> (mm)：</label>
 				<input type="number" id="f2" value="50" min="0" onchange="plotCard2()">
 			</div>
 			<div class="form-group">
-				<label>光圈 N：</label>
+				<label>光圈值 <var>N</var>：</label>
 				<input type="number" id="N2" value="2.0" min="0" onchange="plotCard2()">
 			</div>
 			<div class="form-group">
-				<label>对焦距离 s (m)：</label>
+				<label>主体物距 <var>s</var> (m)：</label>
 				<input type="number" id="s2" value="2" min="0" onchange="plotCard2()">
 			</div>
 			<!--<button onclick="plotCard2()">绘图</button>-->
 			<div id="plot2" class="plot-container"></div>
 		</div>
 		<div class="myCard">
-			<h2>3. CoC vs 焦距 (固定光圈、ΔD、放大率)</h2>
+			<h2>3. CoC vs 焦距 (固定 <var>N</var>、<var>D - s</var>、<var>M</var>)</h2>
 			<div class="form-group">
-				<label>光圈 N：</label>
+				<label>光圈 <var>N</var>：</label>
 				<input type="number" id="N3" value="2.0" min="0" onchange="plotCard3()">
 			</div>
 			<div class="form-group">
-				<label>ΔD = D - s (m)：</label>
+				<label> <var>D - s</var> (m)：</label>
 				<input type="number" id="delta3" value="0.5" onchange="plotCard3()">
 			</div>
 			<div class="form-group">
-				<label>放大率 M：</label>
+				<label>放大率 <var>M</var>：</label>
 				<input type="number" id="M3" value="0.02" min="0" step="0.001" onchange="plotCard3()">
 			</div>
 			<!--<button onclick="plotCard3()">绘图</button>-->
 			<div id="plot3" class="plot-container"></div>
 		</div>
 		<div class="myCard">
-			<h2>4. CoC vs 对焦距离 (固定焦距、光圈、ΔD)</h2>
+			<h2>4. CoC vs 主体物距 (固定 <var>f</var>、<var>N</var>、<var>D - s</var>)</h2>
 			<div class="form-group">
-				<label>焦距 f (mm)：</label>
+				<label>焦距 <var>f</var> (mm)：</label>
 				<input type="number" id="f4" value="50" min="0" onchange="plotCard4()">
 			</div>
 			<div class="form-group">
-				<label>光圈 N：</label>
+				<label>光圈 <var>N</var>：</label>
 				<input type="number" id="N4" value="2.0" min="0" onchange="plotCard4()">
 			</div>
 			<div class="form-group">
-				<label>ΔD = D - s (m)：</label>
+				<label><var>D - s</var> (m)：</label>
 				<input type="number" id="delta4" value="0.5" onchange="plotCard4()">
 			</div>
 			<!--<button onclick="plotCard4()">绘图</button>-->
@@ -253,6 +258,10 @@ favorite: true
 	}
 
 	function computeCoC(f, N, s, D) {
+		// f: 焦距 (mm)
+		// N: 光圈值
+		// s: 主体物距 (mm)
+		// D: 背景物距 (mm)
 		const A = f / N;
 		const v = (f * s) / (s - f);
 		const vPrime = (f * D) / (D - f);
@@ -325,8 +334,8 @@ favorite: true
 		};
 
 		const config = {
-			displayModeBar: true,
-			modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d'],
+			modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d','toggleSpikelines','hoverClosestCartesian','hoverCompareCartesian'],
+        	displaylogo: false,
 			responsive: true
 		}
 
@@ -364,7 +373,7 @@ favorite: true
 		const N = parseFloat(document.getElementById("N2").value);
 		const s = parseFloat(document.getElementById("s2").value) * 1000;
 		const D_list = [], c_list = [], cpx_list = [];
-		for (let D = s / 2; D <= 2 * s; D += 20) {
+		for (let D = s / 2; D <= 2 * s; D += 0.015 * s) {
 			if (D === s || D <= 0) continue;
 			const c = computeCoC(f, N, s, D);
 			D_list.push(D / 1000);
