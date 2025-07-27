@@ -11,12 +11,12 @@ favorite: true
 <!--more-->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <style>
-	body {
+	/*body {
 		font-family: Arial, sans-serif;
 		background: #f0f2f5;
 		margin: 0;
 		padding: 20px;
-	}
+	}*/
 	
 	.container {
 		max-width: 1200px;
@@ -25,7 +25,7 @@ favorite: true
 		padding-right: 10px;
 	}
 	
-	.card {
+	.myCard {
 		background-color: #ffffff;
 		border-radius: 16px;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -34,13 +34,13 @@ favorite: true
 		width: 100%;
 	}
 	
-	.card h2 {
+	.myCard h2 {
 		margin-top: 0;
 		font-size: 1.2rem;
 		color: #333;
 	}
 	
-	.card h3 {
+	.myCard h3 {
 		font-size: 1rem;
 		margin-top: 0.5em;
 	}
@@ -86,10 +86,10 @@ favorite: true
 		/*height: 300px;*/
 	}
 	
-	.card-grid {
+	.myCard-grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		column-gap: 60px;
+		column-gap: 20px;
 	}
 	
 	/* ====== 以下为移动端适配部分 ====== */
@@ -101,10 +101,10 @@ favorite: true
 			padding-left: 0;
 			padding-right: 0;
 		}
-		.card {
+		.myCard {
 			width: unset;
 		}
-		.card-grid {
+		.myCard-grid {
 			grid-template-columns: 1fr; /* 改成单列 */
 			column-gap: 0;
 		}
@@ -131,17 +131,17 @@ favorite: true
 			width: 100%;
 			/*height: 250px;	高度适当缩小 */
 		}
-		.card h2 {
+		.myCard h2 {
 			font-size: 1.1rem;
 		}
-		.card h3 {
+		.myCard h3 {
 			font-size: 0.9rem;
 		}
 	}
 </style>
 
 <div class="container">
-	<div class="card">
+	<div class="myCard">
 		<h2>全局设置</h2>
 		<div class="form-group">
 			<label>选择预设画幅：</label>
@@ -160,8 +160,8 @@ favorite: true
 			<input type="number" id="pixelWidth" value="6000">
 		</div>
 	</div>
-	<div class="card-grid">
-		<div class="card">
+	<div class="myCard-grid">
+		<div class="myCard">
 			<h2>1. CoC vs 光圈 (固定焦距、对焦距离、被摄体距离)</h2>
 			<div class="form-group">
 				<label>焦距 f (mm)：</label>
@@ -178,7 +178,7 @@ favorite: true
 			<!--<button onclick="plotCard1()">绘图</button>-->
 			<div id="plot1" class="plot-container"></div>
 		</div>
-		<div class="card">
+		<div class="myCard">
 			<h2>2. CoC vs 被摄体距离 (固定焦距、光圈、对焦距离)</h2>
 			<div class="form-group">
 				<label>焦距 f (mm)：</label>
@@ -195,7 +195,7 @@ favorite: true
 			<!--<button onclick="plotCard2()">绘图</button>-->
 			<div id="plot2" class="plot-container"></div>
 		</div>
-		<div class="card">
+		<div class="myCard">
 			<h2>3. CoC vs 焦距 (固定光圈、ΔD、放大率)</h2>
 			<div class="form-group">
 				<label>光圈 N：</label>
@@ -212,7 +212,7 @@ favorite: true
 			<!--<button onclick="plotCard3()">绘图</button>-->
 			<div id="plot3" class="plot-container"></div>
 		</div>
-		<div class="card">
+		<div class="myCard">
 			<h2>4. CoC vs 对焦距离 (固定焦距、光圈、ΔD)</h2>
 			<div class="form-group">
 				<label>焦距 f (mm)：</label>
@@ -260,17 +260,14 @@ favorite: true
 		return c;
 	}
 
-	function plotDualAxis(
-		x, y_px, y_mm, id, xLabel, title,
-		{
+	function plotDualAxis(x, y_px, y_mm, id, xLabel, title, {
 			logX = false,
 			logY = false,
 			xTickVals = null,
 			xTickText = null,
 			xTickprefix = null,
 			xTickformat = null
-		} = {}
-	) {
+	} = {}) {
 		const trace_px = {
 			x: x,
 			y: y_px,
