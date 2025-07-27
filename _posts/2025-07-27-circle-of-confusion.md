@@ -21,8 +21,8 @@ favorite: true
 	.container {
 		max-width: 1200px;
 		margin: auto;
-		padding-left: 10px;
-		padding-right: 10px;
+		/*padding-left: 10px;
+		padding-right: 10px;*/
 	}
 	
 	.myCard {
@@ -52,7 +52,7 @@ favorite: true
 	}
 	
 	.form-group label {
-		width: 220px;
+		width: 150px;
 		font-weight: bold;
 	}
 	
@@ -97,10 +97,10 @@ favorite: true
 		body {
 			padding: 10px;
 		}
-		.container {
+		/*.container {
 			padding-left: 0;
 			padding-right: 0;
-		}
+		}*/
 		.myCard {
 			width: unset;
 		}
