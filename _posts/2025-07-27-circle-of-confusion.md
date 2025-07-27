@@ -394,13 +394,13 @@ favorite: true
 		}
 		const D_list = [], c_list = [], cpx_list = [];
 		for (let D = s / 2; D <= 2 * s; D += 0.015 * s) {
-			if (D === f) continue;
+			if (D <= f) continue;
 			const c = computeCoC(f, N, s, D);
 			D_list.push(D / 1000);
 			c_list.push(c);
 			cpx_list.push(toPx(c));
 		}
-		plotDualAxis(D_list, cpx_list, c_list, "plot2", "被摄体距离 (m)", "CoC vs D");
+		plotDualAxis(D_list, cpx_list, c_list, "plot2", "背景物距 (m)", "CoC vs D");
 	}
 
 	function plotCard3() {
@@ -416,7 +416,7 @@ favorite: true
 		for (let f = 16; f <= 800; f += 2) {
 			const s = k * f;
 			const D = s + delta;
-			if (D === f || D <= 0) continue;
+			if (D <= f || D <= 0) continue;
 			const c = computeCoC(f, N, s, D);
 			f_list.push(f);
 			c_list.push(c);
@@ -438,9 +438,9 @@ favorite: true
 			return;
 		}
 		const s_list = [], c_list = [], cpx_list = [];
-		for (let s = 2 * f; s <= 400000; s += 50) {
+		for (let s = f; s <= Math.max(400000, 4 * f); s += 50) {
 			const D = s + delta;
-			if (D === f || D <= 0) continue;
+			if (D <= f || D <= 0) continue;
 			const c = computeCoC(f, N, s, D);
 			s_list.push(s / 1000);
 			c_list.push(c);
