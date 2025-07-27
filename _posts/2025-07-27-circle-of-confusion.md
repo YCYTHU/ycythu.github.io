@@ -151,18 +151,19 @@ favorite: true
 		<div class="form-group">
 			<label>选择预设画幅：</label>
 			<select id="preset" onchange="applyPreset()">
-				<option value="full">全画幅 (36mm, 6000px)</option>
+				<option value="full" selected>全画幅 (36mm, 6000px)</option>
 				<option value="aps-c">APS-C (23.6mm, 4000px)</option>
 				<option value="m43">M4/3 (17.3mm, 4608px)</option>
+				<option value="custom" disabled>自定义</option>
 			</select>
 		</div>
 		<div class="form-group">
 			<label>传感器宽度 (mm)：</label>
-			<input type="number" id="sensorWidth" value="36">
+			<input type="number" id="sensorWidth" value="36" onchange="updateSet()">
 		</div>
 		<div class="form-group">
 			<label>图像宽度 (px)：</label>
-			<input type="number" id="pixelWidth" value="6000">
+			<input type="number" id="pixelWidth" value="6000" onchange="updateSet()">
 		</div>
 	</div>
 	<div class="myCard-grid">
@@ -237,10 +238,20 @@ favorite: true
 	</div>
 </div>
 <script>
-	plotCard1();
-	plotCard2();
-	plotCard3();
-	plotCard4();
+	update();
+
+	function update() {
+		plotCard1();
+		plotCard2();
+		plotCard3();
+		plotCard4();
+	}
+
+	function updateSet() {
+		document.getElementById("preset").options[3].selected = true;
+		update();
+	}
+
 	function applyPreset() {
 		const preset = document.getElementById("preset").value;
 		const widthInput = document.getElementById("sensorWidth");
@@ -255,6 +266,7 @@ favorite: true
 			widthInput.value = 17.3;
 			pxInput.value = 4608;
 		}
+		update();
 	}
 
 	function computeCoC(f, N, s, D) {
@@ -352,6 +364,10 @@ favorite: true
 		const f = parseFloat(document.getElementById("f1").value);
 		const s = parseFloat(document.getElementById("s1").value) * 1000;
 		const D = parseFloat(document.getElementById("D1").value) * 1000;
+		if (f <= 0 || s <= 0 || D <= 0 || s === f || D === f) {
+			alert('Illegal!');
+			return;
+		}
 		const N_list = [], c_list = [], cpx_list = [];
 		for (let N = 0.95; N <= 18; N += 0.05) {
 			const c = computeCoC(f, N, s, D);
@@ -372,9 +388,12 @@ favorite: true
 		const f = parseFloat(document.getElementById("f2").value);
 		const N = parseFloat(document.getElementById("N2").value);
 		const s = parseFloat(document.getElementById("s2").value) * 1000;
+		if (f <= 0 || N <= 0 || s <= 0 || s === f || D === f) {
+			alert('Illegal!');
+			return;
+		}
 		const D_list = [], c_list = [], cpx_list = [];
 		for (let D = s / 2; D <= 2 * s; D += 0.015 * s) {
-			if (D === s || D <= 0) continue;
 			const c = computeCoC(f, N, s, D);
 			D_list.push(D / 1000);
 			c_list.push(c);
@@ -387,11 +406,16 @@ favorite: true
 		const N = parseFloat(document.getElementById("N3").value);
 		const delta = parseFloat(document.getElementById("delta3").value) * 1000;
 		const M = parseFloat(document.getElementById("M3").value);
+		if (N <= 0 || M <= 0) {
+			alert('Illegal!');
+			return;
+		}
 		const k = (1 + M) / M;
 		const f_list = [], c_list = [], cpx_list = [];
 		for (let f = 16; f <= 800; f += 2) {
 			const s = k * f;
 			const D = s + delta;
+			if (D === f || D <= 0) continue;
 			const c = computeCoC(f, N, s, D);
 			f_list.push(f);
 			c_list.push(c);
@@ -408,10 +432,14 @@ favorite: true
 		const f = parseFloat(document.getElementById("f4").value);
 		const N = parseFloat(document.getElementById("N4").value);
 		const delta = parseFloat(document.getElementById("delta4").value) * 1000;
+		if (f <= 0 || N <= 0) {
+			alert('Illegal!');
+			return;
+		}
 		const s_list = [], c_list = [], cpx_list = [];
-		for (let s = 500; s <= 400000; s += 50) {
+		for (let s = 2 * f; s <= 400000; s += 50) {
 			const D = s + delta;
-			if (D <= 0 || s === f) continue;
+			if (D === f || D <= 0) continue;
 			const c = computeCoC(f, N, s, D);
 			s_list.push(s / 1000);
 			c_list.push(c);
