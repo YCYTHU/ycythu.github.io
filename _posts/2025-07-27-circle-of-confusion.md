@@ -204,7 +204,7 @@ favorite: true
 		<div class="myCard">
 			<h2>3. CoC vs 焦距 (固定 <var>N</var>、<var>D - s</var>、<var>M</var>)</h2>
 			<div class="form-group">
-				<label>光圈 <var>N</var>：</label>
+				<label>光圈值 <var>N</var>：</label>
 				<input type="number" id="N3" value="2.0" min="0" onchange="plotCard3()">
 			</div>
 			<div class="form-group">
@@ -225,7 +225,7 @@ favorite: true
 				<input type="number" id="f4" value="50" min="0" onchange="plotCard4()">
 			</div>
 			<div class="form-group">
-				<label>光圈 <var>N</var>：</label>
+				<label>光圈值 <var>N</var>：</label>
 				<input type="number" id="N4" value="2.0" min="0" onchange="plotCard4()">
 			</div>
 			<div class="form-group">
@@ -234,6 +234,48 @@ favorite: true
 			</div>
 			<!--<button onclick="plotCard4()">绘图</button>-->
 			<div id="plot4" class="plot-container"></div>
+		</div>
+		<div class="myCard">
+			<h2>5. 焦距 vs 光圈 (固定 <var style="font-style: normal;">CoC</var>、<var>D - s</var>、<var>M</var>)</h2>
+			<div class="form-group">
+				<label> <var>D - s</var> (m)：</label>
+				<input type="number" id="delta5" value="0.5" onchange="plotCard5()">
+			</div>
+			<div class="form-group">
+				<label>放大率 <var>M</var>：</label>
+				<input type="number" id="M5" value="0.02" min="0" step="0.001" onchange="plotCard5()">
+			</div>
+			<div class="form-group">
+				<label>参考焦距 <var>f</var> (mm)：</label>
+				<input type="number" id="f5" value="50" min="0" step="1" onchange="plotCard5()">
+			</div>
+			<div class="form-group">
+				<label>参考光圈值 <var>N</var>：</label>
+				<input type="number" id="N5" value="2.0" min="0" onchange="plotCard5()">
+			</div>
+			<!--<button onclick="plotCard5()">绘图</button>-->
+			<div id="plot5" class="plot-container"></div>
+		</div>
+		<div class="myCard">
+			<h2>6. 焦距 vs 光圈 (固定 <var style="font-style: normal;">CoC</var>、<var>s</var>、<var>D</var>)</h2>
+			<div class="form-group">
+				<label>主体物距 <var>s</var> (m)：</label>
+				<input type="number" id="s6" value="2.0" min="0" onchange="plotCard6()">
+			</div>
+			<div class="form-group">
+				<label>背景物距 <var>D</var> (m)：</label>
+				<input type="number" id="D6" value="" min="0" onchange="plotCard6()" disabled>
+			</div>
+			<div class="form-group">
+				<label>参考焦距 <var>f</var> (mm)：</label>
+				<input type="number" id="f6" value="50" min="0" onchange="plotCard6()">
+			</div>
+			<div class="form-group">
+				<label>参考光圈值 <var>N</var>：</label>
+				<input type="number" id="N6" value="2.0" min="0" onchange="plotCard6()">
+			</div>
+			<!--<button onclick="plotCard6()">绘图</button>-->
+			<div id="plot6" class="plot-container"></div>
 		</div>
 	</div>
 </div>
@@ -245,6 +287,8 @@ favorite: true
 		plotCard2();
 		plotCard3();
 		plotCard4();
+		plotCard5();
+		plotCard6();
 	}
 
 	function updateSet() {
@@ -354,6 +398,63 @@ favorite: true
 		}
 
 		Plotly.newPlot(id, [trace_px, trace_mm], layout, config);
+	}
+
+	function plotAxis(x, y, id, xLabel, title, {
+			logX = false,
+			logY = false,
+			xTickVals = null,
+			xTickText = null,
+			yTickprefix = null,
+			yTickformat = null
+	} = {}) {
+		const trace = {
+			x: x,
+			y: y,
+			yaxis: "y1",
+			line: { color: "red" },
+			mode: "lines",
+			hovertemplate: 'f/%{y:.1f}<extra></extra>' // <extra></extra>去掉默认trace名
+		};
+
+		const layout = {
+			title: { text: title, font: { size: 14 }, xref: 'paper', x: 0 },
+			xaxis: {
+				title: xLabel,
+				type: logX ? "log" : "linear",
+				automargin: true,
+				ticks: 'outside',
+				showline: true,
+				mirror: true,
+				showspikes: true,
+				spikemode: 'toaxis',
+				tickvals: xTickVals || undefined,
+				ticktext: xTickText || undefined
+			},
+			yaxis: {
+				title: "光圈",
+				type: logY ? "log" : "linear",
+				titlefont: { color: "red" },
+				tickfont: { color: "red" },
+				showline: true,
+				mirror: true,
+				showspikes: true,
+				spikemode: 'toaxis',
+				tickprefix: yTickprefix || undefined,
+				tickformat: yTickformat || undefined
+			},
+			margin: { l: 50, r: 50, t: 30, b: 40 },
+			showlegend: false,
+			height: 300
+		};
+
+		const config = {
+			modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d','toggleSpikelines','hoverClosestCartesian','hoverCompareCartesian'],
+			displaylogo: false,
+			responsive: true
+		}
+
+		Plotly.newPlot(id, [trace], layout, config);
 	}
 
 	function toPx(c_mm) {
@@ -467,6 +568,59 @@ favorite: true
 		plotDualAxis(s_list, cpx_list, c_list, "plot4", "主体物距 s (m)", "CoC vs s", {
 			logX: true,
 			logY: true
+		});
+	}
+
+	function plotCard5() {
+		const f = parseFloat(document.getElementById("f5").value);
+		const N = parseFloat(document.getElementById("N5").value);
+		const M = parseFloat(document.getElementById("M5").value);
+		const delta = parseFloat(document.getElementById("delta5").value) * 1000;
+		if (f <= 0 || N <= 0 || M <= 0) {
+			alert('Illegal!');
+			return;
+		}
+		const k = (1 + M) / M;
+		const bokeh = N * (k + delta / f);
+		const f_list = [], N_list = [];
+		for (let f = 16; f <= 800; f += 2) {
+			f_list.push(f);
+			const eqN = bokeh / (k + delta / f);
+			N_list.push(eqN);
+		}
+		plotAxis(f_list, N_list, "plot5", "焦距 f (mm)", "焦距 vs 光圈", {
+			logX: true,
+			logY: true,
+			xTickVals: [16, 24, 35, 50, 70, 85, 105, 150, 200, 300, 400, 600, 800],
+			xTickText: ["16", "24", "35", "50", "70", "85", "105", "150", "200", "300", "400", "600", "800"],
+			yTickprefix: 'f/',
+			yTickformat: '.1f'
+		});
+	}
+
+	function plotCard6() {
+		const f = parseFloat(document.getElementById("f6").value);
+		const N = parseFloat(document.getElementById("N6").value);
+		const s = parseFloat(document.getElementById("s6").value) * 1000;
+		if (f <= 0 || N <= 0 || s <= 0 || s <= f) {
+			alert('Illegal!');
+			return;
+		}
+		const bokeh = f ** 2 / (N * (s - f));
+		const f_list = [], N_list = [];
+		for (let f = 16; f <= 800; f += 2) {
+			if (s <= f) continue;
+			f_list.push(f);
+			const eqN = f ** 2 / (bokeh * (s - f));
+			N_list.push(eqN);
+		}
+		plotAxis(f_list, N_list, "plot6", "焦距 f (mm)", "焦距 vs 光圈", {
+			logX: true,
+			logY: true,
+			xTickVals: [16, 24, 35, 50, 70, 85, 105, 150, 200, 300, 400, 600, 800],
+			xTickText: ["16", "24", "35", "50", "70", "85", "105", "150", "200", "300", "400", "600", "800"],
+			yTickprefix: 'f/',
+			yTickformat: '.1f'
 		});
 	}
 </script>
