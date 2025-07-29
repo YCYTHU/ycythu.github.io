@@ -6,7 +6,6 @@ tags:
 - JavaScript
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/aperture.jpg
 favorite: true
-full_width: true
 ---
 计算弥散圆直径与不同参数之间的关系，方便估算摄影所需参数。
 <!--more-->
