@@ -9,9 +9,9 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/Colour Palett
 modify_date: 2024-02-22
 favorite: true
 ---
-通过编辑、新增和删除操作修改配色方案，并通过[Plotly.js](https://plotly.com/javascript/)实时预览。
+自定义配色方案或浏览预设的配色方案，并实时预览其在各种图表中的显示效果。
 <!--more-->
-更简便省时地展示、对比配色方案在折线图、柱状图[^STAT]与填充等高线图[^MATLAB]中的显示效果。
+最多支持8种颜色，可以对颜色进行新增、修改和删除操作。折线图、柱状图[^STAT]与填充等高线图[^MATLAB]的实时预览通过[Plotly.js](https://plotly.com/javascript/)实现。
 
 [^STAT]:[数据来源：国家统计局](https://data.stats.gov.cn/easyquery.htm)
 [^MATLAB]:[数据来源：MATLAB函数 `peaks(50)` ](https://www.mathworks.com/help/matlab/ref/peaks.html)
