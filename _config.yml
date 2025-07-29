@@ -207,6 +207,7 @@ defaults:
     values:
       layout: article
       cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/default.jpg
+      pageview: true
 
 ## => Plugins
 ##############################
