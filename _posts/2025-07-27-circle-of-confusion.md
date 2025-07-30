@@ -285,7 +285,9 @@ favorite: true
 
 本部分内容节选自[photographylife](https://photographylife.com/)的博文[Bokeh Is Less About Your Lens, More About You](https://photographylife.com/bokeh-is-less-about-your-lens)，归纳总结了其中提到的改善背景虚化的拍摄技巧，这些方法背后的原理见下一节的“计算原理”部分。
 
-1. **更大的光圈**：更换大光圈镜头是改善背景虚化的有效方法，与 180-600mm f/5.6-6.3（600mm f/6.3）相比，400mm f/2.8（560mm f/4）提供了不止一档的额外背景模糊。
+### 更大的光圈
+
+更换大光圈镜头是改善背景虚化的有效方法，与 180-600mm f/5.6-6.3（600mm f/6.3）相比，400mm f/2.8（560mm f/4）提供了不止一档的额外背景模糊。
 
 <div align="center">
 	<img width="40%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/CoC/663.jpg" alt="600mm f/6.3">
@@ -293,7 +295,9 @@ favorite: true
 </div>
 <div align=center><font color="#999999">左：NIKON Z 9 + NIKKOR Z 180-600mm f/5.6-6.3 VR @ 600mm, ISO 1800, 1/5, f/6.3 右：NIKON Z 9 + NIKKOR Z 400mm f/2.8 TC VR S @ 560mm, ISO 2000, 1/25, f/4.0 © Libor Vaicenbacher</font></div>
 
-2. **拉近拍摄对象**：使用更大光圈带来的额外虚化通常在1~2档左右，而通过拉近拍摄距离可以获得超过3档的虚化效果。
+### 拉近拍摄对象
+
+使用更大光圈带来的额外虚化通常在1~2档左右，而通过拉近拍摄距离可以很容易获得超过3档的虚化效果。
 
 <div align="center">
 	<img width="40%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/CoC/5014.jpg" alt="50mm f/1.4">
@@ -301,7 +305,9 @@ favorite: true
 </div>
 <div align=center><font color="#999999">左：NIKON Z 8 + NIKKOR Z 50mm f/1.4 @ 50mm, ISO 64, 1/320, f/1.4 右：NIKON Z 8 + NIKKOR Z 50mm f/1.4 @ 50mm, ISO 64, 1/50, f/4.5 © Jason Polak</font></div>
 
-3. **寻找更好的背景**：主体与背景之间的距离是影响虚化的一个重要因素，更远、更简洁、颜色更均匀的背景都有助于改善背景虚化。
+### 寻找更好的背景
+
+主体与背景之间的距离是影响虚化的一个重要因素，更远、更简洁、颜色更均匀的背景都有助于改善背景虚化。
 
 <div align="center">
 	<img width="40%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/CoC/bg-n-1.jpg" alt="500mm f/5.6 near1">
@@ -309,13 +315,15 @@ favorite: true
 </div>
 <div align=center><font color="#999999">左：NIKON D500 @ 500mm, ISO 2200, 1/320, f/5.6 右：NIKON D500 @ 500mm, ISO 1600, 1/500, f/5.6 © Jason Polak</font></div>
 
-<div align="center">
+<div align="center" style="margin-top: 1rem;">
 	<img width="40%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/CoC/bg-n-2.jpg" alt="500mm f/5.6 near2">
 	<img width="40%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/CoC/bg-f-2.jpg" alt="500mm f/6.3 far2">
 </div>
 <div align=center><font color="#999999">左：NIKON D500 @ 500mm, ISO 900, 1/250, f/5.6 右：NIKON D500 @ 500mm, ISO 3200, 1/320, f/6.3 © Jason Polak</font></div>
 
-4. **调整拍摄角度**：如果既无法靠近拍摄对象，又无法切换到其他背景，此时还可以通过改变拍摄角度（通常是贴着地面拍摄）来显著改善虚化效果。更低的拍摄角度有助于增大背景和前景之间的距离，从而提高虚化。
+### 调整拍摄角度
+
+如果既无法靠近拍摄对象，又无法切换到其他背景，此时还可以通过改变拍摄角度（通常是贴着地面拍摄）来显著改善虚化效果。更低的拍摄角度有助于增大背景和前景之间的距离，从而提高虚化。
 
 <div align="center">
 	<img width="40%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/CoC/high.jpg" alt="500mm f/5.6 near2">
