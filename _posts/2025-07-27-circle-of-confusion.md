@@ -1,5 +1,5 @@
 ---
-title: 弥散圆计算工具
+title: 弥散圆、虚化与景深
 tags: 
 - Physics
 - Code
@@ -7,7 +7,7 @@ tags:
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/aperture.jpg
 favorite: true
 ---
-计算弥散圆直径与不同参数之间的关系，方便估算摄影所需参数。
+讨论了不同参数对虚化效果的影响，并量化了弥散圆直径与不同参数之间的关系，方便估算摄影所需参数。
 <!--more-->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <style>
@@ -279,6 +279,65 @@ favorite: true
 		</div>
 	</div>
 </div>
+
+## 计算原理
+
+<div align="center"><img width="75%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/CoC/CoC.svg" alt="成像示意图"></div>
+
+假设主体位于距离光心 $s$ 处，并恰好成像于传感器上，像距为 $v$。背景中某点成像于传感器之前（成像于传感器之后同理），物距为 $D$，像距为 $v'$，因此在传感器上形成了弥散圆（Circle of Confusion）。根据成像公式：
+
+$$\frac{1}{s}+\frac{1}{v}=\frac{1}{f}\qquad\frac{1}{D}+\frac{1}{v'}=\frac{1}{f}\tag{1}\label{f}$$
+
+其中 $f$ 为镜头焦距。根据相似三角形的性质，弥散圆直径 $\delta$ 满足：
+
+$$\frac{\delta}{f/N}=\frac{\vert v-v'\vert}{v'}\tag{2}\label{v}$$
+
+将式 $\eqref{f}$ 与式 $\eqref{v}$ 联立，得：
+
+$$\delta=\frac{f^2}{N}\frac{\vert D-s\vert}{D(s-f)}\tag{3}\label{eq}$$
+
+###  CoC vs 背景物距 (固定 $f、N、s$)
+
+此时弥散圆直径 $\displaystyle\delta\propto\vert1-\frac{s}{D}\vert$。 由于分辨能力有限，因此当 $\delta<\delta_0$ 时都可以认为像是清晰的（$\delta_0$ 被称为容许弥散圆），此时可以反解出使得成像清晰的 $D$ 的范围 $D\in(D_1, D_2)$：
+
+$$1-\frac{\delta_0N(s-f)}{f^2}<\frac{s}{D}<1+\frac{\delta_0N(s-f)}{f^2}\tag{4}$$
+
+若 $\displaystyle1-\frac{\delta_0N(s-f)}{f^2}>0$，则解得：
+
+$$D_1=\frac{sf^2}{f^2+\delta_0N(s-f)}\qquad D_2=\frac{sf^2}{f^2-\delta_0N(s-f)}\tag{5}\label{js}$$
+
+若 $\displaystyle1-\frac{\delta_0N(s-f)}{f^2}<0$，则 $\displaystyle1-\frac{\delta_0N(s-f)}{f^2}<\frac{s}{D}$ 对任意 $D$ 成立，因此 $D\in(D_1, +\infty)$ 都可以清晰成像，此时景深最大。满足该条件的临界 $\displaystyle s_0=f+\frac{f^2}{\delta_0N}$ 被称为超焦距，由于一般情况下 $f\gg\delta_0N$，因此 $\displaystyle s_0\approx\frac{f^2}{\delta_0N}$。另外，由数学关系知 $D_1, D_2$ 满足:
+
+$$\frac{s}{D_1}+\frac{s}{D_2}=2\tag{6}$$
+
+### CoC vs 焦距 (固定 $N、D - s、M$)
+
+当固定放大率 $\displaystyle M=\frac{f}{s-f}$ 和背景与主体之间的距离 $\Delta=D-s$ 不变时，使用不同的焦距可以获得不同的虚化效果。将式 $\eqref{eq}$ 改写：
+
+$$\delta=\frac{M^2\vert\Delta\vert}{N}\frac{f}{(M+1)f+M\Delta}\tag{7}\label{cocf}$$
+
+式 $\eqref{cocf}$ 的单调性取决于 $\Delta$ 的符号，因此更长的焦距可以使后景获得更好的虚化效果，而更短的焦距则有利于前景的虚化。同样的结论也可从 $s-D_1$ 与 $D_2-s$ 的单调性得到。
+
+### 焦距 vs 光圈 (固定 $\mathrm{CoC}、D - s、M$)
+
+由于不同焦段的镜头往往也具有不同的光圈范围（例如F4几乎是600mm镜头的极限，而135mm则可以支持F1.8这样更大的光圈），因此固定光圈值来讨论焦距对虚化的影响并不够全面。如果固定 $M, \Delta$ 不变，需要多大的光圈才能在600mm下实现与135mm F1.8几乎相同的虚化效果。由式 $\eqref{cocf}$ 得：
+
+$$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm{Const.}\tag{8}$$
+
+因此当 $\displaystyle\Delta\gg\frac{M+1}{M}f$ 时，$N$ 近似与 $f$ 成正比，因此相同的放大率下，600mm F8.0即可在无穷远处实现与135 mm F1.8几乎相同的虚化效果。但是当主体与背景的分离度并不高时，则必须考虑 $N$ 与 $f$ 之间的非线性。
+
+### 焦距 vs 光圈 (固定 $\mathrm{CoC}、s、D$)
+
+由式 $\eqref{js}$ 知，在固定的 $s$ 下，远近景深 $D_1, D_2$ 仅与 $f$ 和 $N$ 相关，只要具有相同的 $\displaystyle\frac{N(s-f)}{f^2}$ 则景深也相同，即在相同的 $D$ 下拥有相同的 $\mathrm{CoC}$。
+
+### CoC vs 光圈 (固定 $f、s、D$)
+
+此时弥散圆直径反比于光圈值，$\delta\propto N^{-1}$，每增大一档光圈，$\delta$ 扩大为原来的 $\sqrt2$ 倍。
+
+### CoC vs 主体物距 (固定 $f、N、D - s$)
+
+由式 $\eqref{eq}$，固定 $f, N$ 和 $\Delta$ 不变时，$\displaystyle\delta=\frac{f^2\vert\Delta\vert}{N}\frac{1}{(s+\Delta)(s-f)}$，$\delta$ 随 $s$ 单调递减，即在近距离处可以获得更大的弥散圆。
+
 <script>
 	update();
 
