@@ -64,7 +64,11 @@ favorite: true
 		border: 1px solid #ccc;
 		border-radius: 6px;
 	}
-	
+
+	.form-group label:nth-of-type(2) {
+		margin-left: 1rem;
+	}
+
 	/*button {
 		margin-top: 10px;
 		padding: 8px 16px;
@@ -137,6 +141,9 @@ favorite: true
 		.form-group select {
 			width: 100%;
 			flex: none;
+		}
+		.form-group label:nth-of-type(2) {
+			margin-left: 0;
 		}
 		/*button {
 			width: 100%;
@@ -295,17 +302,17 @@ favorite: true
 				<input type="number" id="M7" value="0.02" min="0" step="0.001" onchange="plotCard7()">
 			</div>
 			<div class="form-group">
-				<label>参考焦距1 <var>f<sub>1</sub></var> (mm)：</label>
+				<label>焦距1 <var>f<sub>1</sub></var> (mm)：</label>
 				<input type="number" id="f71" value="50" min="0" onchange="plotCard7()">
-				<label style="margin-left: 1rem;">参考光圈值1 <var>N<sub>1</sub></var>：</label>
+				<label>光圈值1 <var>N<sub>1</sub></var>：</label>
 				<input type="number" id="N71" value="1.2" min="0" onchange="plotCard7()">
 			</div>
 			<div class="form-group">
 			</div>
 			<div class="form-group">
-				<label>参考焦距2 <var>f<sub>2</sub></var> (mm)：</label>
+				<label>焦距2 <var>f<sub>2</sub></var> (mm)：</label>
 				<input type="number" id="f72" value="135" min="0" onchange="plotCard7()">
-				<label style="margin-left: 1rem;">参考光圈值2 <var>N<sub>2</sub></var>：</label>
+				<label>光圈值2 <var>N<sub>2</sub></var>：</label>
 				<input type="number" id="N72" value="2.0" min="0" onchange="plotCard7()">
 			</div>
 			<div class="form-group">
@@ -386,7 +393,7 @@ $$\delta=\frac{f^2}{N}\frac{\vert D-s\vert}{D(s-f)}\tag{3}\label{eq}$$
 
 此时弥散圆直径反比于光圈值，$\delta\propto N^{-1}$，每增大一档光圈，$\delta$ 扩大为原来的 $\sqrt2$ 倍。
 
-###  CoC vs 背景物距 (固定 $f、N、s$)
+### CoC vs 背景物距 (固定 $f、N、s$)
 
 此时弥散圆直径 $\displaystyle\delta\propto\vert1-\frac{s}{D}\vert$。 由于分辨能力有限，因此当 $\delta<\delta_0$ 时都可以认为像是清晰的（$\delta_0$ 被称为容许弥散圆），此时可以反解出使得成像清晰的 $D$ 的范围 $D\in(D_1, D_2)$：
 
@@ -668,7 +675,7 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 			responsive: true
 		}
 
-		Plotly.newPlot(id, [trace1, trcace2], layout, config);
+		Plotly.newPlot(id, [trace1, trace2], layout, config);
 	}
 
 	function toPx(c_mm) {
