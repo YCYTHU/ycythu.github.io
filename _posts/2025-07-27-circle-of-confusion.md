@@ -93,9 +93,16 @@ favorite: true
 		column-gap: 20px;
 	}
 
+	.myCard-grid .full-span {
+		grid-column: span 2;
+	}
+
 	var {
 		font-family: Times New Roman;
 		font-style: italic;
+	}
+	sub {
+		font-style: normal;
 	}
 	
 	/* ====== 以下为移动端适配部分 ====== */
@@ -113,6 +120,9 @@ favorite: true
 		.myCard-grid {
 			grid-template-columns: 1fr; /* 改成单列 */
 			column-gap: 0;
+		}
+		.myCard-grid .full-span {
+			grid-column: span 1;
 		}
 		.form-group {
 			width: 80%;
@@ -236,7 +246,7 @@ favorite: true
 			<!--<button onclick="plotCard4()">绘图</button>-->
 			<div id="plot4" class="plot-container"></div>
 		</div>
-		<div class="myCard">
+		<div class="myCard" style="display: none;">
 			<h2>5. 焦距 vs 光圈 (固定 <var style="font-style: normal;">CoC</var>、<var>D - s</var>、<var>M</var>)</h2>
 			<div class="form-group">
 				<label> <var>D - s</var> (m)：</label>
@@ -257,7 +267,7 @@ favorite: true
 			<!--<button onclick="plotCard5()">绘图</button>-->
 			<div id="plot5" class="plot-container"></div>
 		</div>
-		<div class="myCard">
+		<div class="myCard" style="display: none;">
 			<h2>6. 焦距 vs 光圈 (固定 <var style="font-style: normal;">CoC</var>、<var>s</var>、<var>D</var>)</h2>
 			<div class="form-group">
 				<label>主体物距 <var>s</var> (m)：</label>
@@ -277,6 +287,31 @@ favorite: true
 			</div>
 			<!--<button onclick="plotCard6()">绘图</button>-->
 			<div id="plot6" class="plot-container"></div>
+		</div>
+		<div class="myCard full-span">
+			<h2>5. CoC vs 主体-背景距离 (固定 <var>M</var>，对比 <var>f</var>、<var>N</var>)</h2>
+			<div class="form-group">
+				<label>放大率 <var>M</var>：</label>
+				<input type="number" id="M7" value="0.02" min="0" step="0.001" onchange="plotCard7()">
+			</div>
+			<div class="form-group">
+				<label>参考焦距1 <var>f<sub>1</sub></var> (mm)：</label>
+				<input type="number" id="f71" value="50" min="0" onchange="plotCard7()">
+				<label style="margin-left: 1rem;">参考光圈值1 <var>N<sub>1</sub></var>：</label>
+				<input type="number" id="N71" value="1.2" min="0" onchange="plotCard7()">
+			</div>
+			<div class="form-group">
+			</div>
+			<div class="form-group">
+				<label>参考焦距2 <var>f<sub>2</sub></var> (mm)：</label>
+				<input type="number" id="f72" value="135" min="0" onchange="plotCard7()">
+				<label style="margin-left: 1rem;">参考光圈值2 <var>N<sub>2</sub></var>：</label>
+				<input type="number" id="N72" value="2.0" min="0" onchange="plotCard7()">
+			</div>
+			<div class="form-group">
+			</div>
+			<!--<button onclick="plotCard7()">绘图</button>-->
+			<div id="plot7" class="plot-container"></div>
 		</div>
 	</div>
 </div>
@@ -347,6 +382,10 @@ $$\frac{\delta}{f/N}=\frac{\vert v-v'\vert}{v'}\tag{2}\label{v}$$
 
 $$\delta=\frac{f^2}{N}\frac{\vert D-s\vert}{D(s-f)}\tag{3}\label{eq}$$
 
+### CoC vs 光圈 (固定 $f、s、D$)
+
+此时弥散圆直径反比于光圈值，$\delta\propto N^{-1}$，每增大一档光圈，$\delta$ 扩大为原来的 $\sqrt2$ 倍。
+
 ###  CoC vs 背景物距 (固定 $f、N、s$)
 
 此时弥散圆直径 $\displaystyle\delta\propto\vert1-\frac{s}{D}\vert$。 由于分辨能力有限，因此当 $\delta<\delta_0$ 时都可以认为像是清晰的（$\delta_0$ 被称为容许弥散圆），此时可以反解出使得成像清晰的 $D$ 的范围 $D\in(D_1, D_2)$：
@@ -375,15 +414,11 @@ $$\delta=\frac{M^2\vert\Delta\vert}{N}\frac{f}{(M+1)f+M\Delta}\tag{7}\label{cocf
 
 $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm{Const.}\tag{8}$$
 
-因此当 $\displaystyle\Delta\gg\frac{M+1}{M}f$ 时，$N$ 近似与 $f$ 成正比，因此相同的放大率下，600mm F8.0即可在无穷远处实现与135 mm F1.8几乎相同的虚化效果。但是当主体与背景的分离度并不高时，则必须考虑 $N$ 与 $f$ 之间的非线性。
+因此当 $\displaystyle\Delta\gg\frac{M+1}{M}f$ 时，$N$ 近似与 $f$ 成正比，因此相同的放大率下，600mm F8.0即可在无穷远处实现与135 mm F1.8几乎相同的虚化效果。但是当主体与背景的分离度并不高时，则必须考虑 $N$ 与 $f$ 之间的非线性，因此600mm F8.0在全部范围内的虚化都不如135 mm F1.8，仅在无穷远处才达到几乎相同的水平。同样地，可以发现大光圈镜头有助于在主体背景分离度较小时实现较好的虚化，而长焦镜头则在分离度较大时优势明显。更详细的对比可以参考[howmuchblur.dekoning.nl](http://howmuchblur.dekoning.nl/#compare-1x-50mm-f1.4-and-1x-85mm-f1.8-on-a-0.9m-wide-subject)的在线计算器
 
 ### 焦距 vs 光圈 (固定 $\mathrm{CoC}、s、D$)
 
 由式 $\eqref{js}$ 知，在固定的 $s$ 下，远近景深 $D_1, D_2$ 仅与 $f$ 和 $N$ 相关，只要具有相同的 $\displaystyle\frac{N(s-f)}{f^2}$ 则景深也相同，即在相同的 $D$ 下拥有相同的 $\mathrm{CoC}$。
-
-### CoC vs 光圈 (固定 $f、s、D$)
-
-此时弥散圆直径反比于光圈值，$\delta\propto N^{-1}$，每增大一档光圈，$\delta$ 扩大为原来的 $\sqrt2$ 倍。
 
 ### CoC vs 主体物距 (固定 $f、N、D - s$)
 
@@ -397,8 +432,9 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 		plotCard2();
 		plotCard3();
 		plotCard4();
-		plotCard5();
-		plotCard6();
+		//plotCard5();
+		//plotCard6();
+		plotCard7();
 	}
 
 	function updateSet() {
@@ -515,6 +551,7 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 			logY = false,
 			xTickVals = null,
 			xTickText = null,
+			yTiTle = null,
 			yTickprefix = null,
 			yTickformat = null
 	} = {}) {
@@ -542,7 +579,7 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 				ticktext: xTickText || undefined
 			},
 			yaxis: {
-				title: "光圈",
+				title: yTiTle || "光圈",
 				type: logY ? "log" : "linear",
 				titlefont: { color: "red" },
 				tickfont: { color: "red" },
@@ -565,6 +602,73 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 		}
 
 		Plotly.newPlot(id, [trace], layout, config);
+	}
+
+	function plotAxisDualLine(x, y1, y2, id, xLabel, title, {
+			logX = false,
+			logY = false,
+			xTickVals = null,
+			xTickText = null,
+			yTiTle = null,
+			name1 = null,
+			name2 = null
+	} = {}) {
+		const trace1 = {
+			x: x,
+			y: y1,
+			name: name1 || undefined,
+			yaxis: "y1",
+			line: { color: "red" },
+			mode: "lines",
+			hovertemplate: '%{y:.0f}<extra></extra>' // <extra></extra>去掉默认trace名
+		};
+
+		const trace2 = {
+			x: x,
+			y: y2,
+			name: name2 || undefined,
+			yaxis: "y1",
+			line: { color: "blue" },
+			mode: "lines",
+			hovertemplate: '%{y:.0f}<extra></extra>' // <extra></extra>去掉默认trace名
+		};
+
+		const layout = {
+			title: { text: title, font: { size: 14 }, xref: 'paper', x: 0 },
+			xaxis: {
+				title: xLabel,
+				type: logX ? "log" : "linear",
+				automargin: true,
+				ticks: 'outside',
+				showline: true,
+				mirror: true,
+				showspikes: true,
+				spikemode: 'toaxis',
+				tickvals: xTickVals || undefined,
+				ticktext: xTickText || undefined
+			},
+			yaxis: {
+				title: yTiTle || undefined,
+				type: logY ? "log" : "linear",
+				titlefont: { color: "black" },
+				tickfont: { color: "black" },
+				showline: true,
+				mirror: true,
+				showspikes: true,
+				spikemode: 'toaxis',
+			},
+			margin: { l: 50, r: 50, t: 30, b: 40 },
+			showlegend: true,
+			height: 300
+		};
+
+		const config = {
+			modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d','toggleSpikelines','hoverClosestCartesian','hoverCompareCartesian'],
+			displaylogo: false,
+			responsive: true
+		}
+
+		Plotly.newPlot(id, [trace1, trcace2], layout, config);
 	}
 
 	function toPx(c_mm) {
@@ -731,6 +835,38 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 			xTickText: ["16", "24", "35", "50", "70", "85", "105", "150", "200", "300", "400", "600", "800"],
 			yTickprefix: 'f/',
 			yTickformat: '.1f'
+		});
+	}
+	function plotCard7() {
+		const f1 = parseFloat(document.getElementById("f71").value);
+		const N1 = parseFloat(document.getElementById("N71").value);
+		const f2 = parseFloat(document.getElementById("f72").value);
+		const N2 = parseFloat(document.getElementById("N72").value);
+		const M = parseFloat(document.getElementById("M7").value);
+		if (f1 <= 0 || N1 <= 0 || f2 <= 0 || N2 <= 0 || M <= 0) {
+			alert('Illegal!');
+			return;
+		}
+		const k = (1 + M) / M;
+		const s1 = k * f1;
+		const s2 = k * f2;
+		const d_list = [], cpx1_list = [], cpx2_list = [];
+		for (let delta = 1; delta <= 6; delta += 0.02) {
+			const d = 10**delta;
+			d_list.push(d/1000);
+			const D1 = s1 + d;
+			const c1 = computeCoC(f1, N1, s1, D1);
+			const D2 = s2 + d;
+			const c2 = computeCoC(f2, N2, s2, D2);
+			//c_list.push(c);
+			cpx1_list.push(toPx(c1));
+			cpx2_list.push(toPx(c2));
+		}
+		plotAxisDualLine(d_list, cpx1_list, cpx2_list, "plot7", "主体-背景距离 D-s (m)", "CoC vs D-s", {
+			logX: true,
+			yTiTle: "CoC (px)",
+			name1: `${f1.toFixed(0)}mm @ F/${N1.toFixed(1)}`,
+			name2: `${f2.toFixed(0)}mm @ F/${N2.toFixed(1)}`
 		});
 	}
 </script>
