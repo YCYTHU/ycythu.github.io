@@ -414,13 +414,17 @@ $$\delta=\frac{M^2\vert\Delta\vert}{N}\frac{f}{(M+1)f+M\Delta}\tag{7}\label{cocf
 
 ### 焦距 vs 光圈 (固定 $\mathrm{CoC}、D - s、M$)
 
-由于不同焦段的镜头往往也具有不同的光圈范围（例如F4几乎是600mm镜头的极限，而135mm则可以支持F1.8这样更大的光圈），因此固定光圈值来讨论焦距对虚化的影响并不够全面。如果固定 $M, \Delta$ 不变，需要多大的光圈才能在600mm下实现与135mm F1.8几乎相同的虚化效果。由式 $\eqref{cocf}$ 得：
+由于不同焦段的镜头往往也具有不同的光圈范围（例如F4几乎是600mm镜头的极限，而135mm则可以支持F1.8这样更大的光圈），因此固定光圈值来讨论焦距对虚化的影响并不够全面。
+
+如果固定 $M, \Delta$ 不变，需要多大的光圈才能在600mm下实现与135mm F1.8几乎相同的虚化效果。由式 $\eqref{cocf}$ 得：
 
 $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm{Const.}\tag{8}$$
 
-因此当 $\displaystyle\Delta\gg\frac{M+1}{M}f$ 时，$N$ 近似与 $f$ 成正比，因此相同的放大率下，600mm F8.0即可在无穷远处实现与135 mm F1.8几乎相同的虚化效果。但是当主体与背景的分离度并不高时，则必须考虑 $N$ 与 $f$ 之间的非线性，因此600mm F8.0在全部范围内的虚化都不如135 mm F1.8，仅在无穷远处才达到几乎相同的水平。
+因此当 $\displaystyle\Delta\gg\frac{M+1}{M}f$ 时，$N$ 近似与 $f$ 成正比，因此相同的放大率下，600mm F8.0即可在无穷远处实现与135 mm F1.8几乎相同的虚化效果。
 
-同样地，可以发现大光圈镜头有助于在主体背景分离度较小时实现较好的虚化，而长焦镜头则在分离度较大时优势明显。更详细的对比可以参考[howmuchblur.dekoning.nl](http://howmuchblur.dekoning.nl/#compare-1x-50mm-f1.4-and-1x-85mm-f1.8-on-a-0.9m-wide-subject)的在线计算器。
+但是当主体与背景的分离度并不高时，则必须考虑 $N$ 与 $f$ 之间的非线性，因此600mm F8.0在全部范围内的虚化都不如135 mm F1.8，仅在无穷远处才达到几乎相同的水平。
+
+同样地，可以发现大光圈镜头有助于在主体背景分离度较小时实现较好的虚化，而长焦镜头则在分离度较大时优势明显。
 
 ### 焦距 vs 光圈 (固定 $\mathrm{CoC}、s、D$)
 
@@ -886,8 +890,8 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 		plotAxisDualLine(d_list, cpx1_list, cpx2_list, "plot7", "主体-背景距离 D-s (m)", "CoC vs D-s", {
 			logX: true,
 			yTiTle: "CoC (px)",
-			name1: `${f1.toFixed(0)}mm @ F/${N1.toFixed(1)}`,
-			name2: `${f2.toFixed(0)}mm @ F/${N2.toFixed(1)}`
+			name1: `${f1.toFixed(0)}mm @ f/${N1.toFixed(1)}`,
+			name2: `${f2.toFixed(0)}mm @ f/${N2.toFixed(1)}`
 		});
 	}
 </script>

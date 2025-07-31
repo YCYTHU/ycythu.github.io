@@ -64,14 +64,15 @@
             <li>
               {%- include snippets/get-locale-string.html key='ARTICLE_DATE_FORMAT' -%}
               <i class="far fa-calendar-alt"></i> <span>{{ include.article.date | date: __return }}</span>
+                {%- if page.layout == "home" -%}
+                  <img alt="Page Views" src="https://hits.sh/github.com/YCYTHU/ycythu.github.io.svg?view=today-total&amp;label=Page%20Views&amp;extraCount=15575&amp;color=efefef&amp;labelColor=888888" style="height: 1rem; display: none;">
+                {%- endif -%}
             </li>
           {%- endif -%}
 
           {%- if _pageview -%}
             {%- if site.pageview.provider -%}
-              {%- if page.layout == "home" -%}
-                <li style="display: none;"><img alt="Page Views" src="https://hits.sh/github.com/YCYTHU/ycythu.github.io.svg?view=today-total&amp;label=Page%20Views&amp;extraCount=15575&amp;color=efefef&amp;labelColor=888888" style="height: 1rem;"></li>
-              {%- else -%}
+              {%- if page.layout != "home" -%}
                 <li style="display: flex;"><img alt="Page Views" src="https://hits.sh/github.com/YCYTHU/ycythu.github.io.svg?view=today-total&amp;label=Page%20Views&amp;extraCount=15575&amp;color=efefef&amp;labelColor=888888" style="height: 1rem;"></li>
               {%- endif -%}
               <!--{%- include snippets/get-locale-string.html key='VIEWS' -%}
