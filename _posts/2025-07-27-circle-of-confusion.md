@@ -10,6 +10,7 @@ favorite: true
 ---
 讨论了不同参数对虚化效果的影响，并量化了弥散圆直径与不同参数之间的关系，方便估算摄影所需参数。
 <!--more-->
+<a class="button button--primary button--rounded" href="javascript:void(0);" onclick="fold()" id="fold">折叠</a>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <style>
 	/*body {
@@ -163,7 +164,7 @@ favorite: true
 	}
 </style>
 
-<div class="container">
+<div class="container" id="container">
 	<div class="myCard">
 		<h2>全局设置</h2>
 		<div class="form-group">
@@ -308,14 +309,10 @@ favorite: true
 				<input type="number" id="N71" value="1.2" min="0" onchange="plotCard7()">
 			</div>
 			<div class="form-group">
-			</div>
-			<div class="form-group">
 				<label>焦距2 <var>f<sub>2</sub></var> (mm)：</label>
 				<input type="number" id="f72" value="135" min="0" onchange="plotCard7()">
 				<label>光圈值2 <var>N<sub>2</sub></var>：</label>
 				<input type="number" id="N72" value="2.0" min="0" onchange="plotCard7()">
-			</div>
-			<div class="form-group">
 			</div>
 			<!--<button onclick="plotCard7()">绘图</button>-->
 			<div id="plot7" class="plot-container"></div>
@@ -421,7 +418,9 @@ $$\delta=\frac{M^2\vert\Delta\vert}{N}\frac{f}{(M+1)f+M\Delta}\tag{7}\label{cocf
 
 $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm{Const.}\tag{8}$$
 
-因此当 $\displaystyle\Delta\gg\frac{M+1}{M}f$ 时，$N$ 近似与 $f$ 成正比，因此相同的放大率下，600mm F8.0即可在无穷远处实现与135 mm F1.8几乎相同的虚化效果。但是当主体与背景的分离度并不高时，则必须考虑 $N$ 与 $f$ 之间的非线性，因此600mm F8.0在全部范围内的虚化都不如135 mm F1.8，仅在无穷远处才达到几乎相同的水平。同样地，可以发现大光圈镜头有助于在主体背景分离度较小时实现较好的虚化，而长焦镜头则在分离度较大时优势明显。更详细的对比可以参考[howmuchblur.dekoning.nl](http://howmuchblur.dekoning.nl/#compare-1x-50mm-f1.4-and-1x-85mm-f1.8-on-a-0.9m-wide-subject)的在线计算器
+因此当 $\displaystyle\Delta\gg\frac{M+1}{M}f$ 时，$N$ 近似与 $f$ 成正比，因此相同的放大率下，600mm F8.0即可在无穷远处实现与135 mm F1.8几乎相同的虚化效果。但是当主体与背景的分离度并不高时，则必须考虑 $N$ 与 $f$ 之间的非线性，因此600mm F8.0在全部范围内的虚化都不如135 mm F1.8，仅在无穷远处才达到几乎相同的水平。
+
+同样地，可以发现大光圈镜头有助于在主体背景分离度较小时实现较好的虚化，而长焦镜头则在分离度较大时优势明显。更详细的对比可以参考[howmuchblur.dekoning.nl](http://howmuchblur.dekoning.nl/#compare-1x-50mm-f1.4-and-1x-85mm-f1.8-on-a-0.9m-wide-subject)的在线计算器。
 
 ### 焦距 vs 光圈 (固定 $\mathrm{CoC}、s、D$)
 
@@ -432,6 +431,7 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 由式 $\eqref{eq}$，固定 $f, N$ 和 $\Delta$ 不变时，$\displaystyle\delta=\frac{f^2\vert\Delta\vert}{N}\frac{1}{(s+\Delta)(s-f)}$，$\delta$ 随 $s$ 单调递减，即在近距离处可以获得更大的弥散圆。
 
 <script>
+	var isFold = false;
 	update();
 
 	function update() {
@@ -442,6 +442,19 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 		//plotCard5();
 		//plotCard6();
 		plotCard7();
+	}
+
+	function fold() {
+		if (isFold) {
+			document.getElementById("container").style.display='';
+			isFold = false;
+			document.getElementById("fold").innerHTML='折叠';
+		}
+		else {
+			document.getElementById("container").style.display='none';
+			isFold = true;
+			document.getElementById("fold").innerHTML='取消折叠';
+		}
 	}
 
 	function updateSet() {
@@ -664,6 +677,7 @@ $$N\left(M+1+\frac{M\Delta}{f}\right)=\frac{M^2\vert\Delta\vert}{\delta}=\mathrm
 				showspikes: true,
 				spikemode: 'toaxis',
 			},
+			legend: { x: 0, y: 1 },
 			margin: { l: 50, r: 50, t: 30, b: 40 },
 			showlegend: true,
 			height: 300
