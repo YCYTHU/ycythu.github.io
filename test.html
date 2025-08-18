@@ -65,8 +65,8 @@ title: About Me
   <div class="card">
     <h2>📂 Top Tags</h2>
     <div class="tag-list">
-      {% assign sorted_tags = site.tags | sort: "last" %}
-      {% assign sorted_tags = sorted_tags | sort: "size" | reverse %}
+      {% assign tag_array = site.tags | sort_natural: "last" %}
+      {% assign sorted_tags = tag_array | sort: "last.size" | reverse %}
       {% for tag in sorted_tags limit:6 %}
         {% assign count = tag[1].size %}
         {% if forloop.index0 < 2 %}
