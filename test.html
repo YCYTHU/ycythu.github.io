@@ -51,7 +51,7 @@ title: About Me
   </div>
 
 <div class="cards">
-  <!-- Blog Stats -->
+  <!-- Blog Stats 
   <div class="card">
     <h2>📊 Blog Stats</h2>
     <ul>
@@ -59,7 +59,7 @@ title: About Me
       <li>Total Tags: {{ site.tags | size }}</li>
       <li>Total Categories: {{ site.categories | size }}</li>
     </ul>
-  </div>
+  </div>-->
 
   <!-- Top Tags 
   <div class="card">
@@ -108,15 +108,15 @@ title: About Me
   <div class="posts">
     <h2>📌 Pinned Posts</h2>
     <ul>
-      {% assign pinned_posts = site.posts | where: "favorite", true %}
-      {% for post in pinned_posts limit:3 %}
+      {%- assign pinned_posts = site.posts | where: "favorite", true -%}
+      {%- for post in pinned_posts limit:3 -%}
       <li>
         <a href="{{ post.url | relative_url }}">
           <strong>{{ post.title }}</strong>
           <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
         </a>
       </li>
-      {% endfor %}
+      {%- endfor -%}
     </ul>
     <p class="more"><a href="https://ycythu.github.io/favorites.html">View more →</a></p>
   </div>
@@ -132,14 +132,14 @@ title: About Me
   <div class="posts">
     <h2>📝 Recent Posts</h2>
     <ul>
-      {% for post in site.posts limit:5 %}
+      {%- for post in site.posts limit:5 -%}
       <li>
         <a href="{{ post.url | relative_url }}">
           <strong>{{ post.title }}</strong>
           <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
         </a>
       </li>
-      {% endfor %}
+      {%- endfor -%}
     </ul>
     <p class="more"><a href="https://ycythu.github.io/archive.html">View all posts →</a></p>
   </div>
