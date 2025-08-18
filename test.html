@@ -1,8 +1,4 @@
----
-layout: page
-title: About Me
----
-
+<title>About Me - YAOCY</title>
 <div class="profile-container">
 
   <!-- 封面和头像 -->
@@ -13,7 +9,7 @@ title: About Me
 
   <!-- 基本信息 -->
   <div class="info">
-    <h1>Your Name</h1>
+    <h1>YAOCY</h1>
     <p class="subtitle"><i>Knowledge is no burden to carry</i></p>
   </div>
 
@@ -40,7 +36,7 @@ title: About Me
     </div>
   </div>
 
-  <!-- 兴趣标签 -->
+  <!-- 兴趣标签 
   <div class="interests">
     <h2>✨ Interests</h2>
     <div class="tags">
@@ -48,7 +44,7 @@ title: About Me
       <span>🎵 Music</span>
       <span>🏃 Running</span>
     </div>
-  </div>
+  </div>-->
 
 <div class="cards">
   <!-- Blog Stats -->
@@ -61,12 +57,59 @@ title: About Me
     </ul>
   </div>
 
-{% comment %}
-  <!-- Top Tags 
+  <!-- Top Tags -->
   <div class="card">
     <h2>📂 Top Tags</h2>
     <div class="tag-list">
-      {% assign tag_array = site.tags | sort_natural: "last" %}
+      {%- assign _tags = site.tags | sort_natural: "last" | reverse -%} 
+      {%- assign _tags = _tags | slice: 0, 6 -%}
+      
+      {%- assign _tag_max_size = 1 -%}
+      {%- assign _tag_min_size = 1 -%}
+      
+      {%- for _tag in _tags -%}
+        {%- assign _size = _tag[1].size -%}
+        {%- if _size > _tag_max_size -%}
+          {%- assign _tag_max_size = _size -%}
+        {%- endif -%}
+        {%- if _size < _tag_min_size -%}
+          {%- assign _tag_min_size = _size -%}
+        {%- endif -%}
+      {%- endfor -%}
+      
+      {%- assign _tag_gap_size = (_tag_max_size | minus: _tag_min_size | plus: 1) | divided_by: 4 -%}
+      {%- if _tag_gap_size < 1 -%}
+        {%- assign _tag_gap_size = 1 -%}
+      {%- endif -%}
+      
+      <div class="site-tags js-tags">
+        <ul class="menu">
+          {%- for _tag in _tags -%}
+            {%- assign _size = _tag[1].size -%}
+            {%- assign _c_index = 1 -%}
+            {%- if _size >= _tag_min_size | plus: _tag_gap_size and _size < _tag_min_size | plus: _tag_gap_size | times: 2 -%}
+              {%- assign _c_index = 2 -%}
+            {%- elsif _size >= _tag_min_size | plus: _tag_gap_size | times: 2 and _size < _tag_min_size | plus: _tag_gap_size | times: 3 -%}
+              {%- assign _c_index = 3 -%}
+            {%- elsif _size >= _tag_min_size | plus: _tag_gap_size | times: 3 -%}
+              {%- assign _c_index = 4 -%}
+            {%- endif -%}
+            <li>
+              <button type="button" class="button button--pill tag-button tag-button-{{ _c_index }}" data-encode="{{ _tag[0] | strip | url_encode }}">
+               <span>{{ _tag[0] | strip }}</span>
+               <div class="tag-button__count">{{ _tag[1].size }}</div>
+             </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>      
+    </div>
+  </div>
+</div>
+
+{% comment %}
+
+<!--{% assign tag_array = site.tags | sort_natural: "last" %}
       {% assign sorted_tags = tag_array | sort: "last.size" | reverse %}
       {% for tag in sorted_tags limit:6 %}
         {% assign count = tag[1].size %}
@@ -77,10 +120,7 @@ title: About Me
         {% else %}
           <span class="tag-item tag-light">{{ tag[0] }} ({{ count }})</span>
         {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</div>-->
+      {% endfor %}-->
 
   <!-- 博客数据概览 
   <div class="stats">
