@@ -1,6 +1,5 @@
 <title>About Me - YAOCY</title>
 <div class="profile-container">
-
   <!-- 封面和头像 -->
   <div class="cover"></div>
   <div class="avatar-wrapper">
@@ -61,6 +60,7 @@
   <div class="card">
     <h2>📂 Top Tags</h2>
     <div class="tag-list">
+      <!--{% comment %}
       {%- assign _tags = site.tags | sort_natural: "last" | reverse -%} 
       {%- assign _tags = _tags | slice: 0, 6 -%}
       
@@ -102,14 +102,15 @@
             </li>
           {%- endfor -%}
         </ul>
-      </div>      
+      </div>
+      {% endcomment %}-->
     </div>
   </div>
 </div>
 
+<!--
 {% comment %}
-
-<!--{% assign tag_array = site.tags | sort_natural: "last" %}
+{% assign tag_array = site.tags | sort_natural: "last" %}
       {% assign sorted_tags = tag_array | sort: "last.size" | reverse %}
       {% for tag in sorted_tags limit:6 %}
         {% assign count = tag[1].size %}
@@ -142,8 +143,9 @@
       </a>
       {% endfor %}
     </div>
-  </div>-->
+  </div>
 {% endcomment %}
+-->
 
   <!-- Pinned Posts -->
   <div class="posts">
@@ -162,13 +164,6 @@
     <p class="more"><a href="https://ycythu.github.io/favorites.html">View more →</a></p>
   </div>
 
-  <!-- 社交链接 
-  <div class="social">
-    <a href="https://github.com/yourname">GitHub</a>
-    <a href="https://twitter.com/yourname">Twitter</a>
-    <a href="mailto:you@example.com">Email</a>
-  </div>-->
-
   <!-- 博客文章列表 -->
   <div class="posts">
     <h2>📝 Recent Posts</h2>
@@ -184,6 +179,13 @@
     </ul>
     <p class="more"><a href="https://ycythu.github.io/archive.html">View all posts →</a></p>
   </div>
+
+  <!-- 社交链接 
+  <div class="social">
+    <a href="https://github.com/yourname">GitHub</a>
+    <a href="https://twitter.com/yourname">Twitter</a>
+    <a href="mailto:you@example.com">Email</a>
+  </div>-->
 </div>
 
 <style>
