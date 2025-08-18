@@ -1,0 +1,329 @@
+---
+layout: page
+title: About Me
+---
+
+<div class="profile-container">
+
+  <!-- 封面和头像 -->
+  <div class="cover"></div>
+  <div class="avatar-wrapper">
+    <img src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/molecular spectroscopy.jpg" alt="Avatar" class="avatar">
+  </div>
+
+  <!-- 基本信息 -->
+  <div class="info">
+    <h1>Your Name</h1>
+    <p class="subtitle"><i>Knowledge is no burden to carry</i></p>
+  </div>
+
+  <!-- 学术指标（可接 Google Scholar JSON） -->
+  <div class="cards">
+    <div class="card">
+      <h2>🎓 Education & Research</h2>
+      <p>
+        Ph.D. in Chemistry<br>
+        Interests: OLEDs, Excited State Dynamics, Thin Film Materials
+      </p>
+    </div>
+    <div class="card">
+      <h2>📊 Academic Metrics</h2>
+      {% assign scholar = site.data.scholar %}
+      <ul>
+        <li>Citations: {{ scholar.citations }}</li>
+        <li>h-index: {{ scholar.h_index }}</li>
+        <li>i10-index: {{ scholar.i10_index }}</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>🛠️ Toolbox</h2>
+      <p>Jekyll · Markdown · MathJax · Python</p>
+    </div>
+  </div>
+
+  <!-- 兴趣标签 -->
+  <div class="interests">
+    <h2>✨ Interests</h2>
+    <div class="tags">
+      <span>📷 Photography</span>
+      <span>🎵 Music</span>
+      <span>🏃 Running</span>
+    </div>
+  </div>
+
+<div class="cards">
+  <!-- Blog Stats -->
+  <div class="card">
+    <h2>📊 Blog Stats</h2>
+    <ul>
+      <li>Total Posts: {{ site.posts | size }}</li>
+      <li>Total Tags: {{ site.tags | size }}</li>
+      <li>Total Categories: {{ site.categories | size }}</li>
+    </ul>
+  </div>
+
+  <!-- Top Tags -->
+  <div class="card">
+    <h2>📂 Top Tags</h2>
+    <div class="tag-list">
+      {% assign sorted_tags = site.tags | sort: "last" %}
+      {% assign sorted_tags = sorted_tags | sort: "size" | reverse %}
+      {% for tag in sorted_tags limit:6 %}
+        {% assign count = tag[1].size %}
+        {% if forloop.index0 < 2 %}
+          <span class="tag-item tag-strong">{{ tag[0] }} ({{ count }})</span>
+        {% elsif forloop.index0 < 4 %}
+          <span class="tag-item tag-medium">{{ tag[0] }} ({{ count }})</span>
+        {% else %}
+          <span class="tag-item tag-light">{{ tag[0] }} ({{ count }})</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+  <!-- 博客数据概览 
+  <div class="stats">
+    <h2>📊 Blog Stats</h2>
+    <ul>
+      <li>Total Posts: {{ site.posts | size }}</li>
+      <li>Total Tags: {{ site.tags | size }}</li>
+      <li>Total Categories: {{ site.categories | size }}</li>
+    </ul>
+  </div>-->
+
+  <!-- 分类/专题展示 
+  <div class="categories">
+    <h2>📂 Tags</h2>
+    <div class="tag-list">
+      {% for tag in site.tags %}
+      <a href="{{ site.baseurl }}/tag/{{ tag[0] | slugify }}/" class="tag-item">
+        {{ tag[0] }} ({{ tag[1].size }})
+      </a>
+      {% endfor %}
+    </div>
+  </div>-->
+
+  <!-- Pinned Posts -->
+  <div class="posts">
+    <h2>📌 Pinned Posts</h2>
+    <ul>
+      {% assign pinned_posts = site.posts | where: "favorite", true %}
+      {% for post in pinned_posts limit:3 %}
+      <li>
+        <a href="{{ post.url | relative_url }}">
+          <strong>{{ post.title }}</strong>
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="more"><a href="{{ "/blog/" | relative_url }}">View more →</a></p>
+  </div>
+
+  <!-- 社交链接 
+  <div class="social">
+    <a href="https://github.com/yourname">GitHub</a>
+    <a href="https://twitter.com/yourname">Twitter</a>
+    <a href="mailto:you@example.com">Email</a>
+  </div>-->
+
+  <!-- 博客文章列表 -->
+  <div class="posts">
+    <h2>📝 Recent Posts</h2>
+    <ul>
+      {% for post in site.posts limit:5 %}
+      <li>
+        <a href="{{ post.url | relative_url }}">
+          <strong>{{ post.title }}</strong>
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="more"><a href="{{ "/blog/" | relative_url }}">View all posts →</a></p>
+  </div>
+</div>
+
+<style>
+/* 基本布局 */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+}
+
+.cover {
+  height: 160px;
+  background: linear-gradient(to right, #a5b4fc, #c4b5fd, #fbcfe8);
+  border-radius: 12px;
+}
+
+.avatar-wrapper {
+  margin-top: -60px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* 基本信息 */
+.info h1 {
+  margin-top: 16px;
+  font-size: 28px;
+}
+
+.subtitle {
+  color: #555;
+  margin-top: 6px;
+}
+
+/* 学术卡片 */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+}
+.card {
+  flex: 1 1 220px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+  text-align: left;
+}
+.card h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+/* 兴趣标签 */
+.interests {
+  margin-top: 30px;
+}
+.tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.tags span {
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* 社交链接 */
+.social {
+  margin-top: 20px;
+}
+.social a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #444;
+}
+.social a:hover {
+  color: #000;
+}
+
+/* 文章列表 */
+.posts {
+  margin-top: 40px;
+  text-align: left;
+}
+.posts ul {
+  list-style: none;
+  padding: 0;
+}
+.posts li {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 12px;
+}
+.posts li a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #333;
+}
+.posts li a:hover {
+  background: #f9fafb;
+}
+.posts .date {
+  display: block;
+  font-size: 13px;
+  color: #777;
+  margin-top: 4px;
+}
+.posts .more {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.stats, .categories, .pinned {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.stats ul, .pinned ul {
+  list-style: none;
+  padding: 0;
+}
+
+.stats li, .pinned li {
+  margin: 6px 0;
+}
+
+/* 分类标签 */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+/*.tag-item {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: #334155;
+  text-decoration: none;
+  font-size: 14px;
+}
+.tag-item:hover {
+  background: #e2e8f0;
+}
+ 标签样式分层次 */
+
+.tag-item {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+}
+.tag-strong {
+  background: #312e81;  /* 深蓝 */
+  color: #fff;
+}
+.tag-medium {
+  background: #6366f1;  /* 中蓝 */
+  color: #fff;
+}
+.tag-light {
+  background: #e0e7ff;  /* 浅蓝 */
+  color: #3730a3;
+}
+</style>
