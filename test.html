@@ -17,15 +17,17 @@ title: About Me
   <hr class="divider">
 
   <!-- 学术指标（可接 Google Scholar JSON） -->
-  <div class="cards">
-    <div class="card">
+  <div class="myCards">
+    <div class="myCard">
       <h2>🎓 Education & Research</h2>
       <p>
-        Ph.D. in Chemistry<br>
-        Interests: OLEDs, Excited State Dynamics, Machine Learning
+        Ph.D. in Chemistry
       </p>
+      <a class="button button--info button--pill button--sm" href="">OLEDs</a>
+      <a class="button button--primary button--pill button--sm" href="">Excited State Dynamics</a>
+      <a class="button button--success button--pill button--sm" href="">Machine Learning</a>
     </div>
-    <div class="card">
+    <div class="myCard">
       <h2>📊 Academic Metrics</h2>
       <ul>
         <li>Citations: 84</li>
@@ -41,7 +43,7 @@ title: About Me
     <div class="tags">
       <span>🐍 Python</span>
       <span>📊 Matlab</span>
-      <span>⚛ Gaussian16</span>
+      <span>🔎 Gaussian16</span>
       <span>🧪 GROMACS</span>
     </div>
   </div>
@@ -54,15 +56,15 @@ title: About Me
     </div>
   </div>
 
-  <!--<div class="card" style="margin-top: 24px;">
+  <!--<div class="myCard" style="margin-top: 24px;">
     <h2>🛠️ Toolbox</h2>
     <p>Jekyll · Markdown · MathJax · Python</p>
   </div>-->
   <hr class="divider">
 
-  <div class="cards">
+  <div class="myCards">
     <!-- Blog Stats -->
-    <div class="card">
+    <div class="myCard">
       <h2>📊 Blog Stats</h2>
       <ul>
         <li>Total Posts: {{ site.posts | size }}</li>
@@ -79,7 +81,7 @@ title: About Me
     </div>
   
     <!-- Top Tags -->
-    <div class="card">
+    <div class="myCard">
       <h2>📂 Top Tags</h2>
       <div class="tag-list">
         {%- assign _tags = site.tags | sort_natural: "last" | reverse -%} 
@@ -209,6 +211,10 @@ title: About Me
 </div>
 
 <style>
+.article__header {
+  display: none;
+}
+
 /* 基本布局 */
 .profile-container {
   margin: 0 auto;
@@ -248,14 +254,14 @@ title: About Me
 }
 
 /* 学术卡片 */
-.cards {
+.myCards {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 24px;
   justify-content: center;
 }
-.card {
+.myCard {
   flex: 1 1 220px;
   background: white;
   border-radius: 12px;
@@ -263,11 +269,11 @@ title: About Me
   padding: 16px;
   text-align: left;
 }
-.card h2 {
+.myCard h2 {
   font-size: 18px;
   margin-bottom: 8px;
 }
-.card ul {
+.myCard ul {
   list-style: disc inside;
   padding-left: 16px;
   margin: 0;
