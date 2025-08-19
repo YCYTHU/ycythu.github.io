@@ -6,7 +6,7 @@ title: About Me
   <!-- 封面和头像 -->
   <div class="cover"></div>
   <div class="avatar-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/molecular spectroscopy.jpg" alt="Avatar" class="avatar">
+    <img src="https://avatars.githubusercontent.com/u/121541937" alt="Avatar" class="avatar">
   </div>
 
   <!-- 基本信息 -->
@@ -24,10 +24,9 @@ title: About Me
       <p>
         <a class="button button--success button--pill button--sm" href="">OLEDs</a>&nbsp;
         <a class="button button--info button--pill button--sm" href="">Machine Learning</a>&nbsp;
-        <a class="button button--warning button--pill button--sm" href="">Computational Chemistry</a>&nbsp;
+        <a class="button button--warning button--pill button--sm" href="">Computational Chemistry</a><!--&nbsp;
         <a class="button button--primary button--pill button--sm" href="">Energy Transfer Mechanisms</a>&nbsp;
-        <a class="button button--success button--pill button--sm" href="">Excited State Dynamics</a>&nbsp;
-        <a class="button button--info button--pill button--sm" href="">Noncovalent Interactions</a>&nbsp;
+        <a class="button button--success button--pill button--sm" href="">Noncovalent Interactions</a>-->
       </p>
     </div>
     <div class="myCard">
@@ -53,9 +52,9 @@ title: About Me
   <div class="interests">
     <h2>✨ Interests</h2>
     <div class="tags">
-      <span>🔎 Inquiry</span>
       <span>📷 Photography</span>
       <span>🎵 Peking Opera</span>
+      <span>🔎 Inquiry</span>
       <span>🌀 Reflection</span>
     </div>
   </div>
@@ -73,13 +72,15 @@ title: About Me
       <ul>
         <li>Total Posts: {{ site.posts | size }}</li>
         <li>Total Tags: {{ site.tags | size }}</li>
-        <!--<li>Total Categories: {{ site.categories | size }}</li>-->
+        <!--<li>Total Categories: {{ site.categories | size }}</li>
+        {% comment %}
         {%- assign total_chars = 0 -%}
         {%- for post in site.posts -%}
           {%- assign clean_text = post.content | strip_newlines | replace: "&nbsp;", " " | replace: "  ", " " -%}
           {%- assign total_chars = total_chars | plus: clean_text | size -%}
         {%- endfor -%}
-        <li>Total Words: {{ total_chars }}</li>
+        {% endcomment %}
+        <li>Total Words: {{ total_chars }}</li>-->
         <li>Last Updated: {{ site.time | date: "%Y-%m-%d" }}</li>
       </ul>
     </div>
@@ -243,7 +244,7 @@ title: About Me
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 4px solid white;
+  /*border: 4px solid white;*/
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
