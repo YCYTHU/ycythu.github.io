@@ -20,12 +20,15 @@ title: About Me
   <div class="myCards">
     <div class="myCard">
       <h2>🎓 Education & Research</h2>
+      <p>Ph.D. in Chemistry</p>
       <p>
-        Ph.D. in Chemistry
+        <a class="button button--success button--pill button--sm" href="">OLEDs</a>&nbsp;
+        <a class="button button--info button--pill button--sm" href="">Machine Learning</a>&nbsp;
+        <a class="button button--warning button--pill button--sm" href="">Computational Chemistry</a>&nbsp;
+        <a class="button button--primary button--pill button--sm" href="">Energy Transfer Mechanisms</a>&nbsp;
+        <a class="button button--success button--pill button--sm" href="">Excited State Dynamics</a>&nbsp;
+        <a class="button button--info button--pill button--sm" href="">Noncovalent Interactions</a>&nbsp;
       </p>
-      <a class="button button--info button--pill button--sm" href="">OLEDs</a>
-      <a class="button button--primary button--pill button--sm" href="">Excited State Dynamics</a>
-      <a class="button button--success button--pill button--sm" href="">Machine Learning</a>
     </div>
     <div class="myCard">
       <h2>📊 Academic Metrics</h2>
@@ -42,17 +45,18 @@ title: About Me
     <h2>🛠️ Toolbox</h2>
     <div class="tags">
       <span>🐍 Python</span>
-      <span>📊 Matlab</span>
-      <span>🔎 Gaussian16</span>
+      <span>🤖 Matlab</span>
+      <span>🌱 Gaussian16</span>
       <span>🧪 GROMACS</span>
     </div>
   </div>
   <div class="interests">
     <h2>✨ Interests</h2>
     <div class="tags">
+      <span>🔎 Inquiry</span>
       <span>📷 Photography</span>
-      <span>🎵 Music</span>
-      <span>🏃 Running</span>
+      <span>🎵 Peking Opera</span>
+      <span>🌀 Reflection</span>
     </div>
   </div>
 
@@ -72,7 +76,7 @@ title: About Me
         <!--<li>Total Categories: {{ site.categories | size }}</li>-->
         {%- assign total_chars = 0 -%}
         {%- for post in site.posts -%}
-          {%- assign clean_text = post.content | strip_html | strip_newlines | replace: "&nbsp;", " " | replace: "  ", " " -%}
+          {%- assign clean_text = post.content | strip_newlines | replace: "&nbsp;", " " | replace: "  ", " " -%}
           {%- assign total_chars = total_chars | plus: clean_text | size -%}
         {%- endfor -%}
         <li>Total Words: {{ total_chars }}</li>
@@ -84,7 +88,7 @@ title: About Me
     <div class="myCard">
       <h2>📂 Top Tags</h2>
       <div class="tag-list">
-        {%- assign _tags = site.tags | sort_natural: "last" | reverse -%} 
+        {%- assign _tags = site.tags | sort_natural | reverse -%} 
         {%- assign _tags = _tags | slice: 0, 6 -%}
         
         {%- assign _tag_max_size = 1 -%}
@@ -218,6 +222,7 @@ title: About Me
 /* 基本布局 */
 .profile-container {
   margin: 0 auto;
+  margin-top: 1rem;
   /*max-width: 900px;
   padding: 20px;
   font-family: system-ui, sans-serif;*/
