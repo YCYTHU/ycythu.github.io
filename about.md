@@ -107,7 +107,7 @@ key: page-about
           {% assign _sorted_tags = _tags_list | sort: "" | reverse %}
           {%- for item in _sorted_tags limit:6 -%}
             {% assign _tag = item | split: "::" %}
-            {%- assign _tag_cur_size = _tag[1] -%}
+            {%- assign _tag_cur_size = _tag[1] | plus: 0 -%}
             {%- assign _tag_min_1 = _tag_min_size -%}
             {%- assign _tag_max_1 = _tag_min_1 | plus: _tag_gap_size -%}
             {%- assign _tag_min_2 = _tag_max_1 -%}
@@ -128,7 +128,7 @@ key: page-about
               {%- assign _c_index = 4 -%}
             {%- endif -%}
             <li><button type="button" class="button button--pill tag-button tag-button-{{ _c_index }}" data-encode="{{ _tag[0] | strip | url_encode }}">
-                <span>{{ _tag[0] | strip }}</span><div class="tag-button__count">{{ _tag[1] }}</div>
+                <span>{{ _tag[0] | strip }}</span><div class="tag-button__count">{{ _tag_cur_size }}</div>
               </button>
             </li>
           {%- endfor -%}
