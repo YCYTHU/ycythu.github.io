@@ -97,18 +97,6 @@ key: page-about
         {%- endif -%}  
         <div class="site-tags js-tags">
           <ul class="menu">
-            <!--{% comment %}
-            {%- for _tag in _tags -%}
-              {%- assign _size = _tag[1].size -%}
-              {%- assign _c_index = 1 -%}
-              {%- if _size >= _tag_min_size | plus: _tag_gap_size and _size < _tag_min_size | plus: _tag_gap_size | times: 2 -%}
-                {%- assign _c_index = 2 -%}
-              {%- elsif _size >= _tag_min_size | plus: _tag_gap_size | times: 2 and _size < _tag_min_size | plus: _tag_gap_size | times: 3 -%}
-                {%- assign _c_index = 3 -%}
-              {%- elsif _size >= _tag_min_size | plus: _tag_gap_size | times: 3 -%}
-                {%- assign _c_index = 4 -%}
-              {%- endif -%}
-              {% endcomment %}-->
           {%- for _tag in _tags -%}
             {%- assign _tag_cur_size = _tag[1].size -%}
             {%- assign _tag_min_1 = _tag_min_size -%}
