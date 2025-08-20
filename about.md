@@ -46,10 +46,14 @@ key: page-about
   <div class="interests">
     <h2>🛠️ Toolbox</h2>
     <div class="tags">
-      <span>🐍 Python</span>
+      <a class="button button-tag button--pill" href="">🐍 Python</a>
+      <a class="button button-tag button--pill" href="">🤖 Matlab</a>
+      <a class="button button-tag button--pill" href="">🌱 Gaussian16</a>
+      <a class="button button-tag button--pill" href="">🧪 GROMACS</a>
+      <!--<span>🐍 Python</span>
       <span>🤖 Matlab</span>
       <span>🌱 Gaussian16</span>
-      <span>🧪 GROMACS</span>
+      <span>🧪 GROMACS</span>-->
     </div>
   </div>
   <div class="interests">
@@ -99,7 +103,8 @@ key: page-about
           <ul class="menu">
           {%- assign _tags_array = "" | split: "" -%}
           {% for _tag in _tags %}
-            {%- assign _tag_obj = '{"name": "' | append: _tag[0] | append: '", "count": ' | append: _tag[1].size | append: '}' -%}
+            {%- assign _tag_name = _tag[0] | replace: '"', '\"' -%}
+            {%- assign _tag_obj = '{"name": "' | append: _tag_name | append: '", "count": ' | append: _tag[1].size | append: '}' -%}
             {%- assign _tag_obj = _tag_obj | parse_json -%}
             {%- assign _tags_array = _tags_array | push: _tag_obj -%}
           {% endfor %}
@@ -125,7 +130,7 @@ key: page-about
             {%- else -%}
               {%- assign _c_index = 4 -%}
             {%- endif -%}
-            <li><button type="button" class="button button--pill tag-button tag-button-{{ _c_index }}" data-encode="{{ _tag[0] | strip | url_encode }}">
+            <li><button type="button" class="button button--pill tag-button tag-button-{{ _c_index }}" data-encode="{{ item.name | strip | url_encode }}">
                 <span>{{ item.name | strip }}</span><div class="tag-button__count">{{ _tag_cur_size }}</div>
               </button>
             </li>
@@ -367,12 +372,20 @@ key: page-about
   height: 1px;
   background: linear-gradient(to right, transparent, #d4d4d8, transparent);
 }
-a.button-tag {
+.myCard a.button-tag {
   background-color: #eef2ff;
   color: #3730a3;
 }
-a.button-tag:hover {
+.myCard a.button-tag:hover {
   background-color: #6366f1;
+  color: #fff;
+}
+.tags a.button-tag {
+  background-color: #eef2ff;
   color: #3730a3;
+}
+.tags a.button-tag:hover {
+  background-color: #6366f1;
+  color: #fff;
 }
 </style>
