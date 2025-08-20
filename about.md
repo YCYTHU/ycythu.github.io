@@ -25,9 +25,9 @@ key: page-about
       <h2>🎓 Education & Research</h2>
       <p>Ph.D. in Chemistry</p>
       <p>
-        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/OLED">OLEDs</a>&nbsp;
-        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a>&nbsp;
-        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/Computational_chemistry">Computational Chemistry</a><!--&nbsp;
+        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/OLED" target="_blank">OLEDs</a>&nbsp;
+        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">Machine Learning</a>&nbsp;
+        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/Computational_chemistry" target="_blank">Computational Chemistry</a><!--&nbsp;
         <a class="button button--primary button--pill button--sm" href="">Energy Transfer Mechanisms</a>&nbsp;
         <a class="button button--success button--pill button--sm" href="">Noncovalent Interactions</a>-->
       </p>
@@ -46,23 +46,19 @@ key: page-about
   <div class="interests">
     <h2>🛠️ Toolbox</h2>
     <div class="tags">
-      <a class="button button-tag button--pill" href="">🐍 Python</a>
-      <a class="button button-tag button--pill" href="">🤖 Matlab</a>
-      <a class="button button-tag button--pill" href="">🌱 Gaussian16</a>
-      <a class="button button-tag button--pill" href="">🧪 GROMACS</a>
-      <!--<span>🐍 Python</span>
-      <span>🤖 Matlab</span>
-      <span>🌱 Gaussian16</span>
-      <span>🧪 GROMACS</span>-->
+      <a class="button button-tag button--pill" href="javascript: void(0)">🐍 Python</a>
+      <a class="button button-tag button--pill" href="javascript: void(0)">🤖 Matlab</a>
+      <a class="button button-tag button--pill" href="javascript: void(0)">🌱 Gaussian16</a>
+      <a class="button button-tag button--pill" href="javascript: void(0)">🧪 GROMACS</a>
     </div>
   </div>
   <div class="interests">
     <h2>✨ Interests</h2>
     <div class="tags">
-      <span>📷 Photography</span>
-      <span>🎵 Peking Opera</span>
-      <span>🔎 Inquiry</span>
-      <span>🌀 Reflection</span>
+      <a class="button button-tag button--pill" href="javascript: void(0)">📷 Photography</a>
+      <a class="button button-tag button--pill" href="javascript: void(0)">🎵 Peking Opera</a>
+      <a class="button button-tag button--pill" href="javascript: void(0)">🔎 Inquiry</a>
+      <a class="button button-tag button--pill" href="javascript: void(0)">🌀 Reflection</a>
     </div>
   </div>
 
@@ -106,10 +102,12 @@ key: page-about
             {%- assign _tag_name = _tag[0] | replace: '"', '\"' -%}
             {%- assign _tag_obj = '{"name": "' | append: _tag_name | append: '", "count": ' | append: _tag[1].size | append: '}' -%}
             {%- assign _tag_obj = _tag_obj | parse_json -%}
+            <!-- DEBUG: {{ _tag_obj | inspect }} -->
             {%- assign _tags_array = _tags_array | push: _tag_obj -%}
           {% endfor %}
           {%- assign _sorted_tags = _tags_array | sort: "count" | reverse -%}
           {%- for item in _sorted_tags limit:6 -%}
+          <!-- DEBUG: {{ item | inspect }} -->
             {%- assign _tag_cur_size = item.count -%}
             {%- assign _tag_min_1 = _tag_min_size -%}
             {%- assign _tag_max_1 = _tag_min_1 | plus: _tag_gap_size -%}
