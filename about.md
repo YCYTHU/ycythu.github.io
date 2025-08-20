@@ -25,9 +25,9 @@ key: page-about
       <h2>🎓 Education & Research</h2>
       <p>Ph.D. in Chemistry</p>
       <p>
-        <a class="button button--success button--pill button--sm" href="">OLEDs</a>&nbsp;
-        <a class="button button--info button--pill button--sm" href="">Machine Learning</a>&nbsp;
-        <a class="button button--warning button--pill button--sm" href="">Computational Chemistry</a><!--&nbsp;
+        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/OLED">OLEDs</a>&nbsp;
+        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a>&nbsp;
+        <a class="button button-tag button--pill button--sm" href="https://en.wikipedia.org/wiki/Computational_chemistry">Computational Chemistry</a><!--&nbsp;
         <a class="button button--primary button--pill button--sm" href="">Energy Transfer Mechanisms</a>&nbsp;
         <a class="button button--success button--pill button--sm" href="">Noncovalent Interactions</a>-->
       </p>
@@ -81,7 +81,7 @@ key: page-about
         {%- assign _tag_max_size = 1 -%}
         {%- assign _tag_min_size = 1 -%}
         {%- assign _tag_cur_size = 1 -%}
-        {%- assign _tags = site.tags | sort -%}
+        {%- assign _tags = site.tags | sort: "last" | reverse -%}
         {%- for _tag in _tags -%}
           {%- assign _tag_cur_size = _tag[1].size -%}
           {%- if _tag_cur_size > _tag_max_size -%}
@@ -249,6 +249,7 @@ key: page-about
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 14px;
+  font-weight: bold;
 }
 
 /* 社交链接 */
@@ -358,5 +359,13 @@ key: page-about
   border: 0;
   height: 1px;
   background: linear-gradient(to right, transparent, #d4d4d8, transparent);
+}
+a.button-tag {
+  background-color: #eef2ff;
+  color: #3730a3;
+}
+a.button-tag:hover {
+  background-color: #6366f1;
+  color: #3730a3;
 }
 </style>
