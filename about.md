@@ -99,18 +99,16 @@ key: page-about
           <ul class="menu">
           {%- assign _tags_array = "" | split: "" -%}
           {% for _tag in _tags %}
-            {%- assign _tag_name = _tag[0] -%}
-            {%- assign _tag_count = _tag[1].size -%}
-            {%- assign _tag_obj = "" | split: "" -%}
-            {%- assign _tag_obj = _tag_obj | push: _tag_name -%}
-            {%- assign _tag_obj = _tag_obj | push: _tag_count -%}
+            {% assign padded_count = _tag[1].size | prepend: "000" | slice: -3, 3 %}
+            {% assign _tag_obj = padded_count | append: "::" | append: _tag[0] %}
             <!-- DEBUG: {{ _tag_obj | inspect }} -->
-            {%- assign _tags_array = _tags_array | push: _tag_obj -%}
+            {% assign _tags_array = _tags_array | push: _tag_obj %}
           {% endfor %}
-          {%- assign _sorted_tags = _tags_array | sort_last | reverse -%}
-          {%- for _tags in _sorted_tags limit:6 -%}
+          {%- assign _sorted_tags = _tags_array | sort | reverse -%}
+          {%- for _item in _sorted_tags limit:6 -%}
+            {%- assign _tags = _item | split: "::" -%}
             <!-- DEBUG: {{ _tags | inspect }} -->
-            {%- assign _tag_cur_size = _tags[1] -%}
+            {%- assign _tag_cur_size = _tags[1] | plus: 0  -%}
             {%- assign _tag_min_1 = _tag_min_size -%}
             {%- assign _tag_max_1 = _tag_min_1 | plus: _tag_gap_size -%}
             {%- assign _tag_min_2 = _tag_max_1 -%}
