@@ -124,7 +124,7 @@ key: page-about
           {%- else -%}
             {%- assign _c_index = 4 -%}
           {%- endif -%}
-          <a class="button button-tag button--pill" href="https://ycythu.github.io/archive.html?tag={{ _tags[1] | replace: ' ', '+' }}">{{ _tags[1] | strip }}<span class="top-tag top-tag-{{ _c_index }}">{{ _tag_cur_size }}</span></a>
+          <a class="button button-tag button--pill top-tag-{{ _c_index }}" href="https://ycythu.github.io/archive.html?tag={{ _tags[1] | replace: ' ', '+' }}" target="_blank">{{ _tags[1] | strip }}<span class="top-tag">{{ _tag_cur_size }}</span></a>
         {%- endfor -%}
       </div>
     </div>
