@@ -253,9 +253,9 @@ key: page-about
   font-weight: bold;
 }
 
-/* 社交链接 */
+/* 社交链接 
 .social {
-  margin-top: 20px;
+  margin-top: 20px;``
 }
 .social a {
   margin: 0 10px;
@@ -264,7 +264,7 @@ key: page-about
 }
 .social a:hover {
   color: #000;
-}
+}*/
 
 /* 文章列表 */
 .posts {
@@ -357,6 +357,9 @@ key: page-about
   background-color: #6366f1;
   color: #fff;
 }
+.myCard .tag-list a:hover {
+  color: #fff;
+}
 .tags a.button-tag {
   background-color: #eef2ff;
   color: #3730a3;
@@ -372,20 +375,36 @@ key: page-about
   line-height: 1;
   vertical-align: top;
 }
-.tag-list .top-tag-4 {
+.tag-list .top-tag-4:hover {
   background: #6366f1;
   color: #fff;
 }
-.tag-list .top-tag-3 {
+.tag-list .top-tag-4 {
+  background: #6366f1e6;
+  color: #fff;
+}
+.tag-list .top-tag-3:hover {
   background: #6366f1cc;
   color: #fff;
 }
-.tag-list .top-tag-2 {
+.tag-list .top-tag-3 {
+  background: #6366f1b3;
+  color: #fff;
+}
+.tag-list .top-tag-2:hover {
   background: #6366f199;
   color: #fff;
 }
-.tag-list .top-tag-1 {
+.tag-list .top-tag-2 {
+  background: #6366f180;
+  color: #fff;
+}
+.tag-list .top-tag-1:hover {
   background: #6366f166;
+  color: #fff;
+}
+.tag-list .top-tag-1 {
+  background: #6366f14d;
   color: #fff;
 }
 </style>
