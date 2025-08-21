@@ -37,7 +37,7 @@ key: page-about
       <ul>
         <li>Citations: 84</li>
         <li>h-index: 4</li>
-        <li>i10-index: 4</li>
+        <li>i10-index: 3</li>
       </ul>
     </div>
   </div>
@@ -376,35 +376,35 @@ key: page-about
   vertical-align: top;
 }
 .tag-list .top-tag-4:hover {
-  background: #6366f1;
+  background: #4c4fdb;
   color: #fff;
 }
 .tag-list .top-tag-4 {
-  background: #6366f1e6;
+  background: #6366f1;
   color: #fff;
 }
 .tag-list .top-tag-3:hover {
-  background: #6366f1cc;
+  background: #4c4fdbcc;
   color: #fff;
 }
 .tag-list .top-tag-3 {
-  background: #6366f1b3;
+  background: #6366f1cc;
   color: #fff;
 }
 .tag-list .top-tag-2:hover {
-  background: #6366f199;
+  background: #4c4fdb99;
   color: #fff;
 }
 .tag-list .top-tag-2 {
-  background: #6366f180;
+  background: #6366f199;
   color: #fff;
 }
 .tag-list .top-tag-1:hover {
-  background: #6366f166;
+  background: #4c4fdb66;
   color: #fff;
 }
 .tag-list .top-tag-1 {
-  background: #6366f14d;
+  background: #6366f166;
   color: #fff;
 }
 </style>
