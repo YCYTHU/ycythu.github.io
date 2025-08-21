@@ -124,7 +124,7 @@ key: page-about
           {%- else -%}
             {%- assign _c_index = 4 -%}
           {%- endif -%}
-          <a class="button button-tag button--pill top-tag-{{ _c_index }}" href="https://ycythu.github.io/archive.html?tag={{ _tags[1] | replace: ' ', '+' }}" target="_blank">{{ _tags[1] | strip }}<span class="top-tag">{{ _tag_cur_size }}</span></a>
+          <a class="button button--pill top-tag-{{ _c_index }}" href="https://ycythu.github.io/archive.html?tag={{ _tags[1] | replace: ' ', '+' }}" target="_blank">{{ _tags[1] | strip }}<span class="top-tag">{{ _tag_cur_size }}</span></a>
         {%- endfor -%}
       </div>
     </div>
@@ -372,19 +372,19 @@ key: page-about
   line-height: 1;
   vertical-align: top;
 }
-.top-tag-4 {
+.tag-list .top-tag-4 {
   background: #6366f1;
   color: #fff;
 }
-.top-tag-3 {
+.tag-list .top-tag-3 {
   background: #6366f1cc;
   color: #fff;
 }
-.top-tag-2 {
+.tag-list .top-tag-2 {
   background: #6366f199;
   color: #fff;
 }
-.top-tag-1 {
+.tag-list .top-tag-1 {
   background: #6366f166;
   color: #fff;
 }
