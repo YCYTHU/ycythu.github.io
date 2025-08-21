@@ -94,45 +94,38 @@ key: page-about
         {%- assign _tag_gap_size =  _tag_max_size | minus: _tag_min_size | plus: 1 | divided_by: 4 -%}
         {%- if _tag_gap_size < 1 -%}
           {%- assign _tag_gap_size = 1 -%}
-        {%- endif -%}  
-        <div class="site-tags js-tags">
-          <ul class="menu">
-          {%- assign _tags_array = "" | split: "" -%}
-          {% for _tag in _tags %}
-            {% assign padded_count = _tag[1].size | prepend: "000" | slice: -3, 3 %}
-            {% assign _tag_obj = padded_count | append: "::" | append: _tag[0] %}
-            {% assign _tags_array = _tags_array | push: _tag_obj %}
-          {% endfor %}
-          {%- assign _sorted_tags = _tags_array | sort | reverse -%}
-          {%- for _item in _sorted_tags limit:6 -%}
-            {%- assign _tags = _item | split: "::" -%}
-            {%- assign _tag_cur_size = _tags[0] | plus: 0  -%}
-            {%- assign _tag_min_1 = _tag_min_size -%}
-            {%- assign _tag_max_1 = _tag_min_1 | plus: _tag_gap_size -%}
-            {%- assign _tag_min_2 = _tag_max_1 -%}
-            {%- assign _tag_max_2 = _tag_min_2 | plus: _tag_gap_size -%}
-            {%- assign _tag_min_3 = _tag_max_2 -%}
-            {%- assign _tag_max_3 = _tag_min_3 | plus: _tag_gap_size -%}
-            {%- assign _tag_min_4 = _tag_max_3 -%}
-            {%- assign _tag_max_4 = _tag_min_4 | plus: _tag_gap_size -%}
-            {%- if _tag_cur_size >= _tag_min_1 and _tag_cur_size < _tag_max_1 -%}
-              {%- assign _c_index = 1 -%}
-            {%- elsif _tag_cur_size >= _tag_min_2 and _tag_cur_size < _tag_max_2 -%}
-              {%- assign _c_index = 2 -%}
-            {%- elsif _tag_cur_size >= _tag_min_3 and _tag_cur_size < _tag_max_3 -%}
-              {%- assign _c_index = 3 -%}
-            {%- elsif _tag_cur_size >= _tag_min_4 and _tag_cur_size < _tag_max_4 -%}
-              {%- assign _c_index = 4 -%}
-            {%- else -%}
-              {%- assign _c_index = 4 -%}
-            {%- endif -%}
-            <li><button type="button" class="button button--pill tag-button tag-button-{{ _c_index }}" data-encode="{{ _tags[0] | strip | url_encode }}">
-                <span>{{ _tags[1] | strip }}</span><div class="tag-button__count">{{ _tag_cur_size }}</div>
-              </button>
-            </li>
-          {%- endfor -%}
-          </ul>
-        </div>
+        {%- endif -%}
+        {%- assign _tags_array = "" | split: "" -%}
+        {% for _tag in _tags %}
+          {% assign padded_count = _tag[1].size | prepend: "000" | slice: -3, 3 %}
+          {% assign _tag_obj = padded_count | append: "::" | append: _tag[0] %}
+          {% assign _tags_array = _tags_array | push: _tag_obj %}
+        {% endfor %}
+        {%- assign _sorted_tags = _tags_array | sort | reverse -%}
+        {%- for _item in _sorted_tags limit:6 -%}
+          {%- assign _tags = _item | split: "::" -%}
+          {%- assign _tag_cur_size = _tags[0] | plus: 0  -%}
+          {%- assign _tag_min_1 = _tag_min_size -%}
+          {%- assign _tag_max_1 = _tag_min_1 | plus: _tag_gap_size -%}
+          {%- assign _tag_min_2 = _tag_max_1 -%}
+          {%- assign _tag_max_2 = _tag_min_2 | plus: _tag_gap_size -%}
+          {%- assign _tag_min_3 = _tag_max_2 -%}
+          {%- assign _tag_max_3 = _tag_min_3 | plus: _tag_gap_size -%}
+          {%- assign _tag_min_4 = _tag_max_3 -%}
+          {%- assign _tag_max_4 = _tag_min_4 | plus: _tag_gap_size -%}
+          {%- if _tag_cur_size >= _tag_min_1 and _tag_cur_size < _tag_max_1 -%}
+            {%- assign _c_index = 1 -%}
+          {%- elsif _tag_cur_size >= _tag_min_2 and _tag_cur_size < _tag_max_2 -%}
+            {%- assign _c_index = 2 -%}
+          {%- elsif _tag_cur_size >= _tag_min_3 and _tag_cur_size < _tag_max_3 -%}
+            {%- assign _c_index = 3 -%}
+          {%- elsif _tag_cur_size >= _tag_min_4 and _tag_cur_size < _tag_max_4 -%}
+            {%- assign _c_index = 4 -%}
+          {%- else -%}
+            {%- assign _c_index = 4 -%}
+          {%- endif -%}
+          <a class="button button-tag button--pill" href="https://ycythu.github.io/archive.html?tag={{ _tags[1] | replace: ' ', '+' }}">{{ _tags[1] | strip }}<span class="top-tag top-tag-{{ _c_index }}">{{ _tag_cur_size }}</span></a>
+        {%- endfor -%}
       </div>
     </div>
   </div>
@@ -350,18 +343,6 @@ key: page-about
   text-decoration: none;
   font-size: 14px;
 }
-.tag-strong {
-  background: #312e81;  /* 深蓝 */
-  color: #fff;
-}
-.tag-medium {
-  background: #6366f1;  /* 中蓝 */
-  color: #fff;
-}
-.tag-light {
-  background: #e0e7ff;  /* 浅蓝 */
-  color: #3730a3;
-}
 .divider {
   margin: 40px auto;
   border: 0;
@@ -382,6 +363,29 @@ key: page-about
 }
 .tags a.button-tag:hover {
   background-color: #6366f1;
+  color: #fff;
+}
+.top-tag {
+  display: inline-block;
+  margin-left: .25rem;
+  font-size: .7rem;
+  line-height: 1;
+  vertical-align: top;
+}
+.top-tag-4 {
+  background: #6366f1;
+  color: #fff;
+}
+.top-tag-3 {
+  background: #6366f1cc;
+  color: #fff;
+}
+.top-tag-2 {
+  background: #6366f199;
+  color: #fff;
+}
+.top-tag-1 {
+  background: #6366f166;
   color: #fff;
 }
 </style>
