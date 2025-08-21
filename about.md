@@ -104,10 +104,12 @@ key: page-about
             {%- assign _tag_obj = "" | split: "" -%}
             {%- assign _tag_obj = _tag_obj | push: _tag_name -%}
             {%- assign _tag_obj = _tag_obj | push: _tag_count -%}
+            <!-- DEBUG: {{ _tag_obj | inspect }} -->
             {%- assign _tags_array = _tags_array | push: _tag_obj -%}
           {% endfor %}
           {%- assign _sorted_tags = _tags_array | sort_last | reverse -%}
           {%- for _tags in _sorted_tags limit:6 -%}
+            <!-- DEBUG: {{ _tags | inspect }} -->
             {%- assign _tag_cur_size = _tags[1] -%}
             {%- assign _tag_min_1 = _tag_min_size -%}
             {%- assign _tag_max_1 = _tag_min_1 | plus: _tag_gap_size -%}
