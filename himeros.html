@@ -1,0 +1,278 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+        /* 登录区 */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .login-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .login-button {
+            margin-top: 15px;
+            padding: 12px;
+            width: 100%;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-button:hover { background: #0056b3; }
+
+        /* 视频列表 */
+        .content {
+            padding: 20px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .video-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .video-card:hover { transform: scale(1.05); }
+        .video-card img {
+            width: 100%;
+            display: block;
+        }
+        .video-card h4 {
+            margin: 10px;
+            font-size: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* 播放器区 */
+        .player-container {
+            max-width: 900px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .player-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        .progress-bar {
+            width: 100%;
+            background: #eee;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 10px 0;
+            height: 8px;
+        }
+        .progress-fill {
+            height: 8px;
+            background: #007BFF;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        video {
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+            background: #000;
+        }
+        .back-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #555;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .back-button:hover { background: #333; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div id="loginSection" class="login-container">
+        <div class="login-box">
+            <h2>请输入密钥</h2>
+            <form id="loginForm">
+                <input type="password" id="password" placeholder="密钥" required>
+                <button id="loginButton" type="submit" class="login-button">解锁视频库</button>
+            </form>
+        </div>
+    </div>
+    <!-- 视频列表页 -->
+    <div id="contentSection" class="content hidden">
+        <div id="videoList" class="video-grid"></div>
+    </div>
+    <!-- 播放器页 -->
+    <div id="playerSection" class="player-container hidden">
+        <div class="player-title" id="playerTitle"></div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <video id="videoPlayer" controls></video>
+        <button class="back-button" onclick="goBack()">返回视频列表</button>
+    </div>
+
+<script type="text/javascript">
+function init(map_url, cover_url, fake_url) {
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const key = document.getElementById('password').value;
+        const loginSection = document.getElementById('loginSection');
+        const contentSection = document.getElementById('contentSection');
+        const loginButton = document.getElementById('loginButton');
+
+        loginButton.innerHTML = "加载中...";
+
+        Promise.all([
+            fetch(map_url).then(r => r.text()),
+            fetch(cover_url).then(r => r.text())
+        ]).then(([map_enc, cover_enc]) => {
+            try {
+                const map_arr = decrypt(map_enc.split("\n"), key);
+                const cover_arr = decrypt(cover_enc.split("\n"), key);
+                const map_json = atob(map_arr.join(""));
+                const cover_json = atob(cover_arr.join(""));
+                const videoMap = JSON.parse(map_json);   // 结构: [{name:"xxx", url:"xxx"}]
+                const coverMap = JSON.parse(cover_json); // 结构: [{name:"xxx", cover:"xxx"}]
+
+                showVideoList(videoMap, coverMap, key, fake_url);
+
+                loginSection.classList.add('hidden');
+                contentSection.classList.remove('hidden');
+                document.body.style.alignItems='start';
+            } catch (err) {
+                console.error(err);
+                window.location.replace(fake_url);
+            }
+        });
+    });
+}
+
+function showVideoList(videoMap, coverMap, key, fake_url) {
+    const list = document.getElementById("videoList");
+    list.innerHTML = "";
+
+    videoMap.forEach(v => {
+        const coverObj = coverMap.find(c => c.name === v.name);
+        const card = document.createElement("div");
+        card.className = "video-card";
+        card.innerHTML = `
+            <img src="${coverObj ? coverObj.cover : ''}" alt="${v.name}">
+            <h4>${v.name}</h4>
+        `;
+        card.addEventListener("click", () => loadVideo(v, key, fake_url));
+        list.appendChild(card);
+    });
+}
+
+function loadVideo(videoObj, key, fake_url) {
+    const contentSection = document.getElementById("contentSection");
+    const playerSection = document.getElementById("playerSection");
+    const playerTitle = document.getElementById("playerTitle");
+    const progressFill = document.getElementById("progressFill");
+    const videoPlayer = document.getElementById("videoPlayer");
+
+    contentSection.classList.add("hidden");
+    playerSection.classList.remove("hidden");
+    playerTitle.textContent = videoObj.name;
+    progressFill.style.width = "0%";
+    videoPlayer.src = "";
+    videoPlayer.classList.add("hidden");
+
+    fetch(videoObj.url)
+        .then(r => r.text())
+        .then(enc => {
+            try {
+                let progress = 0;
+                const timer = setInterval(() => {
+                    if (progress < 90) {
+                        progress += 10;
+                        progressFill.style.width = progress + "%";
+                    }
+                }, 200);
+
+                const video_base64 = decrypt(enc.split("\n"), key)[0];
+                const byteCharacters = atob(video_base64);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: "video/mp4" });
+                const videoURL = URL.createObjectURL(blob);
+
+                clearInterval(timer);
+                progressFill.style.width = "100%";
+
+                setTimeout(() => {
+                    videoPlayer.src = videoURL;
+                    videoPlayer.classList.remove("hidden");
+                    videoPlayer.play();
+                }, 300);
+            } catch (err) {
+                console.error(err);
+                window.location.replace(fake_url);
+            }
+        });
+}
+
+function goBack() {
+    document.getElementById("playerSection").classList.add("hidden");
+    document.getElementById("contentSection").classList.remove("hidden");
+    const videoPlayer = document.getElementById("videoPlayer");
+    videoPlayer.pause();
+    videoPlayer.src = "";
+}
+
+function decrypt(encry_arr, serverKey) {
+    const result = [];
+    const key = CryptoJS.enc.Utf8.parse(serverKey);
+    for (let index = 0; index < encry_arr.length; index++) {
+        if (!encry_arr[index]) continue;
+        const decryptedData = CryptoJS.AES.decrypt(encry_arr[index].substring(16), key, {
+            iv: CryptoJS.enc.Utf8.parse(encry_arr[index].substring(0, 16)),
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        result.push(decryptedData.toString(CryptoJS.enc.Utf8));
+    }
+    return result;
+}
+
+// 你需要自己准备这两个文件 (加密后的 JSON)
+const map_url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/video_map.aes";
+const cover_url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/cover_map.aes";
+const fake_url = "https://www.baidu.com";
+init(map_url, cover_url, fake_url);
+</script>
+</body>
+</html>
