@@ -137,7 +137,7 @@
     <div id="playerSection" class="player-container hidden">
         <div class="player-title" id="playerTitle"></div>
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <video id="videoPlayer" controls></video>
+        <video id="videoPlayer" controls autoplay loop muted></video>
         <button class="back-button" onclick="goBack()">返回视频列表</button>
     </div>
 
@@ -236,6 +236,7 @@ function loadVideo(videoObj, key, fake_url) {
                 setTimeout(() => {
                     videoPlayer.src = videoURL;
                     videoPlayer.classList.remove("hidden");
+                    progressFill.classList.add("hidden");
                     videoPlayer.play();
                 }, 300);
             } catch (err) {
