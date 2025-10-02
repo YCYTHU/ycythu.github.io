@@ -35,9 +35,9 @@ key: page-about
     <div class="myCard">
       <h2>📊 Academic Metrics</h2>
       <ul>
-        <li>Citations: 84</li>
+        <li>Articles: 5</li>
+        <li>Citations: 89</li>
         <li>h-index: 4</li>
-        <li>i10-index: 3</li>
       </ul>
     </div>
   </div>
