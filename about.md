@@ -4,6 +4,8 @@ title: About Me
 show_title: false
 key: page-about
 ---
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <div class="profile-container">
   <!-- 封面和头像 -->
   <div class="cover"></div>
@@ -452,109 +454,103 @@ key: page-about
   margin-top: 1rem;
 }
 </style>
+<script>
+  const hotPageURL = "https://cdn.jsdelivr.net/gh/ycythu/assets@main/hotpage.csv";
+  const hotKeywordURL = "https://cdn.jsdelivr.net/gh/ycythu/assets@main/hotkeyword.csv";
 
- <!-- Plotly + PapaParse -->
- <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
- <script>
-   const hotPageURL = "https://cdn.jsdelivr.net/gh/ycythu/assets@main/hotpage.csv";
-   const hotKeywordURL = "https://cdn.jsdelivr.net/gh/ycythu/assets@main/hotkeyword.csv";
+  function loadCSV(url) {
+    return new Promise((resolve, reject) => {
+      Papa.parse(url, {
+        download: true,
+        header: true,
+        complete: results => resolve(results.data),
+        error: err => reject(err)
+      });
+    });
+  }
 
-   function loadCSV(url) {
-     return new Promise((resolve, reject) => {
-       Papa.parse(url, {
-         download: true,
-         header: true,
-         complete: results => resolve(results.data),
-         error: err => reject(err)
-       });
-     });
-   }
+  const shortLabel = url => {
+    try {
+      const u = new URL(url);
+      let path = u.pathname.replace(/^\/|\/$/g, '');
+      if (path === '') return u.hostname;
+      return path.split('/').pop().replace(/\.[^/.]+$/, '');
+    } catch {
+      return url;
+    }
+  };
 
-   const shortLabel = url => {
-     try {
-       const u = new URL(url);
-       let path = u.pathname.replace(/^\/|\/$/g, '');
-       if (path === '') return u.hostname;
-       return path.split('/').pop().replace(/\.[^/.]+$/, '');
-     } catch {
-       return url;
-     }
-   };
+  const trimLabel = s => (s.length > 15 ? s.slice(0, 15) + '…' : s);
 
-   const trimLabel = s => (s.length > 15 ? s.slice(0, 15) + '…' : s);
+  async function drawCharts() {
+    const colors = ['#a5b4fc', '#c4b5fd', '#fbcfe8', '#ddd6fe', '#e0e7ff', '#fde68a', '#fcd34d', '#f9a8d4'];
+    const [pages, keywords] = await Promise.all([
+      loadCSV(hotPageURL),
+      loadCSV(hotKeywordURL)
+    ]);
 
-   async function drawCharts() {
-     const colors = ['#a5b4fc', '#c4b5fd', '#fbcfe8', '#ddd6fe', '#e0e7ff', '#fde68a', '#fcd34d', '#f9a8d4'];
-     const [pages, keywords] = await Promise.all([
-       loadCSV(hotPageURL),
-       loadCSV(hotKeywordURL)
-     ]);
+    const cleanPages = pages.filter(d => d["页面"] && d["印象数"]);
+    const cleanKeywords = keywords.filter(d => d["关键字"] && d["印象数"]);
 
-     const cleanPages = pages.filter(d => d["页面"] && d["印象数"]);
-     const cleanKeywords = keywords.filter(d => d["关键字"] && d["印象数"]);
+    const topPages = cleanPages.sort((a,b) => b["印象数"] - a["印象数"]).slice(0, 10);
+    const topKeywords = cleanKeywords.sort((a,b) => b["印象数"] - a["印象数"]).slice(0, 10);
 
-     const topPages = cleanPages.sort((a,b) => b["印象数"] - a["印象数"]).slice(0, 10);
-     const topKeywords = cleanKeywords.sort((a,b) => b["印象数"] - a["印象数"]).slice(0, 10);
+    const pageLabels = topPages.map(d => trimLabel(shortLabel(d["页面"])));
+    const pageValues = topPages.map(d => Number(d["印象数"]));
+    const pageURLs = topPages.map(d => d["页面"]);
 
-     const pageLabels = topPages.map(d => trimLabel(shortLabel(d["页面"])));
-     const pageValues = topPages.map(d => Number(d["印象数"]));
-     const pageURLs = topPages.map(d => d["页面"]);
+    const pageData = [{
+      type: 'pie',
+      labels: pageLabels,
+      values: pageValues,
+      hovertext: topPages.map(d =>
+        `${d["页面"]}<br>Impression: ${d["印象数"]}`
+      ),
+      textinfo: "label+percent",
+      hoverinfo: "label+text",
+      marker: { colors },
+      hole: 0.3
+    }];
 
-     const pageData = [{
-       type: 'pie',
-       labels: pageLabels,
-       values: pageValues,
-       hovertext: topPages.map(d =>
-         `${d["页面"]}<br>Impression: ${d["印象数"]}`
-       ),
-       textinfo: "label+percent",
-       hoverinfo: "label+text",
-       marker: { colors },
-       hole: 0.3
-     }];
+    const pageLayout = {
+      showlegend: false,
+      legend: {orientation: 'h', y: -0.15, x: 0.5, xanchor: 'center'},
+      margin: {t: 80, b: 60}
+    };
 
-     const pageLayout = {
-       //title: {text: "热门页面展示占比（前10）", x: 0.5},
-       showlegend: false,
-       legend: {orientation: 'h', y: -0.15, x: 0.5, xanchor: 'center'},
-       margin: {t: 80, b: 60}
-     };
+    Plotly.newPlot("pageChart", pageData, pageLayout, {responsive: true}).then(gd => {
+      gd.on('plotly_click', function(data) {
+        const point = data.points[0];
+        const url = pageURLs[point.pointNumber];
+        if (url) window.open(url, "_blank");
+      });
+    });
 
-     Plotly.newPlot("pageChart", pageData, pageLayout, {responsive: true}).then(gd => {
-       gd.on('plotly_click', function(data) {
-         const point = data.points[0];
-         const url = pageURLs[point.pointNumber];
-         if (url) window.open(url, "_blank");
-       });
-     });
+    const keywordData = [{
+      type: 'pie',
+      labels: topKeywords.map(d => trimLabel(d["关键字"])),
+      values: topKeywords.map(d => Number(d["印象数"])),
+      hovertext: topKeywords.map(d =>
+        `Impression: ${d["印象数"]}`
+      ),
+      textinfo: "label+percent",
+      hoverinfo: "label+text",
+      marker: { colors },
+      hole: 0.3
+    }];
 
-     const keywordData = [{
-       type: 'pie',
-       labels: topKeywords.map(d => trimLabel(d["关键字"])),
-       values: topKeywords.map(d => Number(d["印象数"])),
-       hovertext: topKeywords.map(d =>
-         `Impression: ${d["印象数"]}`
-       ),
-       textinfo: "label+percent",
-       hoverinfo: "label+text",
-       marker: { colors },
-       hole: 0.3
-     }];
+    const keywordLayout = {
+      showlegend: false,
+      legend: {orientation: 'h', y: -0.15, x: 0.5, xanchor: 'center'},
+      margin: {t: 80, b: 60}
+    };
 
-     const keywordLayout = {
-       //title: {text: "热门搜索关键词展示占比（前10）", x: 0.5},
-       showlegend: false,
-       legend: {orientation: 'h', y: -0.15, x: 0.5, xanchor: 'center'},
-       margin: {t: 80, b: 60}
-     };
+    Plotly.newPlot("keywordChart", keywordData, keywordLayout, {responsive: true});
+    document.getElementById('loading').style.display = 'none';
+  }
 
-     Plotly.newPlot("keywordChart", keywordData, keywordLayout, {responsive: true});
-     document.getElementById('loading').style.display = 'none';
-   }
-
-   drawCharts().catch(err => {
-     document.getElementById('loading').innerText = "Fail to load data" + err;
-     console.error(err);
-   });
- </script>
+  drawCharts().catch(err => {
+    document.getElementById('loading').innerText = "Fail to load data" + err;
+    console.error(err);
+  });
+</script>
