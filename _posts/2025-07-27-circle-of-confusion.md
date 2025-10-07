@@ -8,18 +8,11 @@ tags:
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/aperture.jpg
 favorite: true
 ---
-讨论了不同参数对虚化效果的影响，并量化了弥散圆直径与不同参数之间的关系，方便估算摄影所需参数。
+本文旨在讨论不同参数对虚化效果的影响，并通过图形直观量化弥散圆直径与不同参数（光圈、焦距、物距等）之间的关系，方便快速估算摄影所需参数。
 <!--more-->
 <a class="button button--primary button--rounded" href="javascript:void(0);" onclick="fold()" id="fold">折叠</a>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <style>
-	/*body {
-		font-family: Arial, sans-serif;
-		background: #f0f2f5;
-		margin: 0;
-		padding: 20px;
-	}*/
-	
 	.container {
 		max-width: 1200px;
 		margin: auto;
