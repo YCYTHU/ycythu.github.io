@@ -135,7 +135,7 @@ key: page-about
   <!-- 热门分析图表 -->
   <div class="myCards">
     <div class="myCard">
-      <h2>📈 Blog Popularity (Click to jump)</h2>
+      <h2>📈 Blog Popularity (click to jump)</h2>
       <div id="pageChart" class="chart"></div>
     </div>
     <div class="myCard">

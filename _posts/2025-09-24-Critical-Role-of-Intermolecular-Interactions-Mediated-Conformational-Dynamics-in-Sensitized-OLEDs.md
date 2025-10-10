@@ -5,7 +5,7 @@ tags:
 - Articles
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/FRET.jpg
 favorite: true
-modify_date: 2025-10-01
+modify_date: 2025-10-09
 ---
 <!--more-->
 <head>
@@ -36,7 +36,7 @@ modify_date: 2025-10-01
 
 <p>
   <span class="__dimensions_badge_embed__" data-doi="10.1021/acs.jpclett.5c02231" data-hide-zero-citations="true" data-legend="never" data-style="large_rectangle"></span><script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
-  <strong>Cite this: </strong><i>J. Phys. Chem. Lett.</i><span> 2025, 16, XXX, 10440–10448</span>
+  <strong>Cite this: </strong><i>J. Phys. Chem. Lett.</i><span> 2025, 16, 40, 10440–10448</span>
 </p>
 
 ## Abstract
