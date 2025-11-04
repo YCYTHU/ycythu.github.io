@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 哥特体元素周期表
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/alchemy.jpg
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/periodic%20table.jpg
 ---
 <!--more-->
 <style>

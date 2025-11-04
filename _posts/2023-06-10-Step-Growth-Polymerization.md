@@ -1,7 +1,7 @@
 ---
 title: 逐步加成聚合反应的聚合度
 tags: Chemistry
-cover: https://upload.wikimedia.org/wikipedia/commons/3/36/Step-growth_polymerization.jpg
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/polymerization.jpg
 mathjax_autoNumber: true
 ---
 在双官能团单体的逐步加成聚合过程中，假设每一步均为可逆反应且平衡常数相同，单体初始浓度为 $c_0$。在反应**达到平衡**后，单体浓度为 $c_1$，聚合度为 $i\ (i\in\mathbb{N}^+)$ 的聚合物的浓度为 $c_i$。
