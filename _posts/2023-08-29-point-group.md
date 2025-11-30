@@ -47,7 +47,7 @@ favorite: true
 <body>
 	<p>点击流程图中的<strong style="background: #feffb3;">&nbsp;点群名称&nbsp;</strong>以显示特征标表，<a class="button button--outline-info button--rounded" onclick="HideTable()">点击此处隐藏特征标表</a></p>
 	<div id="flowchart"><center>		
-		<object data="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/point group/point group complete.svg" type="image/svg+xml" width="100%"></object>
+		<object data="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/point group/point group complete.svg" type="image/svg+xml" height="100%"></object>
 		<button id="point_group_button" onclick="ShowTable(this,event)"></button>
 	</center></div>
 	<div id="Container"></div>

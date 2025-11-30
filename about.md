@@ -21,7 +21,7 @@ key: page-about
 
   <hr class="divider">
 
-  <!-- 学术指标（可接 Google Scholar JSON） -->
+  <!-- 学术指标 -->
   <div class="myCards">
     <div class="myCard">
       <h2>🎓 Education & Research</h2>
@@ -38,7 +38,7 @@ key: page-about
       <h2>📊 Academic Metrics</h2>
       <ul>
         <li>Articles: 5</li>
-        <li>Citations: 89</li>
+        <li>Citations: 101</li>
         <li>h-index: 4</li>
       </ul>
     </div>

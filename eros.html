@@ -300,7 +300,10 @@ function show_img(img_base64_arr) {
     var img_ul = document.getElementById("images");
     var ul_html = "";
     for(let index = 0; index < img_base64_arr.length; index++) {
-        ul_html = ul_html + "<li><img src=\"data:image/png;base64," + img_base64_arr[index] + "\" alt=\"Picture " + (index+1).toString() + "\" class=\"image\"></li>";
+        img_base64 = img_base64_arr[index].substring(12);
+        img_name = img_base64_arr[index].substring(0,12);
+        ul_html = ul_html + `<li><img src="data:image/png;base64,${img_base64}" alt="Picture ${(index+1).toString()}" class="image" data-name="${img_name}"></li>`;
+        //ul_html = ul_html + "<li><img src=\"data:image/png;base64," + img_base64_arr[index] + "\" alt=\"Picture " + (index+1).toString() + "\" class=\"image\"></li>";
     }
     img_ul.innerHTML = ul_html;
     const viewer = new Viewer(document.getElementById('images'), {

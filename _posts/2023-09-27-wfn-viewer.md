@@ -1,6 +1,6 @@
 ---
 layout: none
-title: 氢原子波函数
+title: 氢原子波函数在线预览
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/wavefunction.jpg
 favorite: true
 ---
