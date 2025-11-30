@@ -158,6 +158,71 @@
                 background-color: #52c41a;
             }
         }
+        /* 托盘（top tray） */
+        #tray-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #d9c7a3;
+            border-bottom: 4px solid #b69b6d;
+            padding: 12px 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transition: transform 0.35s ease;
+            z-index: 1000;
+        }
+        /* 托盘收起状态 */
+        #tray-container.hidden {
+            transform: translateY(-100%);
+        }
+        /* 托盘滚动区 */
+        #tray {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+        /* 名牌（tag） */
+        .name-tag {
+          min-width: 90px;
+            padding: 10px 8px;
+            background: #faf3dd;
+            border: 2px solid #c8a876;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            color: #5b4636;
+            cursor: pointer;
+
+            /* 名牌初始平放 */
+            transform: rotateX(5deg);
+            transform-origin: bottom;
+            transition: transform 0.25s ease, box-shadow 0.25s, background 0.25s;
+        }
+        /* 名牌翻起状态 */
+        .name-tag.selected {
+            background: #fff7e2;
+            border-color: #b08b56;
+            transform: rotateX(-25deg) translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+        }
+        /* 展开/收起按钮 */
+        #toggle-tray {
+            position: fixed;
+            top: 10px;
+            right: 14px;
+            background: #b08b56;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 1100;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            user-select: none;
+        }
+        #toggle-tray:hover {
+            background: #967643;
+        }
     </style>
 </head>
 <body>
@@ -173,6 +238,12 @@
         </form>
     </div>
     <div id="contentSection" class="content hidden">
+        <!-- 展开/收起托盘按钮 -->
+        <div id="toggle-tray">托盘 ▾</div>
+        <!-- 名牌托盘 -->
+        <div id="tray-container">
+            <div id="tray"><!-- 名牌会自动注入 --></div>
+        </div>
         <ul id="images" class="gallery">
         </ul>
     </div>
@@ -214,6 +285,7 @@ function init(url, audio_url, fake_url) {
                 loginSection.classList.add('hidden');
                 contentSection.classList.remove('hidden');
                 document.body.style.alignItems='start';
+                select();
             } else {
                 alert(xhr.status);
             }
@@ -301,9 +373,9 @@ function show_img(img_base64_arr) {
     var ul_html = "";
     for(let index = 0; index < img_base64_arr.length; index++) {
         img_base64 = img_base64_arr[index].substring(12);
-        img_name = img_base64_arr[index].substring(0,12);
+        img_id = img_base64_arr[index].substring(0,12);
+        img_name = img_id.replace(/#/g, "").replace(/[0-9]/g,"");
         ul_html = ul_html + `<li><img src="data:image/png;base64,${img_base64}" alt="Picture ${(index+1).toString()}" class="image" data-name="${img_name}"></li>`;
-        //ul_html = ul_html + "<li><img src=\"data:image/png;base64," + img_base64_arr[index] + "\" alt=\"Picture " + (index+1).toString() + "\" class=\"image\"></li>";
     }
     img_ul.innerHTML = ul_html;
     const viewer = new Viewer(document.getElementById('images'), {
@@ -329,6 +401,49 @@ function formatSize(bytes) {
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     const size = (bytes / Math.pow(1024, i)).toFixed(2);
     return `${size} ${units[i]}`;
+}
+function select() {
+    const imgs = document.querySelectorAll("#images img");
+    const names = [...new Set([...imgs].map(img => img.dataset.name))];
+    console.log(names)
+    // 托盘和名牌容器
+    const tray = document.getElementById("tray");
+    console.log(tray)
+    // 生成名牌
+    tray.innerHTML = names.map(n => `
+      <div class="name-tag" data-name="${n}">${n}</div>
+    `).join("");
+    
+    // 选择逻辑（翻牌子）
+    const tags = document.querySelectorAll(".name-tag");
+    // 点击名牌 → 翻牌
+    tags.forEach(tag => {
+      tag.addEventListener("click", () => {
+        tag.classList.toggle("selected");
+        updateDisplay();
+      });
+    });
+    // 托盘展开/收起
+    const trayContainer = document.getElementById("tray-container");
+    const toggleBtn = document.getElementById("toggle-tray");
+    
+    toggleBtn.onclick = () => {
+      trayContainer.classList.toggle("hidden");
+      toggleBtn.textContent = trayContainer.classList.contains("hidden")
+        ? "翻牌 ▾"
+        : "翻牌 ▴";
+    };
+    function updateDisplay() {
+        const selected = [...tags]
+          .filter(tag => tag.classList.contains("selected"))
+          .map(tag => tag.dataset.name);
+        imgs.forEach(img => {
+          img.parentElement.style.display =
+            selected.length === 0 || selected.includes(img.dataset.name)
+              ? ""
+              : "none";
+        });
+    }
 }
 const url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/eros.aes";
 const audio_url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/eros_audio.aes";
