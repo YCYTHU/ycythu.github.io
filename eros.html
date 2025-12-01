@@ -158,6 +158,10 @@
                 background-color: #52c41a;
             }
         }
+        @font-face {
+            font-family: eros;
+            src: url("https://cdn.jsdelivr.net/gh/ycythu/assets@main/fonts/eros/aestera.ttf")
+        }
         /* 托盘（top tray） */
         #tray-container {
             position: fixed;
@@ -178,13 +182,14 @@
         /* 托盘滚动区 */
         #tray {
             display: flex;
+            flex-wrap: wrap;
             gap: 12px;
             overflow-x: auto;
             scrollbar-width: thin;
         }
         /* 名牌（tag） */
         .name-tag {
-          min-width: 90px;
+            min-width: 90px;
             padding: 10px 8px;
             background: #faf3dd;
             border: 2px solid #c8a876;
@@ -193,7 +198,9 @@
             font-size: 16px;
             color: #5b4636;
             cursor: pointer;
-
+            font-family: eros;
+            font-size: large;
+            font-weight: bold;
             /* 名牌初始平放 */
             transform: rotateX(5deg);
             transform-origin: bottom;
@@ -201,7 +208,8 @@
         }
         /* 名牌翻起状态 */
         .name-tag.selected {
-            background: #fff7e2;
+            background: #c8a876;
+            color: #faf3dd;
             border-color: #b08b56;
             transform: rotateX(-25deg) translateY(-4px);
             box-shadow: 0 6px 14px rgba(0,0,0,0.18);
@@ -239,7 +247,7 @@
     </div>
     <div id="contentSection" class="content hidden">
         <!-- 展开/收起托盘按钮 -->
-        <div id="toggle-tray">托盘 ▾</div>
+        <div id="toggle-tray">翻牌 ▴</div>
         <!-- 名牌托盘 -->
         <div id="tray-container">
             <div id="tray"><!-- 名牌会自动注入 --></div>
@@ -404,11 +412,10 @@ function formatSize(bytes) {
 }
 function select() {
     const imgs = document.querySelectorAll("#images img");
-    const names = [...new Set([...imgs].map(img => img.dataset.name))];
-    console.log(names)
+    const names = [...new Set([...imgs].map(img => img.dataset.name))].filter(name => name && name.trim() !== "").sort((a, b) => a.localeCompare(b));
+
     // 托盘和名牌容器
     const tray = document.getElementById("tray");
-    console.log(tray)
     // 生成名牌
     tray.innerHTML = names.map(n => `
       <div class="name-tag" data-name="${n}">${n}</div>
