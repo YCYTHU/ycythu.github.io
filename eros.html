@@ -414,23 +414,17 @@ function select() {
     const imgs = document.querySelectorAll("#images img");
     const names = [...new Set([...imgs].map(img => img.dataset.name))].filter(name => name && name.trim() !== "").sort((a, b) => a.localeCompare(b));
 
-    // 托盘和名牌容器
     const tray = document.getElementById("tray");
-    // 生成名牌
-    tray.innerHTML = names.map(n => `
-      <div class="name-tag" data-name="${n}">${n}</div>
-    `).join("");
-    
-    // 选择逻辑（翻牌子）
+    tray.innerHTML = names.map(n => `<div class="name-tag" data-name="${n}">${n}</div>`).join("");
+
     const tags = document.querySelectorAll(".name-tag");
-    // 点击名牌 → 翻牌
     tags.forEach(tag => {
       tag.addEventListener("click", () => {
-        tag.classList.toggle("selected");
-        updateDisplay();
+        toggleTag(tag.dataset.name);
+        updatePageByTags();
       });
     });
-    // 托盘展开/收起
+
     const trayContainer = document.getElementById("tray-container");
     const toggleBtn = document.getElementById("toggle-tray");
     
@@ -440,16 +434,33 @@ function select() {
         ? "翻牌 ▾"
         : "翻牌 ▴";
     };
-    function updateDisplay() {
-        const selected = [...tags]
-          .filter(tag => tag.classList.contains("selected"))
-          .map(tag => tag.dataset.name);
+
+    updatePageByTags();
+
+    function updatePageByTags() {
+        const params = new URLSearchParams(location.search);
+        const selected_tags = params.getAll("love");
         imgs.forEach(img => {
-          img.parentElement.style.display =
-            selected.length === 0 || selected.includes(img.dataset.name)
-              ? ""
-              : "none";
+            img.parentElement.style.display =
+                selected_tags.length === 0 || selected_tags.includes(img.dataset.name) ? "" : "none";
         });
+    }
+    function toggleTag(tag) {
+        const params = new URLSearchParams(location.search);
+        const tags = params.getAll("love");
+
+        if (tags.includes(tag)) {
+            // 已存在 → 删除
+            const newTags = tags.filter(t => t !== tag);
+            params.delete("love");
+            newTags.forEach(t => params.append("love", t));
+        } else {
+            // 不存在 → 添加
+            params.append("love", tag);
+        }
+
+        const newUrl = `${location.pathname}?${params.toString()}`;
+        history.pushState({}, "", newUrl);
     }
 }
 const url = "https://raw.githubusercontent.com/YCYTHU/assets/refs/heads/main/eros.aes";
