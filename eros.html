@@ -436,6 +436,7 @@ function select() {
     };
 
     updatePageByTags();
+    window.addEventListener("popstate", updatePageByTags);
 
     function updatePageByTags() {
         const params = new URLSearchParams(location.search);
