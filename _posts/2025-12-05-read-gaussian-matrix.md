@@ -54,6 +54,14 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/FRET.jpg
 ```python
 import numpy as np
 
+def read_gaussian_full_matrix(txt_path, start, column_count):
+    lines=open(txt_path).readlines()[start-1:]
+    d=[0]+[(column_count+1)*(i+1) for i in range((column_count-1)//5)]
+    il=[l.split()[1:] for c,l in enumerate(lines) if c not in d]
+    lm=[[b+bias for b in [0]+[column_count*(i+1) for i in range((column_count-1)//5)]] 
+          for bias in range(column_count)]
+    return np.array([sum([il[j] for j in idx], []) for idx in lm], dtype=float)
+
 def read_gaussian_lower_triangle(txt_path, start, column_count, to_full=True):
     lines=open(txt_path).readlines()[start-1:]
     d=[0]+[sum(list(range(column_count+1,0,-5))[:i+1]) for i in range(column_count//5)]
@@ -63,16 +71,11 @@ def read_gaussian_lower_triangle(txt_path, start, column_count, to_full=True):
     if to_full:
         return np.array([[lt[j][i] if i<=j else lt[i][j] for i in range(len(lt))] for j in range(len(lt))], dtype=float)
     return np.array([row + [np.nan]*(column_count-len(row)) for row in lt], dtype=float)
-
-def read_gaussian_full_matrix(txt_path, start, column_count):
-    lines=open(txt_path).readlines()[start-1:]
-    d=[0]+[(column_count+1)*(i+1) for i in range((column_count-1)//5)]
-    il=[l.split()[1:] for c,l in enumerate(lines) if c not in d]
-    lm=[[b+bias for b in [0]+[column_count*(i+1) for i in range((column_count-1)//5)]] 
-          for bias in range(column_count)]
-    return np.array([sum([il[j] for j in idx], []) for idx in lm], dtype=float)
 ```
 
+`read_gaussian_full_matrix`函数用于读取 Gaussian 输出的普通方阵，其分别接受文件路径`txt_path`、起始行号`start`和矩阵列数（行数）`column_count`三个参数。
+
+`read_gaussian_lower_triangle`函数用于读取 Gaussian 输出的下三角矩阵并可选择地将其上三角部分赋予对应的值得到对称矩阵。函数接受相似的三个参数，还接受一个额外的`to_full`参数用于选择是否要将上三角部分予对应的值得到对称矩阵。该参数默认为`False`，此时上三角部分返回NaN。
 
 ```text
 In [1]: read_gaussian_full_matrix("CoeffMatrix.txt", 2, 8)
