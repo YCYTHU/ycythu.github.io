@@ -3,7 +3,6 @@ title: 使用Python读取Gaussian生成的分块格式矩阵文件
 tags: 
 - Python
 - Quantum Chemistry
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/FRET.jpg
 ---
 在使用 Gaussian 进行量化计算时，程序会按照固定格式输出各类矩阵（例如重叠矩阵、密度矩阵等）。通常来说，前一行或前数行用于说明信息，随后进入正式的数据部分。矩阵的内容会按照“每五列一组”的方式分块输出：先给出当前分组的列号，再逐行列出行号及对应的五列数据。
 <!--more-->
@@ -75,7 +74,7 @@ def read_gaussian_lower_triangle(txt_path, start, column_count, to_full=True):
 
 `read_gaussian_full_matrix`函数用于读取 Gaussian 输出的普通方阵，其分别接受文件路径`txt_path`、起始行号`start`和矩阵列数（行数）`column_count`三个参数。
 
-`read_gaussian_lower_triangle`函数用于读取 Gaussian 输出的下三角矩阵并可选择地将其上三角部分赋予对应的值得到对称矩阵。函数接受相似的三个参数，还接受一个额外的`to_full`参数用于选择是否要将上三角部分予对应的值得到对称矩阵。该参数默认为`False`，此时上三角部分返回NaN。
+`read_gaussian_lower_triangle`函数用于读取 Gaussian 输出的下三角矩阵并可选择地将其上三角部分赋予对应的值得到对称矩阵。函数接受相似的三个参数，还接受一个额外的`to_full`参数用于选择是否要将上三角部分赋予对应的值得到对称矩阵。该参数默认为`False`，此时上三角部分返回NaN。
 
 ```text
 In [1]: read_gaussian_full_matrix("CoeffMatrix.txt", 2, 8)
