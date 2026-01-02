@@ -2,6 +2,7 @@
 title: 使用Python读取Gaussian生成的分块格式矩阵文件
 tags: 
 - Python
+- Code
 - Quantum Chemistry
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/FRET.jpg
 ---
