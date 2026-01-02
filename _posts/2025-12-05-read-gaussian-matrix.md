@@ -4,7 +4,6 @@ tags:
 - Python
 - Code
 - Quantum Chemistry
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/FRET.jpg
 ---
 在使用 Gaussian 进行量化计算时，程序会按照固定格式输出各类矩阵（例如重叠矩阵、密度矩阵等）。通常来说，前一行或前数行用于说明信息，随后进入正式的数据部分。矩阵的内容会按照“每五列一组”的方式分块输出：先给出当前分组的列号，再逐行列出行号及对应的五列数据。
 <!--more-->
@@ -55,6 +54,14 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/FRET.jpg
 ```python
 import numpy as np
 
+def read_gaussian_full_matrix(txt_path, start, column_count):
+    lines=open(txt_path).readlines()[start-1:]
+    d=[0]+[(column_count+1)*(i+1) for i in range((column_count-1)//5)]
+    il=[l.split()[1:] for c,l in enumerate(lines) if c not in d]
+    lm=[[b+bias for b in [0]+[column_count*(i+1) for i in range((column_count-1)//5)]] 
+          for bias in range(column_count)]
+    return np.array([sum([il[j] for j in idx], []) for idx in lm], dtype=float)
+
 def read_gaussian_lower_triangle(txt_path, start, column_count, to_full=True):
     lines=open(txt_path).readlines()[start-1:]
     d=[0]+[sum(list(range(column_count+1,0,-5))[:i+1]) for i in range(column_count//5)]
@@ -64,13 +71,53 @@ def read_gaussian_lower_triangle(txt_path, start, column_count, to_full=True):
     if to_full:
         return np.array([[lt[j][i] if i<=j else lt[i][j] for i in range(len(lt))] for j in range(len(lt))], dtype=float)
     return np.array([row + [np.nan]*(column_count-len(row)) for row in lt], dtype=float)
-
-def read_gaussian_full_matrix(txt_path, start, column_count):
-    lines=open(txt_path).readlines()[start-1:]
-    d=[0]+[(column_count+1)*(i+1) for i in range((column_count-1)//5)]
-    il=[l.split()[1:] for c,l in enumerate(lines) if c not in d]
-    lm=[[b+bias for b in [0]+[column_count*(i+1) for i in range((column_count-1)//5)]] 
-          for bias in range(column_count)]
-    return np.array([sum([il[j] for j in idx], []) for idx in lm], dtype=float)
 ```
 
+`read_gaussian_full_matrix`函数用于读取 Gaussian 输出的普通方阵，其分别接受文件路径`txt_path`、起始行号`start`和矩阵列数（行数）`column_count`三个参数。
+
+`read_gaussian_lower_triangle`函数用于读取 Gaussian 输出的下三角矩阵并可选择地将其上三角部分赋予对应的值得到对称矩阵。函数接受相似的三个参数，还接受一个额外的`to_full`参数用于选择是否要将上三角部分赋予对应的值得到对称矩阵。该参数默认为`False`，此时上三角部分返回NaN。
+
+```text
+In [1]: read_gaussian_full_matrix("CoeffMatrix.txt", 2, 8)
+```
+```text
+Out[1]: 
+array([[ 3.71864e-06,  0.00000e+00, -5.89756e-06, -5.97407e-07,
+         0.00000e+00,  1.05099e-05,  0.00000e+00, -8.92734e-04],
+       [ 1.89932e-05,  0.00000e+00, -3.03494e-05,  2.46912e-06,
+         0.00000e+00,  4.43052e-05,  0.00000e+00, -1.98249e-04],
+       [ 0.00000e+00, -2.03878e-05,  0.00000e+00,  0.00000e+00,
+        -3.46725e-05,  0.00000e+00,  1.98985e-06,  0.00000e+00],
+       [-8.53629e-06,  0.00000e+00,  1.15089e-05,  2.27583e-05,
+         0.00000e+00, -1.82804e-06,  0.00000e+00,  1.99084e-06],
+       [ 0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00,
+         0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00],
+       [-1.07081e-04,  0.00000e+00,  2.36449e-04, -7.20967e-04,
+         0.00000e+00, -8.64026e-04,  0.00000e+00,  2.56960e-03],
+       [ 0.00000e+00,  3.57670e-04,  0.00000e+00,  0.00000e+00,
+         9.88191e-05,  0.00000e+00,  3.19972e-05,  0.00000e+00],
+       [ 2.16309e-04,  0.00000e+00, -3.46699e-04,  2.33406e-04,
+         0.00000e+00,  7.40894e-04,  0.00000e+00, -1.33186e-03]])
+```
+```text
+In [2]: read_gaussian_lower_triangle("OverlapMatrix.txt", 2, 8, False)
+```
+```text
+Out[2]: 
+array([[ 1.00000e+00,          nan,          nan,          nan,
+                 nan,          nan,          nan,          nan],
+       [ 2.19059e-01,  1.00000e+00,          nan,          nan,
+                 nan,          nan,          nan,          nan],
+       [ 4.96995e-25,  4.18154e-25,  1.00000e+00,          nan,
+                 nan,          nan,          nan,          nan],
+       [ 9.52700e-17,  0.00000e+00,  0.00000e+00,  1.00000e+00,
+                 nan,          nan,          nan,          nan],
+       [ 3.45561e-34,  7.92386e-34,  1.85179e-57,  0.00000e+00,
+         1.00000e+00,          nan,          nan,          nan],
+       [ 1.84261e-01,  8.12273e-01, -9.55356e-25, -6.28313e-16,
+         0.00000e+00,  1.00000e+00,          nan,          nan],
+       [ 0.00000e+00, -5.76860e-25,  5.69754e-01,  4.26956e-40,
+         0.00000e+00,  0.00000e+00,  1.00000e+00,          nan],
+       [ 1.55645e-16,  9.56506e-17,  4.26956e-40,  5.69754e-01,
+         0.00000e+00,  0.00000e+00,  0.00000e+00,  1.00000e+00]])
+```
