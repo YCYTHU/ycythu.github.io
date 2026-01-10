@@ -169,8 +169,9 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: #d9c7a3;
-            border-bottom: 4px solid #b69b6d;
+            background: #d9c7a3a6;
+            backdrop-filter: blur(6px) saturate(160%);
+            border-bottom: 2px solid #b69b6d;
             padding: 12px 10px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
             transition: transform 0.35s ease;
@@ -192,7 +193,7 @@
         .name-tag {
             min-width: 90px;
             padding: 10px 8px;
-            background: #faf3dd;
+            background: #faf3dda6;
             border: 2px solid #c8a876;
             border-radius: 6px;
             text-align: center;
@@ -381,6 +382,9 @@ function show_img(img_base64_arr) {
     var img_ul = document.getElementById("images");
     var ul_html = "";
     for(let index = 0; index < img_base64_arr.length; index++) {
+        if(img_base64_arr[index].length==0) {
+            continue;
+        }
         img_base64 = img_base64_arr[index].substring(12);
         img_id = img_base64_arr[index].substring(0,12);
         img_name = img_id.replace(/#/g, "").replace(/[0-9]/g,"");
