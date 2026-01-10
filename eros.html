@@ -2,6 +2,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.1/dist/viewer.min.css">
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/ycythu/assets@main/fonts/eros/aestera.ttf" as="font" type="font/ttf" crossorigin>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.min.js"></script>
     <style>
@@ -249,8 +250,8 @@
         <!-- 展开/收起托盘按钮 -->
         <div id="toggle-tray">翻牌 ▴</div>
         <!-- 名牌托盘 -->
-        <div id="tray-container">
-            <div id="tray"><!-- 名牌会自动注入 --></div>
+        <div id="tray-container" class="hidden">
+            <div id="tray"></div>
         </div>
         <ul id="images" class="gallery">
         </ul>
