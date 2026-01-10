@@ -26,7 +26,7 @@ cover:
 
 ---
 
-记 $s$ 的数学期望为 $E(s\vert n)=f(n)$，将 $n$ 个球的一维阵列按顺序编号 $1,2,3,\dots,n$。在第一次取球过程中，有可能
+记 $s$ 的数学期望为 $E(s\vert n)=S_n$，将 $n$ 个球的一维阵列按顺序编号 $1,2,3,\dots,n$。在第一次取球过程中，有可能
 
 - 取走 $1$ 号与 $2$ 号球，原问题简化为 $n'=0$ 和 $n'=n-2$ 的情况
 - 取走 $2$ 号与 $3$ 号球，原问题简化为 $n'=1$ 和 $n'=n-3$ 的情况
@@ -36,35 +36,37 @@ cover:
 
 由于每种情况是等可能的并且重复了两次，因此：
 
-$$f(n)=\frac{2}{n-1}\sum_{i=1}^{n-2}f(i)\tag{1}$$
+$$S_n=\frac{2}{n-1}\sum_{i=1}^{n-2}S_i\tag{1}$$
 
-因此：
+定义 $\Delta_n=S_n-S_{n-1}$，推出：
 
-$$\begin{align}&(n-1)f(n)=2\sum_{i=1}^{n-2}f(i)\tag{2}\label{rec_n}\\&nf(n+1)=2\sum_{i=1}^{n-2}f(i)+2f(n-1)\tag{3}\label{rec_n1}\end{align}$$
+$$(n-1)\Delta_n=S_{n-2}-\Delta_{n-1}\tag{2}\label{rec_n}$$
+
+$$(n-2)\Delta_{n-1}=S_{n-3}-\Delta_{n-2}\tag{3}\label{rec_n1}$$
 
 将式 $\eqref{rec_n}$ 与式 $\eqref{rec_n1}$ 作差得到递推关系：
 
-$$nf(n+1)-(n-1)f(n)-2f(n-1)=0\tag{4}\label{rec}$$
+$$(n-1)(\Delta_n-\Delta_{n-1})=-2(\Delta_{n-1}-\Delta_{n-2})\tag{4}\label{rec}$$
 
-对于 $n=1,2$ 的情况，显然有 $f(1)=1,f(2)=0$。对式 $\eqref{rec}$ 应用Z变换得到：
+因此：
 
-$$\left[zF'(z)-F(z)\right]-z\left[zF'(z)-F(z)\right]-2z^2F(z)=0\tag{5}$$
+$$\Delta_n-\Delta_{n-1}=\frac{(-2)^{n-2}}{(n-1)!}(\Delta_2-\Delta_1)\tag{5}$$
 
-化简得到：
+对于 $n=0,1,2$ 的情况，显然有 $S_0=0,S_1=1,S_2=0$，因此$\Delta_1=1,\Delta_2=-1$，故而：
 
-$$\frac{F(z)}{F'(z)}=-\frac{z^2-z}{2z^2-z+1}\tag{6}$$
+$$\Delta_n-\Delta_{n-1}=\frac{(-2)^{n-1}}{(n-1)!}\tag{6}$$
 
 解得：
 
-$$F(z)=C\cdot\frac{ze^{-2z}}{(z-1)^2}\tag{7}$$
+$$\Delta_n=\sum_{i=1}^n\frac{(-2)^{n-1}}{(n-1)!}\tag{7}$$
 
-代入初值条件并进行逆变换得到：
+当 $n$ 趋于无穷时:
 
-$$f(n)=\frac{(-2)^{n+1}}{\Gamma(n+2)}+\frac{\Gamma(n+3,-2)}{e^2\Gamma(n+2)}\tag{8}$$
+$$\lim_{n\to\infty}\Delta_n=\sum_{i=1}^\infty\frac{(-2)^{n-1}}{(n-1)!}=\exp(-2)\tag{8}$$
 
-因此当 $n$ 趋于无穷的时候，$\displaystyle{E(s\vert n)\sim\frac{n}{e^2}}$
+因此 $n$ 趋于无穷时 $\displaystyle{S_n\sim\frac{n}{e^2}}$
 
-$$\lim_{n\to\infty}\frac{E(s\vert n)}{n}=\frac{1}{e^2}\tag{9}\label{ratio}$$
+$$\lim_{n\to\infty}\frac{S_n}{n}=\frac{1}{e^2}\tag{9}\label{ratio}$$
 
 ---
 

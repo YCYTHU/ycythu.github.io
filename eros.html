@@ -248,7 +248,7 @@
     </div>
     <div id="contentSection" class="content hidden">
         <!-- 展开/收起托盘按钮 -->
-        <div id="toggle-tray">翻牌 ▴</div>
+        <div id="toggle-tray">翻牌 ▾</div>
         <!-- 名牌托盘 -->
         <div id="tray-container" class="hidden">
             <div id="tray"></div>
@@ -421,6 +421,7 @@ function select() {
     const tags = document.querySelectorAll(".name-tag");
     tags.forEach(tag => {
       tag.addEventListener("click", () => {
+        tag.classList.toggle("selected");
         toggleTag(tag.dataset.name);
         updatePageByTags();
       });
@@ -452,12 +453,10 @@ function select() {
         const tags = params.getAll("love");
 
         if (tags.includes(tag)) {
-            // 已存在 → 删除
             const newTags = tags.filter(t => t !== tag);
             params.delete("love");
             newTags.forEach(t => params.append("love", t));
         } else {
-            // 不存在 → 添加
             params.append("love", tag);
         }
 
