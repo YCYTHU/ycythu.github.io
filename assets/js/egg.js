@@ -36,7 +36,9 @@ document.addEventListener("keydown", async e => {
 
 window.addEventListener("load", function () {
   localValue = localStorage.getItem("eggActivated");
-  h = await hashKeys(buffer);
+  if (!localValue) return;
+
+  h = await hashKeys(localValue);
   if (h === TARGET_HASH) {
     triggerEgg();
   }
