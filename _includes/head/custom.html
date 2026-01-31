@@ -1,3 +1,7 @@
 <!-- start custom head snippets -->
+{%- include snippets/prepend-baseurl.html path='/assets/css/egg.css' -%}
+<link rel="stylesheet" href="{{ __return }}">
 
+{%- include snippets/prepend-baseurl.html path='/assets/js/egg.js' -%}
+<script src="{{ __return }}" defer></script>
 <!-- end custom head snippets -->

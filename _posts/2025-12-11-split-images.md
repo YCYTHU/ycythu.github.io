@@ -8,17 +8,15 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/split%20image
 ---
 微信等社交媒体支持发布3×3布局的9张图片，该程序可以将一张高清图片拆分为9张子图像，使其在九宫格视图下恰好还原为原图像，并且子图间的间距可以人为指定以适应不同的社交媒体或不同设备。
 <!--more-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/egg.css">
-<script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/egg.js"></script>
 拆分过程的示意图如下：
 
 <div align="center"><img width="75%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/split%20image/scheme.jpg" alt="scheme"></div>
 
 编译后的程序可以使用命令行调用也可以双击运行，使用命令行时参数说明如下
 ```text
--i, --input:	输入图片路径
+-i --input:	输入图片路径
 -q --quality:	输出 JPG 质量（0-100），默认 100
--g --gap:		子图间隔与图片宽度的比例（0.01表示1%），默认 0.0
+-g --gap:	子图间隔与图片宽度的比例（0.01表示1%），默认 0.0
 ```
 
 程序使用Python编写，示意代码如下：
