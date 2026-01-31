@@ -44,7 +44,6 @@ function startEggSlideshow() {
 
   eggQueue = shuffle(EGG_IMAGES);
   eggIndex = 0;
-
   applyEggImage(eggQueue[eggIndex]);
 
   eggTimer = setInterval(() => {
@@ -77,8 +76,6 @@ document.addEventListener("keydown", async e => {
   if (buffer.length === SEQ_LEN) {
     const bufferHash = await hashKeys(buffer);
     const targetHash = await hashKeys([bufferHash]);
-
-    //const h = await hashKeys(buffer);
     if (targetHash === TARGET_HASH) {
       triggerEgg();
       localStorage.setItem("eggActivated", bufferHash);
