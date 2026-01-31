@@ -1,8 +1,5 @@
-const TARGET_HASH =
-  "c1ccd0b6b1b14a2220d67ea2d19bf16cd038d14dd0250a977313c11e3267558b";
-
+const TARGET_HASH = "c1ccd0b6b1b14a2220d67ea2d19bf16cd038d14dd0250a977313c11e3267558b";
 const SEQ_LEN = 10;
-const BLACKOUT_TIME = 1000; // ms
 
 async function hashKeys(keys) {
   const text = keys.join("|");
@@ -37,16 +34,24 @@ document.addEventListener("keydown", async e => {
   }
 });
 
+window.addEventListener("load", function () {
+  if (localStorage.getItem("eggActivated") === "true") {
+    triggerEgg();
+  }
+});
+
 function triggerEgg() {
   if (active) return;
   active = true;
   document.documentElement.classList.add("egg-active");
   document.body.classList.add("egg-active");
+  localStorage.setItem("eggActivated", "true");
 }
 
 function closeEgg() {
   if (!active) return;
   document.documentElement.classList.remove("egg-active");
   document.body.classList.remove("egg-active");
+  localStorage.removeItem("eggActivated");
   active = false;
 }
