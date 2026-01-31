@@ -14,7 +14,6 @@ const buffer = [];
 let active = false;
 
 document.addEventListener("keydown", async e => {
-  // ESC：唯一出口
   if (e.key === "Escape") {
     closeEgg();
     return;
@@ -29,13 +28,16 @@ document.addEventListener("keydown", async e => {
     const h = await hashKeys(buffer);
     if (h === TARGET_HASH) {
       triggerEgg();
+      localStorage.setItem("eggActivated", buffer);
       buffer.length = 0;
     }
   }
 });
 
 window.addEventListener("load", function () {
-  if (localStorage.getItem("eggActivated") === "true") {
+  localValue = localStorage.getItem("eggActivated");
+  h = await hashKeys(buffer);
+  if (h === TARGET_HASH) {
     triggerEgg();
   }
 });
@@ -45,7 +47,6 @@ function triggerEgg() {
   active = true;
   document.documentElement.classList.add("egg-active");
   document.body.classList.add("egg-active");
-  localStorage.setItem("eggActivated", "true");
 }
 
 function closeEgg() {
