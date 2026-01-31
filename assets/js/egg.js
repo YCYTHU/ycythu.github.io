@@ -40,13 +40,13 @@ document.addEventListener("keydown", async e => {
 function triggerEgg() {
   if (active) return;
   active = true;
-  document.documentElement.classList.add("egg-bg-active");
-  document.body.classList.add("egg-bg-active");
+  document.documentElement.classList.add("egg-active");
+  document.body.classList.add("egg-active");
 }
 
 function closeEgg() {
   if (!active) return;
-  document.documentElement.classList.remove("egg-bg-active");
-  document.body.classList.remove("egg-bg-active");
+  document.documentElement.classList.remove("egg-active");
+  document.body.classList.remove("egg-active");
   active = false;
 }
