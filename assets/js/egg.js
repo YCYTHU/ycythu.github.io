@@ -1,4 +1,4 @@
-const TARGET_HASH = "c1ccd0b6b1b14a2220d67ea2d19bf16cd038d14dd0250a977313c11e3267558b";
+const TARGET_HASH = "15871a2e317cd380b101ba92e5758440137df962582198a0ec3de25d04e3f04f";
 const SEQ_LEN = 10;
 
 async function hashKeys(keys) {
@@ -25,22 +25,25 @@ document.addEventListener("keydown", async e => {
   if (buffer.length > SEQ_LEN) buffer.shift();
 
   if (buffer.length === SEQ_LEN) {
-    const h = await hashKeys(buffer);
-    if (h === TARGET_HASH) {
+    const bufferHash = await hashKeys(buffer);
+    const targetHash = await hashKeys([bufferHash]);
+
+    //const h = await hashKeys(buffer);
+    if (targetHash === TARGET_HASH) {
       triggerEgg();
-      localStorage.setItem("eggActivated", buffer);
+      localStorage.setItem("eggActivated", bufferHash);
       buffer.length = 0;
     }
   }
 });
 
-window.addEventListener("load", function () {
-  localValue = localStorage.getItem("eggActivated");
-  if (!localValue) return;
-
-  h = await hashKeys(localValue);
-  if (h === TARGET_HASH) {
-    triggerEgg();
+window.addEventListener("load", async function () {
+  const storedBufferHash = localStorage.getItem("eggActivated");
+  if (storedBufferHash) {
+    const checkHash = await hashKeys([storedBufferHash]);
+    if (checkHash === TARGET_HASH) {
+      triggerEgg();
+    }
   }
 });
 
