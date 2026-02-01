@@ -33,3 +33,10 @@ html.egg-active::after {
 body.egg-active * {
     background-color: transparent !important;
 }
+
+body.egg-active img,
+body.egg-active iframe,
+body.egg-active video,
+body.egg-active canvas {
+  opacity: 0.5 !important;
+}

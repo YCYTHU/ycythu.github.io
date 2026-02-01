@@ -14,12 +14,12 @@ article_header:
     src: /assets/images/cover3.jpg
 ---
 <script>
-//window.onkeyup = function(e) {
-//    if (e.which === 69) {
-//        window.location.href = "/eros.html";
-//    }
-//    else if (e.which === 72) {
-//        window.location.href = "/himeros.html";
-//    }
-//};
+window.onkeydown = function(e) {
+    if (e.altKey && (e.key === 'e' || e.which === 69)) {
+        window.location.href = "/eros.html";
+    }
+    else if (e.altKey && (e.key === 'h' || e.which === 72)) {
+        window.location.href = "/himeros.html";
+    }
+};
 </script>
