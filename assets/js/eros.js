@@ -73,7 +73,7 @@ function applyEggImage(src) {
   requestAnimationFrame(() => {
     document.documentElement.style.setProperty(
       "--egg-image",
-      `url("data:image/jpeg;base64,${src}")`
+      `url("data:image/jpeg;base64,${src.substring(12)}")`
     );
   });
 }
