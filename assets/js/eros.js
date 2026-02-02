@@ -1,8 +1,8 @@
 const TARGET_HASH = [
-  "1746f23ae7175d5d16a11024be28bf212d4b517861c3e2cf20ddcb9af5f3aaf4",
-  "2746f23ae7175d5d16a11024be28bf212d4b517861c3e2cf20ddcb9af5f3aaf4",
+  "5e21e31f4ad0ebad53de659b20930a951c5a18dcd17adf3597d0bfd199718303",
+  "21623482698e1b200d7987c865e7400c776ed929f42dfbfc2fd5630fb9360245",
 ];
-const SEQ_LEN = 10;
+const SEQ_LEN = 16;
 const SWITCH_INTERVAL = 10000;
 
 let eggTimer = null;
