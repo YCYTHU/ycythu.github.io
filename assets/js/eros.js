@@ -1,4 +1,7 @@
-const TARGET_HASH = "1746f23ae7175d5d16a11024be28bf212d4b517861c3e2cf20ddcb9af5f3aaf4";
+const TARGET_HASH = [
+  "1746f23ae7175d5d16a11024be28bf212d4b517861c3e2cf20ddcb9af5f3aaf4",
+  "2746f23ae7175d5d16a11024be28bf212d4b517861c3e2cf20ddcb9af5f3aaf4",
+];
 const SEQ_LEN = 10;
 const SWITCH_INTERVAL = 10000;
 
@@ -8,22 +11,22 @@ let eggIndex = 0;
 const buffer = [];
 let active = false;
 
-function triggerEgg(bufferHash) {
+function triggerEgg(bufferHash, targetHash) {
   if (active) return;
   active = true;
 
   const key = bufferHash.substring(0,32);
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", `/assets/${TARGET_HASH}.aes`, true);
+  xhr.open("GET", `/assets/${targetHash}.aes`, true);
   xhr.responseType = "text";
 
   xhr.onload = function() {
     if (xhr.status === 200) {
       var txtContent = xhr.responseText;
-      const EGG_IMAGES = decrypt(txtContent.split('\n'), key);
+      const eggImages = decrypt(txtContent.split('\n'), key);
       document.documentElement.classList.add("egg-active");
   		document.body.classList.add("egg-active");
-  		startEggSlideshow(EGG_IMAGES);
+  		startEggSlideshow(eggImages);
     }
   };
   xhr.send();
@@ -78,17 +81,17 @@ function applyEggImage(src) {
   });
 }
 
-function startEggSlideshow(EGG_IMAGES) {
+function startEggSlideshow(eggImages) {
   if (eggTimer) return;
 
-  eggQueue = shuffleArray(EGG_IMAGES);
+  eggQueue = shuffleArray(eggImages);
   eggIndex = 0;
   applyEggImage(eggQueue[eggIndex]);
 
   eggTimer = setInterval(() => {
     eggIndex++;
     if (eggIndex >= eggQueue.length) {
-      eggQueue = shuffleArray(EGG_IMAGES);
+      eggQueue = shuffleArray(eggImages);
       eggIndex = 0;
     }
     applyEggImage(eggQueue[eggIndex]);
@@ -115,8 +118,8 @@ document.addEventListener("keydown", async e => {
   if (buffer.length === SEQ_LEN) {
     const bufferHash = await hashKeys(buffer);
     const targetHash = await hashKeys([bufferHash]);
-    if (targetHash === TARGET_HASH) {
-      triggerEgg(bufferHash);
+    if (TARGET_HASH.includes(targetHash)) {
+      triggerEgg(bufferHash, targetHash);
       localStorage.setItem("eggActivated", bufferHash);
       buffer.length = 0;
     }
@@ -127,8 +130,8 @@ window.addEventListener("load", async function () {
   const storedBufferHash = localStorage.getItem("eggActivated");
   if (storedBufferHash) {
     const checkHash = await hashKeys([storedBufferHash]);
-    if (checkHash === TARGET_HASH) {
-      triggerEgg(storedBufferHash);
+    if (TARGET_HASH.includes(checkHash)) {
+      triggerEgg(storedBufferHash, checkHash);
     }
   }
 });
