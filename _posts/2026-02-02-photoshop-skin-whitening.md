@@ -3,7 +3,7 @@ title: 在Adobe Photoshop中进行人像美白的方法
 tags: 
 - Photoshop
 - Photography
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/split%20image.jpg
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/Adobe_Photoshop_CC_icon.png
 aside:
   toc: true
 ---
@@ -27,7 +27,7 @@ aside:
 3. 【混合模式】改为柔光
 4. 适当提高【明度】，降低【饱和度】
 
-<p><a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/photoshop/whitening/brightness.png"><a class="button button--outline-info button--rounded">详细信息<i class="fas fa-search"></i></a></a></p>
+<p><a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/photoshop/whitening/brightness.png"><button class="button button--outline-info button--rounded">详细信息 <i class="fas fa-search"></i></button></a></p>
 
 <div style="text-align: center;">
   <img-comparison-slider>
@@ -43,7 +43,7 @@ aside:
 3. 【图层】改为主体所在图层，【通道】改为绿，【混合】改为滤色
 4. 适当调整【不透明度】
 
-<p><a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/photoshop/whitening/apply-image.png"><a class="button button--outline-info button--rounded">详细信息<i class="fas fa-search"></i></a></a></p>
+<p><a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/photoshop/whitening/apply-image.png"><button class="button button--outline-info button--rounded">详细信息 <i class="fas fa-search"></i></button></a></p>
 
 <div style="text-align: center;">
   <img-comparison-slider>
