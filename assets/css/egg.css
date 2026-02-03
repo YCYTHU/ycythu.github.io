@@ -40,3 +40,13 @@ body.egg-active video,
 body.egg-active canvas {
   opacity: 0.5 !important;
 }
+
+@keyframes flicker
+{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.onload {
+  animation: flicker 5s;
+}

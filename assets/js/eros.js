@@ -22,6 +22,7 @@ function triggerEgg(bufferHash, targetHash) {
   xhr.responseType = "text";
 
   xhr.onload = function() {
+    document.documentElement.classList.remove("onload");
     if (xhr.status === 200) {
       var txtContent = xhr.responseText;
       const eggImages = decrypt(txtContent.split('\n'), key);
@@ -29,6 +30,12 @@ function triggerEgg(bufferHash, targetHash) {
   		document.body.classList.add("egg-active");
   		startEggSlideshow(eggImages);
     }
+  };
+  xhr.onprogress = function() {
+    document.documentElement.classList.add("onload");
+  };
+  xhr.onerror = function() {
+    alert("xhr onerror")
   };
   xhr.send();
 }
