@@ -11,8 +11,7 @@ html.egg-active::before {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-  filter: blur(10px) saturate(1.1);
+  filter: blur(10px) saturate(1.1) brightness(0.8);
   transform: scale(1.1);
   opacity: 0.5;
 }
@@ -22,16 +21,17 @@ html.egg-active::after {
   position: fixed;
   inset: 0;
   z-index: -1;
-
   background-image: var(--egg-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 0.5;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6));
 }
 
 body.egg-active * {
     background-color: transparent !important;
+    text-shadow: 0 0.033em white, 0.033em 0 white, -0.033em 0 white, 0 -0.033em white;
 }
 
 body.egg-active img,
@@ -48,5 +48,5 @@ body.egg-active canvas {
 }
 
 .onload {
-  animation: flicker 5s;
+  animation: flicker 3s;
 }
