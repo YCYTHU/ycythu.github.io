@@ -52,3 +52,19 @@ aside:
   </img-comparison-slider>
 </div>
 
+## 曲线+白场吸管工具
+
+1. 【选择主体】-【调整】-【曲线】
+2. 点击【白场吸管工具】-点击【肤色较亮的区域】
+3. 双击图层打开【图层样式】
+4. 按住【Alt】键，拖动下一图层中左侧右半个滑块到最右方，调整为【0/255 255】
+5. 适当调整【不透明度】
+
+<p><a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/photoshop/whitening/curves.png"><button class="button button--outline-info button--rounded">详细信息 <i class="fas fa-search"></i></button></a></p>
+
+<div style="text-align: center;">
+  <img-comparison-slider>
+    <img slot="first" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/photoshop/whitening/curves-origin.jpg"/>
+    <img slot="second" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/photoshop/whitening/curves-whitening.jpg"/>
+  </img-comparison-slider>
+</div>
