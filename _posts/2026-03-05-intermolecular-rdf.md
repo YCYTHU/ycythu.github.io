@@ -8,7 +8,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/Adobe_Photosh
 在分子动力学模拟后计算径向分布函数（RDF）时，分子内峰和分子间峰有可能会同时出现，分子内峰还可能会遮蔽分子间峰造成分析困难。利用GROMACS的`pairdist`命令结合Fortran程序可以有效分离分子内峰的影响，对分子间峰进行单独分析。
 <!--more-->
 
-该方法仅适用于分子内距离仅由两个原子（片段）产生的情况。
+该方法仅适用于分子内距离仅由两个原子（片段）贡献的情况。
 
 ##  使用方法
 
@@ -41,6 +41,8 @@ Volume                      534.849       0.14   0.929486  -0.992984  (nm^3)
 然后通过`head -n 25 pairdist.xvg | tail -n 1 | tr -s ' ' '\n' | wc -l`命令确定每行数据的列数，输出应为（参与计算RDF的分子数的平方+2）。如果第25行不是第一行数据，则此处的`25`应该改为第一行数据的行号。
 
 ### 计算RDF
+
+编译文末的源代码得到`inter_rdf`程序，随后执行如下命令：
 
 ```
 inter_rdf -f pairdist.xvg -n n_mol -v volume [-o output (inter_rdf.txt)] [-rmax rmax (4)] [-bin bin width (0.002)] [-s start line (25)]
@@ -82,13 +84,13 @@ inter_rdf -f pairdist.xvg -n n_mol -v volume [-o output (inter_rdf.txt)] [-rmax 
 
 蓝色实线在大约1 nm的位置出现了显著高于周围RDF的峰，来源于同一分子内A片段和B片段质心距离的贡献。橙色虚线是使用本文方法将分子内峰剔除后得到的RDF曲线，可以看到1 nm左右的峰被排除并且其余位置基本与蓝色实线重合，验证了本方法的合理性。
 
-在另一些情况下，分子内峰会遮蔽分子间峰，导致结论错误。假设A和B两个片段不再是线性连接而是通过一个刚性片段以U型连接，如图2左所示，其中A和B的质心距离大约为0.4 nm。对多个该分子进行分子动力学模拟并分析A片段质心与B片段质心之间的RDF得到图2右的蓝色实线。
+在另一些情况下，分子内峰会遮蔽分子间峰而干扰分析。假设A和B两个片段不再是线性连接而是通过一个刚性片段以U型连接，如图2左所示，其中A和B的质心距离大约为0.4 nm。对多个该分子进行分子动力学模拟并分析A片段质心与B片段质心之间的RDF得到图2右的蓝色实线。
 
 <div align=center>
     <img width="20%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/rdf/Ushape.png" alt="A和B两个片段被刚性片段以U型连接">
     <img width="50%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/rdf/inter_rdf_2.jpg" alt="分子动力学模拟后A片段质心与B片段质心之间的RDF">
 </div>
-<div align=center><font color="#999999">图1：（左）A和B两个片段被刚性片段以U型连接；（右）分子动力学模拟后A片段质心与B片段质心之间的RDF（小图：更改纵轴范围后的RDF）。</font></div>
+<div align=center><font color="#999999">图2：（左）A和B两个片段被刚性片段以U型连接；（右）分子动力学模拟后A片段质心与B片段质心之间的RDF（小图：更改纵轴范围后的RDF）。</font></div>
 
 由于A和B被刚性片段连接，因此同一分子内A片段和B片段质心距离只能在0.4 nm左右小幅波动，因此0.4 nm处的RDF峰远远高于其他位置的RDF峰，只有更改纵轴范围才能观察到其他位置的变化趋势，如图2右小图所示。
 
