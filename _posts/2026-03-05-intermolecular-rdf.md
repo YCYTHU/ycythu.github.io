@@ -85,12 +85,12 @@ inter_rdf -f pairdist.xvg -n n_mol -v volume [-o output (inter_rdf.txt)] [-rmax 
 在另一些情况下，分子内峰会遮蔽分子间峰，导致结论错误。假设A和B两个片段不再是线性连接而是通过一个刚性片段以U型连接，如图2左所示，其中A和B的质心距离大约为0.4 nm。对多个该分子进行分子动力学模拟并分析A片段质心与B片段质心之间的RDF得到图2右的蓝色实线。
 
 <div align=center>
-    <img width="40%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/rdf/Ushape.png" alt="A和B两个片段被刚性片段以U型连接">
+    <img width="20%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/rdf/Ushape.png" alt="A和B两个片段被刚性片段以U型连接">
     <img width="50%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/rdf/inter_rdf_2.jpg" alt="分子动力学模拟后A片段质心与B片段质心之间的RDF">
 </div>
 <div align=center><font color="#999999">图1：（左）A和B两个片段被刚性片段以U型连接；（右）分子动力学模拟后A片段质心与B片段质心之间的RDF（小图：更改纵轴范围后的RDF）。</font></div>
 
-由于A和B被刚性片段连接，因此同一分子内A片段和B片段质心距离偏离0.4 nm很小，因此此位置的RDF峰远远高于其他位置的RDF峰，只有更改纵轴范围才能观察到其他位置的RDF曲线变化趋势，如图2右小图所示。
+由于A和B被刚性片段连接，因此同一分子内A片段和B片段质心距离只能在0.4 nm左右小幅波动，因此0.4 nm处的RDF峰远远高于其他位置的RDF峰，只有更改纵轴范围才能观察到其他位置的变化趋势，如图2右小图所示。
 
 图2右中的橙色虚线是使用本文方法将分子内峰剔除后得到的RDF曲线，可以看到0.4 nm左右的位置不仅存在分子内峰，还存在分子间峰。说明不同分子的A片段和B片段也有在0.4 nm左右进行堆积的倾向，而这一分子间峰在蓝色实线中被分子内峰所遮蔽，导致无法分析该距离下的分子间堆积情况。
 
