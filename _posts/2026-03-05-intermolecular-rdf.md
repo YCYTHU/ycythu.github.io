@@ -12,7 +12,7 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/Adobe_Photosh
 
 ##  使用方法
 
-假设**原始RDF**使用如下命令产生：
+假设组`A`和组`B`之间的原始RDF使用如下命令产生：
 ```
 gmx rdf -f traj.xtc -s system.tpr -n index.ndx -ref 'res_com of group A' -sel 'res_com of group B' -o rdf.xvg
 ```
@@ -24,7 +24,7 @@ gmx rdf -f traj.xtc -s system.tpr -n index.ndx -ref 'res_com of group A' -sel 'r
 gmx pairdist -f traj.xtc -s system.tpr -n index.ndx -ref 'res_com of group A' -sel 'res_com of group B' -o pairdist.xvg -pbc -refgrouping res -selgrouping res
 ```
 
-随后使用`energy`命令获得体系的体积，得到平均体积（该脚本目前使用平均体积进行RDF计算，因此不适用于体系体积剧烈波动时的RDF）。
+随后使用`energy`命令获得体系的体积，得到平均体积（该脚本目前使用平均体积进行计算，因此不适用于体系体积剧烈波动的情况）。
 
 ```
 gmx energy -f energy.edr -b begin_time -e end_time
@@ -43,10 +43,10 @@ Volume                      534.849       0.14   0.929486  -0.992984  (nm^3)
 ### 计算RDF
 
 ```
-inter_rdf -f pairdist.xvg -n n_mol -v volume [-o output (inter_rdf.txt)] [-rmax rmax(4)] [-bin bin width(0.002)] [-s start line(25)]
+inter_rdf -f pairdist.xvg -n n_mol -v volume [-o output (inter_rdf.txt)] [-rmax rmax (4)] [-bin bin width (0.002)] [-s start line (25)]
 ```
 
-其中`n_mol`为参与计算RDF的分子数，`volume`为之前计算得到的平均体积(以nm<sup>3</sup>为单位)。其余可选参数包括：
+其中`n_mol`为参与计算RDF的分子数，`volume`为之前计算得到的平均体积（以nm<sup>3</sup>为单位）。其余可选参数包括：
 
 - `-o` 输出文件，默认为`inter_rdf.txt`
 - `-rmax` 最大距离，超过此距离的数据不参与RDF计算，默认为4 nm
@@ -69,6 +69,18 @@ inter_rdf -f pairdist.xvg -n n_mol -v volume [-o output (inter_rdf.txt)] [-rmax 
        3.997000       1.006536       1.004527
        3.999000       1.006465       1.004456
 ```
+
+## 示例
+
+假设一个包含A和B两个片段的分子，分子内A和B的距离大约为1 nm（图1左）。对500个该分子进行分子动力学模拟并分析A片段质心与B片段质心之间的RDF，如图1右蓝色实线所示。
+
+<div align=center>
+    <img width="75%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/rdf/linear.png" alt="由A和B两个片段组成的分子">
+    <img width="75%" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/rdf/inter_rdf_1.jpg" alt="分子动力学模拟后A片段质心与B片段质心之间的RDF">
+</div>
+<div align=center><font color="#999999">图1：（左）由A和B两个片段组成的分子；（右）分子动力学模拟后A片段质心与B片段质心之间的RDF。</font></div>
+
+
 
 ## 源代码
 
@@ -129,11 +141,11 @@ program inter_rdf
             i = i + 1
             call get_command_argument(i, arg)
             read(arg, *) box_volume
-        case ("-r")
+        case ("-rmax")
             i = i + 1
             call get_command_argument(i, arg)
             read(arg, *) r_max
-        case ("-dr")
+        case ("-bin")
             i = i + 1
             call get_command_argument(i, arg)
             read(arg, *) dr
@@ -144,7 +156,8 @@ program inter_rdf
         case default
             print *, "Unknown:", trim(arg)
             print *, "Usage:"
-            print *, "./inter_rdf -f file -o output -n n_mol -v volume [-r rmax(4)] [-dr dr(0.002)] [-s start line(25)]"
+            print *, "inter_rdf -f file -n n_mol -v volume [-o output (inter_rdf.txt)]" // &
+                     "[-rmax rmax (4)] [-bin bin width (0.002)] [-s start line (25)]"
             stop
         end select
 
@@ -154,7 +167,8 @@ program inter_rdf
     ! 检查必要参数
     if (filename == "" .or. n_mol <= 0 .or. box_volume <= 0.0_dp) then
         print *, "Usage:"
-        print *, "./inter_rdf -f file -o output -n n_mol -v volume [-r rmax(4)] [-dr dr(0.002)] [-s start line(25)]"
+        print *, "inter_rdf -f file -n n_mol -v volume [-o output (inter_rdf.txt)]" // &
+                 "[-rmax rmax (4)] [-bin bin width (0.002)] [-s start line (25)]"
         stop
     end if
 
