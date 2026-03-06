@@ -8,6 +8,70 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/Adobe_Photosh
 在分子动力学模拟后计算径向分布函数（RDF）时，分子内峰和分子间峰有可能会同时出现，分子内峰还可能会遮蔽分子间峰造成分析困难。利用GROMACS的`pairdist`命令结合Fortran程序可以有效分离分子内峰的影响，对分子间峰进行单独分析。
 <!--more-->
 
+该方法仅适用于分子内距离仅由两个原子（片段）产生的情况。
+
+##  使用方法
+
+假设**原始RDF**使用如下命令产生：
+```
+gmx rdf -f traj.xtc -s system.tpr -n index.ndx -ref 'res_com of group A' -sel 'res_com of group B' -o rdf.xvg
+```
+
+### 准备必要文件与参数
+
+首先使用如下命令计算组`A`和组`B`之间的距离，并保存为 `pairdist.xvg`文件：
+```
+gmx pairdist -f traj.xtc -s system.tpr -n index.ndx -ref 'res_com of group A' -sel 'res_com of group B' -o pairdist.xvg -pbc -refgrouping res -selgrouping res
+```
+
+随后使用`energy`命令获得体系的体积，得到平均体积（该脚本目前使用平均体积进行RDF计算，因此不适用于体系体积剧烈波动时的RDF）。
+
+```
+gmx energy -f energy.edr -b begin_time -e end_time
+
+Energy                      Average   Err.Est.       RMSD  Tot-Drift
+-------------------------------------------------------------------------------
+Volume                      534.849       0.14   0.929486  -0.992984  (nm^3)
+```
+
+### 文件检查（可选）
+
+首先通过`head -n 24 pairdist.xvg`和`head -n 25 pairdist.xvg`命令确认是否前24行是注释行，第25行是第一行数据，如果不是则需要记录第一行数据是第几行。
+
+然后通过`head -n 25 pairdist.xvg | tail -n 1 | tr -s ' ' '\n' | wc -l`命令确定每行数据的列数，输出应为（参与计算RDF的分子数的平方+2）。如果第25行不是第一行数据，则此处的`25`应该改为第一行数据的行号。
+
+### 计算RDF
+
+```
+inter_rdf -f pairdist.xvg -n n_mol -v volume [-o output (inter_rdf.txt)] [-rmax rmax(4)] [-bin bin width(0.002)] [-s start line(25)]
+```
+
+其中`n_mol`为参与计算RDF的分子数，`volume`为之前计算得到的平均体积(以nm<sup>3</sup>为单位)。其余可选参数包括：
+
+- `-o` 输出文件，默认为`inter_rdf.txt`
+- `-rmax` 最大距离，超过此距离的数据不参与RDF计算，默认为4 nm
+- `-bin` bin宽度，默认为0.002 nm
+- `-s` 第一行数据的行号，默认为25
+
+### 输出
+
+输出文件的第一行记录了在`pairdist.xvg`文件中一共有多少行数据被处理。第二行之后是RDF部分，第一列是距离，第二列是不包含分子内峰的RDF，第三列是包含分子内峰的RDF，可用于与原始RDF进行对比验证。
+
+```text
+# Frames: 5001
+#         r          inter-g(r)        g(r)
+       0.001000       0.000000       0.000000
+       0.003000       0.000000       0.000000
+       0.005000       0.000000       0.000000
+...
+       3.993000       1.006620       1.004611
+       3.995000       1.007425       1.005414
+       3.997000       1.006536       1.004527
+       3.999000       1.006465       1.004456
+```
+
+## 源代码
+
 ```fortran
 program inter_rdf
     implicit none
@@ -80,7 +144,7 @@ program inter_rdf
         case default
             print *, "Unknown:", trim(arg)
             print *, "Usage:"
-            print *, "./rdf -f file -o output -n n_mol -v volume [-r rmax(4)] [-dr dr(0.002)] [-s start line(25)]"
+            print *, "./inter_rdf -f file -o output -n n_mol -v volume [-r rmax(4)] [-dr dr(0.002)] [-s start line(25)]"
             stop
         end select
 
@@ -90,7 +154,7 @@ program inter_rdf
     ! 检查必要参数
     if (filename == "" .or. n_mol <= 0 .or. box_volume <= 0.0_dp) then
         print *, "Usage:"
-        print *, "./rdf -f file -o output -n n_mol -v volume [-r rmax(4)] [-dr dr(0.002)] [-s start line(25)]"
+        print *, "./inter_rdf -f file -o output -n n_mol -v volume [-r rmax(4)] [-dr dr(0.002)] [-s start line(25)]"
         stop
     end if
 
