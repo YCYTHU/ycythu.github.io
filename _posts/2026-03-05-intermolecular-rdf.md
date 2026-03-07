@@ -3,7 +3,7 @@ title: 利用GROMACS计算RDF时避免分子内峰的Fortran脚本
 tags: 
 - Code
 - Fortran
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/Adobe_Photoshop_CC_icon.png
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/inter-rdf.png
 ---
 在分子动力学模拟后计算径向分布函数（RDF）时，分子内峰和分子间峰有可能会同时出现，分子内峰还可能会遮蔽分子间峰造成分析困难。利用GROMACS的`pairdist`命令结合Fortran程序可以有效分离分子内峰的影响，对分子间峰进行单独分析。
 <!--more-->
