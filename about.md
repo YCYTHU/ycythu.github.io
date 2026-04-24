@@ -37,8 +37,8 @@ key: page-about
     <div class="myCard">
       <h2>📊 Academic Metrics</h2>
       <ul>
-        <li>Articles: 5</li>
-        <li>Citations: 124</li>
+        <li>Articles: 7</li>
+        <li>Citations: 157</li>
         <li>h-index: 4</li>
       </ul>
     </div>
