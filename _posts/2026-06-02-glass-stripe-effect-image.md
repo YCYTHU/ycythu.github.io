@@ -1,9 +1,9 @@
 ---
-title: 模拟条纹玻璃风格壁纸的css
+title: 模拟条纹玻璃风格壁纸的网页
 tags: 
 - Code
 - CSS
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/inter%20rdf.png
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/glass%20stripes.jpg
 ---
 借助CSS的`blur()`和`mask-image`属性实现壁纸的条纹玻璃化。
 <!--more-->
