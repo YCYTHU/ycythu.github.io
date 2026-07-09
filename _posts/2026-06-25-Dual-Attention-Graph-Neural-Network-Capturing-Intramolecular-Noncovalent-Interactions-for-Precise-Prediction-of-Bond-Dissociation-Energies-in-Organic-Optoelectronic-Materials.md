@@ -30,7 +30,7 @@ modify_date: 2026-06-28
 </head>
 <p>
 	<span style="display: inline-block;"><a href="https://pubs.acs.org/journal/jpclcd" target="_blank"><strong>Chemistry of Materials</strong></a></span> ｜ 
-	<span style="display: inline-block;"><strong>Pub Date : 2026-06-XX</strong></span> ｜ 
+	<span style="display: inline-block;"><strong>Pub Date : 2026-06-29</strong></span> ｜ 
 	<span style="display: inline-block;"><strong>DOI: </strong><a href="https://doi.org/10.1021/acs.chemmater.6c01241" target="_blank"><strong>10.1021/acs.chemmater.6c01241</strong></a></span>
 </p>
 
