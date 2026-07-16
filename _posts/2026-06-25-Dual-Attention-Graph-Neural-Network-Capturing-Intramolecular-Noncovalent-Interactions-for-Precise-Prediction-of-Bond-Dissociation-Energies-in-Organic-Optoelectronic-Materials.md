@@ -5,7 +5,7 @@ tags:
 - Articles
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/FRET.jpg
 favorite: true
-modify_date: 2026-06-28
+modify_date: 2026-07-15
 ---
 <!--more-->
 <head>
@@ -36,7 +36,7 @@ modify_date: 2026-06-28
 
 <p>
   <span class="__dimensions_badge_embed__" data-doi="10.1021/acs.chemmater.6c01241" data-hide-zero-citations="true" data-legend="never" data-style="large_rectangle"></span><script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
-  <strong>Cite this: </strong><i>Chem. Mater.</i><span> 2026, XXXX, XXX, XXX-XXX</span>
+  <strong>Cite this: </strong><i>Chem. Mater.</i><span> 2026, 38, 13, 6962–6973</span>
 </p>
 
 ## Abstract
@@ -48,7 +48,7 @@ Intramolecular noncovalent interactions (Intra-NIs) have emerged as key determin
 </p>
 
 <div style="background-color: #0039a6; color: #fff; padding: .5rem 1rem; border-radius: .5rem;">
-  <a href="https://www.researchgate.net" target="_blank" style="display: block; color: #fff; width: 100%;">
+  <a href="https://www.researchgate.net/publication/408242363_Dual-Attention_Graph_Neural_Network_Capturing_Intramolecular_Noncovalent_Interactions_for_Precise_Prediction_of_Bond_Dissociation_Energies_in_Organic_Optoelectronic_Materials" target="_blank" style="display: block; color: #fff; width: 100%;">
     <i class="fa-solid fa-newspaper" style="font-size: 1rem; color: #fff;"></i>
     <span style="font-size: 1rem; font-weight: 600; font-family: tahoma,arial,sans-serif; color: #fff; letter-spacing: 0.04rem;"> Read this Article on ResearchGate</span>
   </a>
