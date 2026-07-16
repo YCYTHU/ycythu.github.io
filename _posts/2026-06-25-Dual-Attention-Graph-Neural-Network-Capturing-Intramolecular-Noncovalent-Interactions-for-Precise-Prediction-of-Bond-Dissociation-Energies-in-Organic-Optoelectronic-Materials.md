@@ -3,7 +3,7 @@ title: Dual-Attention Graph Neural Network Capturing Intramolecular Noncovalent 
 tags: 
 - Chemistry
 - Articles
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/FRET.jpg
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/dual%20attention.jpg
 favorite: true
 modify_date: 2026-07-15
 ---
