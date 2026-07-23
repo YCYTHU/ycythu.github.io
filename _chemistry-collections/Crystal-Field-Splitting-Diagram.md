@@ -15,9 +15,9 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/crystal tree.
 	<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.min.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js" type="text/javascript"></script>
-	<script src="/assets/js/Detector.js" type="text/javascript"></script>
-	<script src="/assets/js/MarchingCubes.js" type="text/javascript"></script>
-	<script src="/assets/js/OrbitControls@2.110.3.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/wavefunction/Detector.min.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/wavefunction/MarchingCubes.min.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/wavefunction/OrbitControls@2.110.3.min.js" type="text/javascript"></script>
 	<style>
 		@font-face {
 			font-family: LMMath;
