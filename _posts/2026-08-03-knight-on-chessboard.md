@@ -4,7 +4,7 @@ tags:
 - Code
 - JavaScript
 - Graph theory
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/inter%20rdf.png
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/chess%20knight.jpg
 favorite: true
 ---
 在无限棋盘上，将指定棋子移动到目标位置的最短路径问题，本质上是一个由移动规则定义的离散状态空间搜索问题。给定一组二维移动向量，如何从原点到达任意目标点并确定所需的最少步数，可通过图搜索算法进行求解并进一步进行可视化分析。
@@ -51,27 +51,18 @@ favorite: true
 			background:#217dbb;
 			transform:translateY(-1px);
 		}
-		.delete{
-			background:#e74c3c;
-			}
-		.delete:hover{
-			background:#c0392b;
-		}
-		.gray{
-			background:#7f8c8d;
-		}
-		.gray:hover{
-			background:#616a6b;
-		}
 		.panel{
 			margin-top:10px;
 			margin-bottom: 10px;
 			padding:15px;
-			background:#ecf0f1;
+			/*background:#ecf0f1;*/
+			border: 2px solid #999;
 			border-radius:12px;
 		}
 		#heatmap{
 			margin-top:30px;
+			display: flex;
+    		justify-content: center;
 		}
 		.size-title{
 			display:flex;
@@ -135,8 +126,8 @@ favorite: true
 	<div class="container">
 		<div class="panel">
 			棋盘类型：
-			<button class="gray" onclick="setBoard('xiangqi')">中国象棋</button>
-			<button class="gray" onclick="setBoard('chess')">国际象棋</button>
+			<a class="button button--secondary button--rounded" onclick="setBoard('xiangqi')">中国象棋</a>
+			<a class="button button--secondary button--rounded" onclick="setBoard('chess')">国际象棋</a>
 		</div>
 		<div class="panel">
 			<label class="size-title">棋盘尺寸：<span id="sizeValue">9 × 9</span></label>
@@ -151,7 +142,9 @@ favorite: true
 				<span>19</span>
 			</div>
 		</div>
-		<b>移动向量</b><button onclick="addVector()">＋ 新增向量</button><button onclick="calculate()">计算</button>
+		<h3>移动向量</h3>
+		<a class="button button--success button--rounded" onclick="addVector()">＋添加</a>
+		<a class="button button--secondary button--rounded" onclick="calculate()"><i class="fa-solid fa-arrow-rotate-left"></i>更新绘图</a>
 		<div id="vectors">
 			<div class="vector">
 				x:<input type="number" value="1">
@@ -184,7 +177,7 @@ favorite: true
 		<label><input type="checkbox" class="sx" checked>±x</label>
 		<label><input type="checkbox" class="sy" checked>±y</label>
 		<label><input type="checkbox" class="swap" checked>交换x/y</label>
-		<button class="delete" onclick="removeVector(this)">删除</button>`;
+		<a class="button button--primary button--pill" onclick="removeVector(this)"><i class="fa-solid fa-trash"></i></a>`;
 		document.getElementById("vectors").appendChild(div);
 	}
 
