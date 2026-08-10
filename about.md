@@ -38,7 +38,7 @@ key: page-about
       <h2>📊 Academic Metrics</h2>
       <ul>
         <li>Articles: 8</li>
-        <li>Citations: 173</li>
+        <li>Citations: 186</li>
         <li>h-index: 4</li>
       </ul>
     </div>
