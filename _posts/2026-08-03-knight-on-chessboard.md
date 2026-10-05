@@ -5,7 +5,6 @@ tags:
 - JavaScript
 - Graph theory
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/chess%20knight.jpg
-favorite: true
 ---
 在无限棋盘上，将指定棋子移动到目标位置的最短路径问题，本质上是一个由移动规则定义的离散状态空间搜索问题。给定一组二维移动向量，如何从原点到达任意目标点并确定所需的最少步数，可通过图搜索算法进行求解并进一步进行可视化分析。
 <!--more-->
