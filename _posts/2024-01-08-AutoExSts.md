@@ -1,6 +1,7 @@
 ---
 title: 自动调用Gaussian续算激发态的Bash脚本
-tags: 
+tags:
+- Automation
 - Code
 - Bash
 - Quantum Chemistry

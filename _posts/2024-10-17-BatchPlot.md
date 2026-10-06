@@ -1,6 +1,7 @@
 ---
 title: 结合Gnuplot与Batch脚本实现快速批量绘图
-tags: 
+tags:
+- Automation
 - Code
 - Batch
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/gnuplot.jpg

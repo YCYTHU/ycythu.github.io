@@ -1,10 +1,12 @@
 ---
 title: 高性能集群上高斯优化振荡的检测与提醒
-tags: 
+tags:
+- Automation
 - Code
 - Go
 - Bash
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/inter%20rdf.png
+- Quantum Chemistry
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/oscillation.jpg
 favorite: true
 ---
 Gaussian的几何优化任务有几率发生振荡，即原子受力、几何结构随优化步数增加呈现一定周期性变化趋势。在高性能集群上，一些几何优化任务往往需要数天甚至十天才会收敛，如果发生了振荡现象而没有及时进行干预，优化任务只能空耗机时而不会正常收敛。
@@ -14,7 +16,8 @@ Gaussian的几何优化任务有几率发生振荡，即原子受力、几何结
 	#testTable {
 		width: 100%;
 		display: table;
-		border: 2px #ccc solid;
+		border-bottom: 2px #999 solid;
+		border-top: 2px #999 solid
 	}
 
 	td {
@@ -106,13 +109,13 @@ func detectPeriodicOscillation(
 Gaussian输出的log文件中包含了每一步的最大受力、方均根受力、最大位移与方均根位移四个指标，可以从log文件中匹配序列，并分别使用`oscDetect`检测其自相关性，只要有一个指标存在显著的自相关，就可以怀疑该优化任务已经发生振荡。在实际情况中，往往会有不止一个指标发生非常明显的振荡，其自相关性可以接近1.0。
 
 ```bash
-awk '/Converged\?/{count=4; next} count>0 { if(match($0, /[-+]?[0-9]*\.?[0-9]+/)) { val=substr($0, RSTART, RLENGTH); print val > "tmp_file_" (5-count) ".txt"; count-- } }' ${filename}
+awk 'BEGIN {for (i=1; i<=4; i++) printf "" > "tmp_file_" i ".txt"}/Converged\?/{count=4; next} count>0 { if(match($0, /[-+]?[0-9]*\.?[0-9]+/)) { val=substr($0, RSTART, RLENGTH); print val > "tmp_file_" (5-count) ".txt"; count-- } }' ${filename}
 
 for data in tmp_file_{1..4}.txt; do
 	oscDetect -window $WINDOW -maxperiod $MAXPERIOD $data >> tmp_osc
 done
 
-MAX_VAL=$(awk -F',' 'NR==1{max=$2} $2>max{max=$2} END{print max}' tmp_osc)
+MAX_VAL=$(awk -F',' 'NR==1{max=$2} $2>max{max=$2} END{print (max=="" ? 0 : max)}' tmp_osc)
 PERIOD=$(awk -F',' 'NR==1{max=$2; col=$1} $2>max{max=$2; col=$1} END{print col}' tmp_osc)
 ```
 
@@ -127,6 +130,19 @@ PERIOD=$(awk -F',' 'NR==1{max=$2; col=$1} $2>max{max=$2; col=$1} END{print col}'
 	<tr><td rowspan="3">阴性</td><td>window=8</td><td>0.0265</td><td>0.2523</td><td>0.5161</td><td>-0.3490</td><td>-0.3290</td><td>0.5991</td><td><b>0.8708</b></td><td>0.7113</td></tr>
 	<tr><td>window=12</td><td>0.0546</td><td>0.2983</td><td>0.5025</td><td>-0.1837</td><td>-0.1835</td><td>0.2537</td><td>0.0151</td><td>0.0800</td></tr>
 	<tr><td>window=20</td><td>0.2370</td><td>0.6042</td><td>0.5879</td><td>-0.0322</td><td>-0.1835</td><td>0.2141</td><td>0.0151</td><td>0.2751</td></tr>
+</table>
+
+<table id="testTable">
+	<thead><tr style="font-weight: bold;"><td colspan="3">阳性</td><td colspan="3">阴性</td></tr></thead>
+	<tr style="border-bottom: 2px #999 solid; font-weight: bold;"><td>window=8</td><td>window=12</td><td>window=20</td><td>window=8</td><td>window=12</td><td>window=20</td></tr>
+	<tr><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.0265</td><td>0.0546</td><td>0.2370</td></tr>
+	<tr><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.2523</td><td>0.2983</td><td>0.6042</td></tr>
+	<tr><td>1.0000</td><td>1.0000</td><td>0.9999</td><td>0.5161</td><td>0.5025</td><td>0.5879</td></tr>
+	<tr><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>-0.3490</td><td>-0.1837</td><td>-0.0322</td></tr>
+	<tr><td>0.9802</td><td>0.9901</td><td>0.9950</td><td>-0.3290</td><td>-0.1835</td><td>-0.1835</td></tr>
+	<tr><td><b>0.3499</b></td><td>0.9689</td><td>0.9210</td><td>0.5991</td><td>0.2537</td><td>0.2141</td></tr>
+	<tr><td>1.0000</td><td>1.0000</td><td>0.9647</td><td><b>0.8708</b></td><td>0.0151</td><td>0.0151</td></tr>
+	<tr><td></td><td></td><td></td><td>0.7113</td><td>0.0800</td><td>0.2751</td></tr>
 </table>
 
 ## 监控与提醒

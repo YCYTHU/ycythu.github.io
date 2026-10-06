@@ -1,6 +1,7 @@
 ---
 title: 便捷地沿化学键分割分子的Bash脚本
-tags: 
+tags:
+- Automation
 - Code
 - Bash
 - Quantum Chemistry
