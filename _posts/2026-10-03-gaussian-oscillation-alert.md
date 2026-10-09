@@ -124,15 +124,6 @@ PERIOD=$(awk -F',' 'NR==1{max=$2; col=$1} $2>max{max=$2; col=$1} END{print col}'
 使用12或20的窗口时，该方法对振荡任务均给出了高于0.90的检测值，因此可以选择将判断阈值设为0.90，尽量避免误报的情况发生。
 
 <table id="testTable">
-	<tr><td rowspan="3">阳性</td><td>window=8</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.9802</td><td><b>0.3499</b></td><td>1.0000</td></tr>
-	<tr><td>window=12</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.9901</td><td>0.9689</td><td>1.0000</td></tr>
-	<tr><td>window=20</td><td>1.0000</td><td>1.0000</td><td>0.9999</td><td>1.0000</td><td>0.9950</td><td>0.9210</td><td>0.9647</td></tr>
-	<tr><td rowspan="3">阴性</td><td>window=8</td><td>0.0265</td><td>0.2523</td><td>0.5161</td><td>-0.3490</td><td>-0.3290</td><td>0.5991</td><td><b>0.8708</b></td><td>0.7113</td></tr>
-	<tr><td>window=12</td><td>0.0546</td><td>0.2983</td><td>0.5025</td><td>-0.1837</td><td>-0.1835</td><td>0.2537</td><td>0.0151</td><td>0.0800</td></tr>
-	<tr><td>window=20</td><td>0.2370</td><td>0.6042</td><td>0.5879</td><td>-0.0322</td><td>-0.1835</td><td>0.2141</td><td>0.0151</td><td>0.2751</td></tr>
-</table>
-
-<table id="testTable">
 	<thead><tr style="font-weight: bold;"><td colspan="3">阳性</td><td colspan="3">阴性</td></tr></thead>
 	<tr style="border-bottom: 2px #999 solid; font-weight: bold;"><td>window=8</td><td>window=12</td><td>window=20</td><td>window=8</td><td>window=12</td><td>window=20</td></tr>
 	<tr><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.0265</td><td>0.0546</td><td>0.2370</td></tr>
