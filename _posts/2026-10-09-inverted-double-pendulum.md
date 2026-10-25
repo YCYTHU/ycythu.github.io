@@ -1,7 +1,7 @@
 ---
 layout: none
 title: 倒立双摆
-cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/wavefunction.jpg
+cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/double%20pendulum.jpg
 favorite: true
 ---
 <!--more-->
