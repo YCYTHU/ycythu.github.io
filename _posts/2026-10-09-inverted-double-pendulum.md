@@ -1,9 +1,14 @@
 ---
 layout: none
-title: 倒立双摆
+title: 倒立双摆游戏
+tags:
+- Code
+- JavaScript
+- Physics
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/double%20pendulum.jpg
 favorite: true
 ---
+控制小车左右移动，使第二根杆在第一根杆之上保持平衡，而第一根杆又在小车之上保持平衡
 <!--more-->
 
 <html lang="zh-CN">
@@ -12,7 +17,7 @@ favorite: true
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b1520">
-<meta name="description" content="小车可以左右移动，目标是通过对小车施加连续的力，使第二根杆在第一根杆之上保持平衡，而第一根杆又在小车之上保持平衡">
+<meta name="description" content="控制小车左右移动，使第二根杆在第一根杆之上保持平衡，而第一根杆又在小车之上保持平衡">
 <title>倒立双摆 · Inverted Double Pendulum</title>
 <style>
   :root {
@@ -182,7 +187,7 @@ favorite: true
     <div class="identity">
       <div class="mark" aria-hidden="true"><i></i></div>
       <div>
-        <div class="eyebrow">MECHANICS&nbsp; / &nbsp;YCY</div>
+        <div class="eyebrow">MECHANICS</div>
         <h1>双摆平衡</h1>
         <div class="subtitle">INVERTED DOUBLE PENDULUM</div>
       </div>
