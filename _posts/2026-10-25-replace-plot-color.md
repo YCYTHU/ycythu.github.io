@@ -14,6 +14,7 @@ favorite: true
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"/>
 <style>
   .slider-example-split-line {
+    box-shadow: 0px 0px 20px 0px #ccc;
     --divider-width: 4px;
     --divider-color: #555;
     --default-handle-opacity: 0;
@@ -32,14 +33,14 @@ favorite: true
 
 <div style="display: flex; justify-content: center; column-gap: 30px;">
   <div style="width: 40%;">
-    <img-comparison-slider tabindex="0" class="rendered">
+    <img-comparison-slider tabindex="0" class="rendered slider-example-split-line">
       <img slot="first" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/replace%20plot%20color/plot-with-scatter.png">
       <img slot="second" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/replace%20plot%20color/plot-with-scatter-replace.png">
       <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6"><path stroke="#555" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2" stroke-width="1" fill="#555" vector-effect="non-scaling-stroke"></path></svg>
     </img-comparison-slider>
   </div>
   <div style="width: 30%;">
-    <img-comparison-slider tabindex="0" class="rendered">
+    <img-comparison-slider tabindex="0" class="rendered slider-example-split-line">
       <img slot="first" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/replace%20plot%20color/blue-orange.png">
       <img slot="second" src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/replace%20plot%20color/blue-orange-replace.png">
       <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6"><path stroke="#555" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2" stroke-width="1" fill="#555" vector-effect="non-scaling-stroke"></path></svg>
