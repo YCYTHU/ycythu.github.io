@@ -147,7 +147,7 @@ comments:
 ## => Pageview
 ##############################
 pageview:
-  provider: custom # false (default), "leancloud", "custom"
+  provider: goatcounter # false (default), "leancloud", "custom"
 
   ## Leancloud
   leancloud:
@@ -155,6 +155,8 @@ pageview:
     app_key   : # LeanCloud App key
     app_class : # LeanCloud App class
 
+  goatcounter:
+    endpoint: https://ycythu.goatcounter.com/count
 
 ## => Search
 ##############################

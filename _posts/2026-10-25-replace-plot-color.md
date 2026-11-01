@@ -15,7 +15,7 @@ favorite: true
 <style>
   .slider-example-split-line {
     box-shadow: 0px 0px 20px 0px #ccc;
-    --divider-width: 4px;
+    --divider-width: 2px;
     --divider-color: #555;
     --default-handle-opacity: 0;
   }
