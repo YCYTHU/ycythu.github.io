@@ -1,6 +1,6 @@
 ---
 layout: none
-title: 倒立双摆游戏
+title: 在线游戏：控制倒立双摆平衡
 tags:
 - Code
 - JavaScript
@@ -8,7 +8,6 @@ tags:
 cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/double%20pendulum.jpg
 favorite: true
 ---
-控制小车左右移动，使第二根杆在第一根杆之上保持平衡，而第一根杆又在小车之上保持平衡
 <!--more-->
 
 <html lang="zh-CN">

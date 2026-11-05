@@ -1,11 +1,11 @@
 User-agent: Googlebot
 Disallow: /eros
-Disallow: /assets/
+Disallow: /himeros
 Allow: /
 
 User-agent: Bingbot
 Disallow: /eros
-Disallow: /assets/
+Disallow: /himeros
 Allow: /
 
 User-agent: *
