@@ -71,4 +71,9 @@ favorite: true
 	</div>-->
 </body>
 <script src="https://cdn.jsdelivr.net/gh/ycythu/assets@main/js/wavefunction/main.js" type="text/javascript"></script>
+<script
+    data-goatcounter="https://ycythu.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+</script>
 </html>

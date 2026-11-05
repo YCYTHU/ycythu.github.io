@@ -1472,4 +1472,9 @@ cover: https://cdn.jsdelivr.net/gh/ycythu/assets@main/images/cover/default.jpg
 })();
 </script>
 </body>
+<script
+    data-goatcounter="https://ycythu.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+</script>
 </html>

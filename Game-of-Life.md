@@ -447,4 +447,9 @@ title: 康威生命游戏
 </div>
 <script>document.getElementById("overlay").style.display = "none"</script>
 </body>
+<script
+    data-goatcounter="https://ycythu.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+</script>
 </html>

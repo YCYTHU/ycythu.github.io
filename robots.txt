@@ -9,8 +9,12 @@ Disallow: /himeros
 Allow: /
 
 User-agent: *
-Allow: /MolViewer
-Allow: /chemistry-collections
-Disallow: /
+Disallow: /eros
+Disallow: /himeros
+Allow: /
+
+#Allow: /MolViewer
+#Allow: /chemistry-collections
+#Disallow: /
 
 Sitemap: https://ycythu.github.io/sitemap.xml

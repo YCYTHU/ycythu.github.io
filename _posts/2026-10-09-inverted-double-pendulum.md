@@ -725,4 +725,9 @@ favorite: true
 })();
 </script>
 </body>
+<script
+    data-goatcounter="https://ycythu.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+</script>
 </html>
